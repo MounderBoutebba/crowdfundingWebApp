@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>http://www.lucidocean.com/wbl-license.html</PackageLicenseUrl>
+    <PackageProjectUrl>http://www.lucidocean.com/wbl-license.html</PackageProjectUrl>
+    <PackageIconUrl>http://www.lucidocean.com/content/icon.png</PackageIconUrl>
+    <PackageReleaseNotes>Note: Breaking Namespace usings. You will need to add various usings to find EventArgs&lt;T&gt;, JsonRpcClient and soem other classes as they have moved to LucidOcean.MultioChain.Util or Enums. in short, Refactored jsonrpcclient and other classes that were on the root namespace to a sub namespace to make the entry point to MultChainClient more developer friendly.
+Support entity name for permissions management.
+Extract verbose version of getrawtransaction command into separate method to avoid deserialization error upon verbose flag is false
+Added sync versions of EstimatePriority GetBalance GetUnconfirmedBalance VerifyChain SetTxFee GetBlockTemplate SubmitBlock DecodeScript.
+Added a few more summary comments to calls.</PackageReleaseNotes>
+    <PackageTags>MultiChain BlockChain API Wrapper</PackageTags>
+    <Version>0.0.0.8</Version>
+    <AssemblyVersion>0.0.0.8</AssemblyVersion>
+    <FileVersion>0.0.0.8</FileVersion>
+    <Copyright>Copyright © 2017, Lucid Ocean PTY (Ltd)</Copyright>
+    <Company>Lucid Ocean</Company>
+    <Product>Lucid Ocean MultiChain Client</Product>
+    <Authors>Lucid Ocean</Authors>
+    <Description>This library attempt to wrap the JSON-RPC calls provided by MultiChain.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>DEBUG;NETCORE;NETSTANDARD;NETSTANDARD2_0;NETSTANDARD2_0;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <DefineConstants>NET45;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\LucidOcean.MultiChain.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>
