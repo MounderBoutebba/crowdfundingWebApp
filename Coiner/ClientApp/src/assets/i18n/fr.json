@@ -1,0 +1,984 @@
+{
+  "SideBar": {
+    "Dashboard": "DASHBOARD",
+    "MyProfile": "MON PROFILE",
+    "MyWallet": "MON PORTEFUILLE",
+    "MyProjects": "MES PROJETS",
+    "MyStats": "STATISTIQUES",
+    "Favourites": "FAVORIS",
+    "Notifications": "NOTIFICATIONS "
+  },
+  "Menu": {
+    "Signup": "S'INSCRIRE",
+    "Login": "SE CONNECTER",
+    "Home": "ACCUEIL",
+    "About": "NÉGOCIER DES COINS",
+    "CreateProject": "DÉPOSER UN PRODUIT",
+    "Projects": "FINANCER UN PRODUIT",
+    "FavoriteProjects": "MES FAVORIS",
+    "Dashboard": "DASHBOARD"
+  },
+  "Footer": {
+    "About": "À PROPOS",
+    "Home": "ACCUEIL",
+    "Projects": "PROJETS",
+    "Contact": "CONTACT",
+    "FollowUs": "NOUS SUIVRE",
+    "StartNow": "COMMENCER MAINTENANT",
+    "AllRightReceived": "All rights reserved.",
+    "DeseignedBy": "Designed and created by"
+  },
+  "Popups": {
+    "Plustard": "Plus tard",
+    "Transmettre": "Transmettre",
+    "Transmettre02": "Veuilliez Transmettez vos documents légaux à l'adresse kyc@stirblock.com",
+    "Transmettre03": "Êtes-vous sûr d'avoir transmis vos documents ?",
+    "AccountActivationHeader": "Activation du compte",
+    "VerificationSucces": " Votre compte a été activé avec succes.",
+    "VerificationFails": "Votre compte n'a pas pu étre activé.",
+    "VerificationError": "Une erreur s'est produite lors de l'activation de votre compte. veuillez réessayer !",
+    "UpdatePassword": "Modifier mot de passe",
+    "ErrorAccessProfil": "Une erreur s'est produite lors de l'accès à votre compte. veuillez réessayer !",
+    "EmailInvalid": "Email incorrect !",
+    "EmailSent": "Un email a été envoyé",
+    "SetEmail": "Veuillez indiquer votre email pour renouveler votre mot de passe",
+    "SendButton": "Envoyer",
+    "ok": "OK",
+    "Login": "Se connecter",
+    "InvalidLogin": "Email ou mot de passe incorrect !",
+    "ForgotPassword": "Mot de passe oublié?",
+    "CreateAccount": "Vous n'avez pas de compte ?",
+    "Register": "S'ENREGISTRER",
+    "ConfirmationHeader": "Confirmation",
+    "SuccessHeader": "Succès",
+    "ErrorHeader": "Erreur",
+    "ReplyQuestionHeader": "Répondre aux questions",
+    "OperationSuccessText": "opération terminée avec succès",
+    "OperationErrorText": "Une erreur s'est produite lors de votre investissement!",
+    "ConfirmationButton": "Confirmer",
+    "CancelButton": "Annuler",
+    "CloseButton": "Fermer",
+    "ProjectDeatilPopup": {
+      "ConfirmationCoinsUsageText": "Attention, vous allez perdre l'usage de certains de vos coins. Si vous confirmez le retrait, voici votre futur statut de votre portefeuille:",
+      "NumberUsedCoins3Times": "coins qui peut être utilisé 3 fois",
+      "NumberUsedCoins2Times": "coins qui peut être utilisé 2 fois",
+      "NumberUsedCoins1Times": "coins qui peut être utilisé 1 fois",
+      "ConfirmInvestText": "Etes-vous sûr de vouloir investir dans ce projet?",
+      "AddMoreCoins": "Ajouter plus des coins pour investir !"
+    }
+  },
+  "ProfileDropDown": {
+    "Profile": "Profil",
+    "MyProjects": "Mes Projets",
+    "MyBills": "Mes Factures",
+    "LogOut": "Déconnexion",
+    "Hello": "Bienvenu"
+  },
+  "HomePageSections": {
+    "About": "A propos",
+    "Projects": "Projets",
+    "Products": "Produits",
+    "NoProjects": "Il n'y aucun projet  pour le moment",
+    "NoProducts": "Il n'y aucun produit  pour le moment",
+    "ContactUs": "Contactez-Nous",
+    "Creators": "Créateurs",
+    "HowItWorks": "Comment ça marche ?",
+    "SearchButton": "Rechercher",
+    "Step1": "Étape 1",
+    "Step2": "Étape 2",
+    "Step3": "Étape 3",
+    "Step4": "Étape 4",
+    "Step1Text": "Vous souhaitez developper votre activité ou réaliser un projet ? Vous souhaitez vendre un bien ou une partie d'un bien ?",
+    "Step2Text": "Vous souhaitez participer à des levées de fonds à votre rythme et à partir de quelques dizaine d'euros.Votre investissement est materialisé par des coins performance sur la blockchain Stirblock.",
+    "Step3Text": "Vous voulez acheter ou vendre des coins performances côtés sur le marché Stirblock.Trader un large eventail de coin disponible sur la blockchain Stiblock.",
+    "Step4Text": "Vos coins performances ont pris de la valeur, dégagent des dividendes ou arrivent à maturité. Profiter du rendrement de vos coins performances.",
+    "Adress": "Adresse",
+    "Phone": "Téléphone",
+    "ErrorSentMessage": "Une erreur s'est produite lors de l'envoie de votre message!",
+    "SuccessSentMessage": "Votre message a été envoyé avec succès!",
+    "SearchProductText": "Rechercher un produit par mots clés",
+    "step1-button": "DÉPOSER UN PRODUIT",
+    "step2-button": "DÉPOSER UN PRODUIT",
+    "step3-button": "DÉPOSER UN PRODUIT",
+    "step4-button": "DÉPOSER UN PRODUIT"
+  },
+  "CommonMessages": {
+    "CheckInputsFill": "Veuillez vérifier que tous les champs sont remplis correctement !",
+    "EnterNewPassword": "Veuillez entrer votre nouveau mot de passe",
+    "ModifiedPassword": "Votre mot de passe a été modifié",
+    "ErrorUpdatePassword": "Une erreur s'est produite lors de la modification de votre mot de passe. veuillez réessayer !",
+    "InvalidPassword": "Mot de passe incorrecte !"
+  },
+  "InputsPlaceholder": {
+    "Name": "Nom",
+    "ProjectDescription": "Parles-nous de votre projet",
+    "Password": "Mot de passe",
+    "ConfirmPassword": "Confirmer Mot de passe",
+    "Login": "Login",
+    "LastName": "Prénom",
+    "BirhtDay": "Date de naissance"
+  },
+  "LoginPage": {
+    "ActiveAccount": "votre compte n'est pas encore activé",
+    "LoginTitle": "Se Connecter",
+    "LoginInfoMessage": "Veuillez saisir vos coordonnées pour vous connecter",
+    "LoginForm": {
+      "Email": "Email",
+      "Password": "Mot de passe"
+    },
+    "LoginButton": "Connecter",
+    "LoginButtonGoogle": "Connecter avec Google",
+    "SignUpWithGoogle": "Créer compte avec Google"
+  },
+  "SearchPage": {
+    "SearchFindText": "projets correspond à votre recherche",
+    "SearchNotFindText": "aucun projet ne correspond à votre recherche"
+  },
+  "FavoritePage": {
+    "Myfavourites": "Projets levés Favoris",
+    "NoneFavoritesFound": "Vous n'avez pas encore ajouté des projets à vos favoris!"
+  },
+  "NotificationsPage": {
+    "Notifications": "Notifications",
+    "NoNotificationFound": "You have no notifications yet!",
+    "Show": "Voir",
+    "Hide": "Masquer"
+  },
+  "UserProjectPage": {
+    "EmptyProjectsMessage": "La liste est vide , vous n'a avez pas encore créé des projets",
+    "AuthorizationText": "Vous n'êtes pas autorisé à accéder cette page",
+    "AddNews": "Ajouter des news",
+    "AddNew": "Ajouter News",
+    "EditProject": "Modifier Projet",
+    "RefundUsers": "Rembourser les utilisateurs",
+    "ValidateProject": "Valider Projet",
+    "AddUserNews": "Ajouter votre news",
+    "NewsSuccess": "News ajouter avec succé",
+    "NewsDescription": "Description des news",
+    "AddNewsButton": "Ajouter",
+    "seeMore": " Afficher plus de projects",
+    "EditProjectRequest": " Demande modification du projet",
+    "AddNewsRequest": "demande d'ajouter des news",
+    "NewsBroadcastRequest": "Demande de Diffusion d’actualité",
+    "ProjectModificationRequest": "Demande de modification du project",
+    "ProjectModifiactionInfos": "Ajouter les informations du projet",
+    "sendRequestButton": "Envoyer"
+  },
+  "UserFormPage": {
+    "CreateCompteHeader": "Créer Votre Compte",
+    "UpdateCompteHeader": "Modifier Votre Compte",
+    "CorrespPasswrdText": "Veuillez vérifier que vos mots de passe correspondent !",
+    "ProfilImage": "Image de profile",
+    "CreateMyAccount": "Créer mon Compte",
+    "EditButton": "Modifier",
+    "NewCompteHeader": "Nouveau Compte",
+    "EditCompteHeader": "Modifier Compte",
+    "CreateAccountSuccessText": "Votre compte a été crée avec succès.",
+    "EditAccountSuccessText": "Votre compte a été modifiée avec succès.",
+    "ExistingMail": "Cet email existe déjà.",
+    "ErrorCreateAccount": "Une erreur s'est produite lors de la création de votre compte !",
+    "AddImage": "Ajouter une image",
+    "UploadImage": "Charger une nouvelle image",
+    "maxSizeImage": "The size of the image exceeds the maximum limit!",
+    "Particulier": "Particulier",
+    "Professionnel": "Professionnel",
+    "Adresse": "Adresse",
+    "Tel": "Numéro de Télephone",
+    "Siren": "Siren",
+    "Tva": "TVA"
+  },
+  "BuySellBook": {
+    "Actions": "Offres d'achat/vente",
+    "SeeAll": "Voir tout",
+    "Sale": "Offre de vente disponible",
+    "SaleInfo": "Ces investisseurs cherche à vendre leurs coins",
+    "Buy": "Offre de d'achat disponible",
+    "BuyInfo": "Ces investisseurs cherche à acheter des coins",
+    "Qte": "Qté",
+    "interessted": "ça m'interesse"
+  },
+  "StatsPanel": {
+    "Sale": "Offre de vente disponible",
+    "StatsTitle": "STATISTIQUES",
+    "HistoGrammeTitle": "Histogramme title",
+    "PeriodLabel": "Période",
+    "PeriodButtons": {
+      "WeekButton": "Semaine",
+      "MonthButton": "Mois",
+      "YearButton": "Année"
+    },
+    "SyncData": "synchronisation en temps réel"
+  },
+  "ProductDetailsPage": {
+    "MoreInformationProduct": "Plus d'informations sur le Produit",
+    "CoinsTotalNumber": "Nombre total de coins",
+    "CurrentValue": "Valeur actuelle",
+    "SaleText": "Lorem ipsum dolor sit amet consectetur elit Duis nec gravida mauris",
+    "BuyText": "Lorem ipsum dolor sit amet consectetur elit Duis nec gravida mauri",
+    "SaleButton": "VENDRE",
+    "BuyButton": "ACHETER",
+    "Sale": "Vente",
+    "Buy": "Achat",
+    "NoBuyOffers": "Aucune offre d'achat",
+    "NoSellOffers": "Aucune offre de vente",
+    "NoActuality": "Aucune actualité sur le produit",
+    "ReplyButton": "Répondre",
+    "AskQuestion": "N’hésitez pas à poser des questions",
+    "AskQuestionButton": "Poser une question",
+    "ProposePrice": "Aucun prix ne m’intéresse, je propose un prix",
+    "Amount": "Quantité",
+    "Price": "Prix",
+    "TotalPrice": "Prix Total",
+    "PrivateKey": "Clé Privé",
+    "WarningUserText": "Vous n'êtes pas encore un utilisateur sur la blockchain et vous n'avez pas assez de jetons devise pour l’opération.",
+    "PayPlatform": "Payer la platforme en CB (recharge 100 EURO pour 100 jetons devises).",
+    "PayPlatform2": "Pay the platform in CB (recharge 100 EURO pour 100 coins).",
+    "AmountDevice": "Quantité jetons devise",
+    "AcceptOffer": "Accepter offre",
+    "AcceptOfferConfirmText": "Si vous êtes sûr d'accepter cet offre, veuillez saisir votre clé privé",
+    "Exchange": "Confirmer mon opération d'achat de ",
+    "With": "tokens (s) à ",
+    "CancelOffer": "Annuler offre",
+    "CancelOfferConfirmText": "Si vous êtes sûr d'annuler cet offre, veuillez saisir votre clé privé.",
+    "Product": "Produit",
+    "LimitSale": "Limite de vente disponible",
+    "LimitBuy": "Limite d'achat disponible",
+    "NoLimit": "Proposer une offre",
+    "ProduitCote": "Produits cotés",
+    "ProductFundraising": "Produits en cours de négociation",
+    "TotalCapitalisation": "Capitalisation",
+    "BetterBuyPrice": "Il y a des offres de vente de prix par coin inférieur à votre proposition, achetez-les ! ",
+    "BetterSellPrice": "Il y a des offres d’achat de prix par coin supérieur à votre proposition, vendez-leurs !",
+    "CoinOf": "Coin de",
+    "LastExchange": "Dernier échange",
+    "seeMore": " Afficher plus de produits",
+    "userAssetBalance": "Votre participation"
+  },
+  "ProjectListingItem": {
+    "FundingGoal": "À atteindre",
+    "ReceivedFunding": "Recueillis",
+    "Days": "Jours",
+    "ConfirmProjectText": "Etes-vous sûr de vouloir confirmer ce projet?"
+  },
+  "ProjectCreationPage": {
+    "ProjectTypes": {
+      "Socity": "SOCIÉTÉ",
+      "Product": "BIEN",
+      "Project": "PROJET",
+      "Career": "PARCOUR"
+    },
+    "GeneralInformation": "Informations générales",
+    "ProjectType": "Type du projet",
+    "VideoAndImages": "Images et Videos",
+    "Documents": "Documents",
+    "ProjectDenomination": "Dénomination du projet",
+    "ProductName": "Nom du produit (aprés fin de levée)",
+    "UserWalletId": "WalletId",
+    "ProductTVA": "TVA",
+    "CommissionTokenStirblock": "Commission Token Stirblock",
+    "ProductBillDescription": "Description Facture",
+    "ProfilDenomination": "Dénomination du profil",
+    "ProductDenomination": "Dénomination du bien",
+    "ActivityType": "Type d'activité",
+    "ProductType": "Type de bien",
+    "BusinessPlane": "Business plan",
+    "Lieu": "Lieu",
+    "LieuProduct": "Lieu du bien",
+    "WebLink": "Lien web",
+    "FundingGoal": "Montant recherché",
+    "BeginDate": "Date début",
+    "FundingPeriod": "Durée de la lévé",
+    "SelPercentage": "Quel pourcentage de la société souhaitez-vous vendre ?",
+    "ProductSelPercentage": "Quel pourcentage du bien souhaitez-vous vendre ?",
+    "IntreduceYourself": "Presentez-vous",
+    "ProjectDescreption": "Description du projet",
+    "ObjectifDescreption": "Description de vos objectif",
+    "ProductDescreption": "Description du bien",
+    "ProjectName": "Nom du projet",
+    "SocityName": "Nom du societé",
+    "legalIdentification": "Identification légale",
+    "structureType": "Type de structure",
+    "CreationDate": "Date de création",
+    "BeginEnchereDate": "Début de l'enchere",
+    "EndEnchereDate": "Fin de l'enchere",
+    "Perspective": "Perspective d'évolution",
+    "ProjectionRealisation": "Projection des gains suite à votre réalisation",
+    "EngagementYear": "Sur combien d'année vous souhaitez vous engager ?",
+    "EngagementPercentage": "Quel pourcentage du CA ou salaire comptez-vous verser durant votre engagement ?",
+    "SelPerspective": "Percepective de vente",
+    "PreviosButton": "Précédent",
+    "NextButton": "Suivant",
+    "CreateButton": "Créer",
+    "UpperTextCrooper": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor nisi mattis pretium sagittis. Sed a ligula vel purus pulvinar rutrum id et urna. Pellentesque finibus molestie risus quis",
+    "Projectfiles": {
+      "AddFiles": "Ajouter des fichiers",
+      "MaxSizeFile": "La taille du fichier dépasse la limite maximale!",
+      "InvalidFile": "Fichier invalide, veulliez choisir une image",
+      "MaxNumberFiles": "le nombre de fichiers ajoutés dépasse la limite maximale!",
+      "FileTitle": "Titre",
+      "FileDescreption": "Description",
+      "FileDescreptionPlaceHolder": "Description du fichier",
+      "FileSize": "Taille",
+      "NoneFilesFound": "Aucun fichier n'a été ajouté pour ce projet"
+    },
+    "NewProject": "Nouveau Projet",
+    "SuccessCreationProjectText": "Votre projet a été crée avec succès.",
+    "ErrorCreationProjectText": "Une erreur s'est produite lors de la création de votre projet !",
+    "EditProject": "Modfier Projet",
+    "SuccessEditProjectText": "Votre projet a été modifié avec succès.",
+    "ErrorEditProjectText": "Une erreur s'est produite lors de la modification de votre projet !",
+    "DragAndDropLabel": "Glisser Déposer",
+    "BrowseFileLabel": "Parcourir le fichier",
+    "OrLabel": "OU"
+  },
+  "BlockChainMessages": {
+    "Success": "Succés",
+    "Error": "Erreur",
+    "SuccesCreationOffer": "Votre offre a été crée avec succés",
+    "ErrorCreationOffer": "Une erreur sest produite lors de la création de votre offre !",
+    "SuccessAcceptationOffer": "Votre acceptation a été bien réussie",
+    "ErrorAcceptationOffer": "Une erreur s'est produite lors de l'acceptation de l'offre",
+    "SuccessCancelOffer": "Votre annulation a été bien réussie",
+    "ErrorCancelOffer": "Une erreur est survenue lorsque vous avez tenté d'annuler votre offre",
+    "ErrorCreationAdress": "Une erreur s'est produite lors de la création de votre address blockchain !",
+    "ErrorPrivateKey": "La clé privée fournie est incorrect",
+    "ErrorNofunds": "Vous n’avez pas assez de cryto-euro pour finaliser cette transaction, veuillez recharge votre portefeuille",
+    "ErrorNoActions": "Vous n'avez pas asses d'action pour finaliser cette transaction",
+    "ErrorOfferUnavailable": "Cette offre n'est plus disponible",
+    "ErrorOfferInvalidLock": "Vous n'avez pas assez de balance pour créer un offre",
+    "BuyCrypto": "Acheter Crypto-euro",
+    "BuyCoins": "Acheter des coins"
+  },
+  "ProjectFilterPanel": {
+    "ProjectTypesFilter": {
+      "ProjectTypesTexts": {
+        "defaultTitle": "Type",
+        "checked": "selectionné",
+        "checkedPlural": "selectionnés",
+        "allSelected": "Tous types",
+        "checkAll": "Cocher tout",
+        "uncheckAll": "Décocher tout"
+      },
+      "ProjectTypes": {
+        "Project": "Projet",
+        "Society": "Société",
+        "Career": "Parcours",
+        "Product": "Bien"
+      }
+    },
+    "ActivityTypesFilter": {
+      "ActivityTypesTexts": {
+        "defaultTitle": "Secteur",
+        "checked": "selectionné",
+        "checkedPlural": "selectionnés",
+        "allSelected": "Toutes activités",
+        "checkAll": "Cocher tout",
+        "uncheckAll": "Décocher tout"
+      },
+      "ActivityTypes": {
+        "Environment": "Environnement",
+        "IndustryAndService": "Industrie & Service",
+        "Health": "Santé",
+        "Digital": "Numérique",
+        "RealEstateDevelopment": "Promotion immobilière",
+        "Trade": "Commerce"
+      }
+    },
+    "FilterButton": "Filtrer",
+    "ClearButton": "Réinitialiser"
+  },
+  "ProjectDetailsPage": {
+    "SideBar": {
+      "Backers": "Contributeurs",
+      "FundingGoal": "Recherchés",
+      "Progress": "Ouverture produit",
+      "ReceivedFunding": "Recueillis",
+      "Days": "Jours",
+      "DaysToGo": "Pour le démarrage du projet",
+      "InvestButton": "J'investis Maintenant",
+      "RemainingDays": "Restants",
+      "DaysBeforSell": "Nb jours avant vente",
+      "GotoProduct": "Cotation en cours",
+      "coinPercentageToolTip": "pourcentage d'un Coin par rapport à la valeur totale du produit"
+    },
+    "Tabs": {
+      "Description": "À Propos",
+      "Documents": "Documents",
+      "Discussion": "Discussions",
+      "News": "Actualités"
+    },
+    "DocumentsTable": {
+      "FileTitle": "Titre",
+      "FileDescription": "Description"
+    },
+    "EndOfLeve": "Fin de levé",
+    "EndOfLeveText": "projet proche de la fin de levé vous pouvez utiliser juste"
+  },
+  "ProjectValidationStatus": {
+    "Initialized": "En attente de validation",
+    "Accepted": "Publiée",
+    "EndSurvey": "Find de levé",
+    "Validated": "Validé",
+    "Refused": "Rejetée"
+  },
+  "ActivityTypes": {
+    "Environment": "Environnement",
+    "IndustryAndService": "Industrie & Service",
+    "Health": "Santé",
+    "Digital": "Numérique",
+    "RealEstateDevelopment": "Promotion immobilière",
+    "Trade": "Commerce"
+  },
+  "ProjectTypes": {
+    "Project": "Projet",
+    "Society": "Société",
+    "Career": "Parcours",
+    "Product": "Bien"
+  },
+  "CarouselListing": {
+    "Title": "Projets en cours de levé",
+    "ViewMoreProjectsLabel": "Voir tous les projets en cours de levé",
+    "ViewMoreProductsLabel": "Voir tous les produits cotés"
+  },
+  "BrowserSupport": {
+    "IEWarning": "Pour une meilleure navigation sur le site albeyt, nous vous invitons à utiliser un navigateur récent, comme:\r\n1) Google Chrome \r\n2) Mozilla Firefox \r\n3) Ou une version d'Internet Explorer supérieure à IE9"
+  },
+  "ProjectFavorite": {
+    "AddToFavoriteTooltipMessage": "Ajouter à mes favoris",
+    "RemoveFavoriteTooltipMessage": "Retirer de mes favoris"
+  },
+  "WalletPage": {
+    "CryptoEuro": "Crypto-Euro",
+    "OpportunityCoin": "Opportunity Coin",
+    "CurrentBalance": "Solde actuel ",
+    "BuyButton": "ACHETER",
+    "EncaseButton": "ENCAISSER",
+    "OpenPosition": "Position ouverte",
+    "CompletedTransactions": "Transactions achevées",
+    "SalesMade": "Ventes effectueés",
+    "PurchasesMade": "Achats effectueés",
+    "YourCurrentSales": "Vos ventes en cours",
+    "YourCurrentBuys": "Vos achats en cours",
+    "noSellHistory": "Aucune historique de ventes",
+    "noBuyHistory": "Aucune historique d'achats",
+    "CoinName": " Nom du coin",
+    "Date": "Date",
+    "CoinPrice": "Prix coin",
+    "Quantity": "Quantity",
+    "TotalPrice": "Prix totale",
+    "TransactionRef": "Réference du transaction",
+    "CancelButton": "Annuler",
+    "privateKey": "Private Key",
+    "DebitedAmount": "Debited Amount",
+    "PayOutSuccessMessage": "Payout avec success",
+    "PayOutNotEnoughCryptoMessage": "T'as pas assez de crypto veuillez recharger votre compte",
+    "PayOutSuccessTitle": "Crée",
+    "PayOutFailedTitle": "Echec",
+    "PayOutPopUpHeader": "Combien d'argent voulez vous débitez",
+    "PayOutPopUpTitle": " Pay Out ",
+    "InvestWithCryptoEuroTitle": "Investir avec Crypto-Euro",
+    "InvestWithCryptoEuroHeader": "Mettez votre clÃ© privÃ©e"
+  },
+  "StatsPage": {
+    "ProfitsAndLosses": "Profits et pertes",
+    "Sold": "Vendu",
+    "Bought": "Acheté",
+    "Performance": "Performance"
+  },
+  "createdAt": "{{date}}",
+  "ActivityTypesCreation": {
+    "Product": [{
+        "name": "Ameublement",
+        "value": "Furnishing"
+      },
+      {
+        "name": "Art&Photo",
+        "value": "Art&Photo"
+      },
+      {
+        "name": "Bagagerie",
+        "value": "Luggage"
+      },
+      {
+        "name": "Bijoux",
+        "value": "Jewellery"
+      },
+      {
+        "name": "Chaussures",
+        "value": "Shoes"
+      },
+      {
+        "name": "Electroménager",
+        "value": "Household appliances"
+      },
+      {
+        "name": "Equipement industriel",
+        "value": "Industrial plant"
+      },
+      {
+        "name": "Informatique",
+        "value": "Computer"
+      },
+      {
+        "name": "Livre",
+        "value": "Book"
+      },
+      {
+        "name": "Matériel médical",
+        "value": "Equipment"
+      },
+      {
+        "name": "Moto",
+        "value": "Motorbike"
+      },
+      {
+        "name": "Nautisme",
+        "value": "Boating"
+      },
+      {
+        "name": "Téléphonie",
+        "value": "Telephony"
+      },
+      {
+        "name": "Vélo",
+        "value": "Bike"
+      },
+      {
+        "name": "Vêtement",
+        "value": "Clothes"
+      },
+      {
+        "name": "Voiture",
+        "value": "Car"
+      },
+      {
+        "name": "Autres",
+        "value": "Others"
+      }
+    ],
+    "Project": [{
+        "name": "Comptabilité",
+        "value": "Accounting"
+      },
+      {
+        "name": "Services d'administration",
+        "value": "Administration Services"
+      },
+      {
+        "name": "publicité",
+        "value": "Advertising"
+      },
+      {
+        "name": "Architecture",
+        "value": "Architecture"
+      },
+      {
+        "name": "Bâtiment",
+        "value": "Building"
+      },
+      {
+        "name": "Conseil d'entreprises",
+        "value": "Business Consulting"
+      },
+      {
+        "name": "Développement des affaires",
+        "value": "Business Development"
+      },
+      {
+        "name": "services d'entreprises",
+        "value": "Business Services"
+      },
+      {
+        "name": "Services de voiture",
+        "value": "Car Services"
+      },
+      {
+        "name": "Ordinateur",
+        "value": "Computer"
+      },
+      {
+        "name": "Courtage en douane",
+        "value": "Customs Brokerage"
+      },
+      {
+        "name": "Recouvrement de créances",
+        "value": "Debt Collection"
+      },
+      {
+        "name": "Distributeurs, agents de vente et importateurs",
+        "value": "Distributors, Sales Agents and Importers"
+      },
+      {
+        "name": "Développement économique",
+        "value": "Economic Development"
+      },
+      {
+        "name": "Education and Training Services",
+        "value": "Education and Training Services"
+      },
+      {
+        "name": "Composants électroniques et fournitures",
+        "value": "Electronic Components and Supplies"
+      },
+      {
+        "name": "Services d'ingénierie",
+        "value": "Engineering Services"
+      },
+      {
+        "name": "Divertissement",
+        "value": "Entertainment"
+      },
+      {
+        "name": "Environnement",
+        "value": "Environmental"
+      },
+      {
+        "name": "Gestion des événements",
+        "value": "Event Management"
+      },
+      {
+        "name": "Gestion des exportations",
+        "value": "Export Management"
+      },
+      {
+        "name": "Services financiers",
+        "value": "Financial Services"
+      },
+      {
+        "name": "Conception graphique",
+        "value": "Graphic Design"
+      },
+      {
+        "name": "Santé",
+        "value": "Health"
+      },
+      {
+        "name": "Hotels",
+        "value": "Hotels"
+      },
+      {
+        "name": "Assurance",
+        "value": "Insurance"
+      },
+      {
+        "name": "Loi",
+        "value": "Law"
+      },
+      {
+        "name": "Services juridiques",
+        "value": "Legal Services"
+      },
+      {
+        "name": "Fabrication",
+        "value": "Manufacturing "
+      },
+      {
+        "name": "Commercialisation",
+        "value": "Marketing"
+      },
+      {
+        "name": "Services miniers et pétroliers et gaziers",
+        "value": "Mining and Oil and Gas Services"
+      },
+      {
+        "name": "Mobilier de bureau",
+        "value": "Office Furniture"
+      },
+      {
+        "name": "Location de bureau",
+        "value": "Office Rental"
+      },
+      {
+        "name": "Photographie",
+        "value": "Photographic"
+      },
+      {
+        "name": "Édition",
+        "value": "Publishing"
+      },
+      {
+        "name": "Immobilier",
+        "value": "Real Estate"
+      },
+      {
+        "name": "Restaurants",
+        "value": "Restaurants"
+      },
+      {
+        "name": "Détaillants",
+        "value": "Retailers"
+      },
+      {
+        "name": "Sécurité",
+        "value": "Security"
+      },
+      {
+        "name": "Télécommunications",
+        "value": "Telecommunications"
+      },
+      {
+        "name": "Facilitation de voyage",
+        "value": "Travel Facilitation"
+      },
+      {
+        "name": "Vetting/Due Diligence",
+        "value": "Vetting/Due Diligence"
+      },
+      {
+        "name": "Autres",
+        "value": "Others"
+      }
+    ]
+  },
+  "AllActivityTypesCreation": [{
+      "name": "Ameublement",
+      "value": "Furnishing"
+    },
+    {
+      "name": "Art&Photo",
+      "value": "Art&Photo"
+    },
+    {
+      "name": "Bagagerie",
+      "value": "Luggage"
+    },
+    {
+      "name": "Bijoux",
+      "value": "Jewellery"
+    },
+    {
+      "name": "Chaussures",
+      "value": "Shoes"
+    },
+    {
+      "name": "Electroménager",
+      "value": "Household appliances"
+    },
+    {
+      "name": "Equipement industriel",
+      "value": "Industrial plant"
+    },
+    {
+      "name": "Informatique",
+      "value": "Computer"
+    },
+    {
+      "name": "Livre",
+      "value": "Book"
+    },
+    {
+      "name": "Matériel médical",
+      "value": "Equipment"
+    },
+    {
+      "name": "Moto",
+      "value": "Motorbike"
+    },
+    {
+      "name": "Nautisme",
+      "value": "Boating"
+    },
+    {
+      "name": "Téléphonie",
+      "value": "Telephony"
+    },
+    {
+      "name": "Vélo",
+      "value": "Bike"
+    },
+    {
+      "name": "Vêtement",
+      "value": "Clothes"
+    },
+    {
+      "name": "Voiture",
+      "value": "Car"
+    },
+    {
+      "name": "Comptabilité",
+      "value": "Accounting"
+    },
+    {
+      "name": "Services d'administration",
+      "value": "Administration Services"
+    },
+    {
+      "name": "Publicité",
+      "value": "Advertising"
+    },
+    {
+      "name": "Architecture",
+      "value": "Architecture"
+    },
+    {
+      "name": "Bâtiment",
+      "value": "Building"
+    },
+    {
+      "name": "Conseil aux entreprises",
+      "value": "Business Consulting"
+    },
+    {
+      "name": "Développement des affaires",
+      "value": "Business Development"
+    },
+    {
+      "name": "services d'entreprises",
+      "value": "Business Services"
+    },
+    {
+      "name": "Services de voiture",
+      "value": "Car Services"
+    },
+    {
+      "name": "Ordinateur",
+      "value": "Computer"
+    },
+    {
+      "name": "Courtage en douane",
+      "value": "Customs Brokerage"
+    },
+    {
+      "name": "Recouvrement de créances",
+      "value": "Debt Collection"
+    },
+    {
+      "name": "Distributeurs, agents de vente et importateurs",
+      "value": "Distributors, Sales Agents and Importers"
+    },
+    {
+      "name": "Développement économique",
+      "value": "Economic Development"
+    },
+    {
+      "name": "Services d'éducation et de formation",
+      "value": "Education and Training Services"
+    },
+    {
+      "name": "Composants électroniques et fournitures",
+      "value": "Electronic Components and Supplies"
+    },
+    {
+      "name": "Services d'ingénierie",
+      "value": "Engineering Services"
+    },
+    {
+      "name": "Divertissement",
+      "value": "Entertainment"
+    },
+    {
+      "name": "Environnement",
+      "value": "Environmental"
+    },
+    {
+      "name": "Gestion des événements",
+      "value": "Event Management"
+    },
+    {
+      "name": "Gestion des exportations",
+      "value": "Export Management"
+    },
+    {
+      "name": "Services financiers",
+      "value": "Financial Services"
+    },
+    {
+      "name": "Conception graphique",
+      "value": "Graphic Design"
+    },
+    {
+      "name": "Santé",
+      "value": "Health"
+    },
+    {
+      "name": "Hôtels",
+      "value": "Hotels"
+    },
+    {
+      "name": "Assurance",
+      "value": "Insurance"
+    },
+    {
+      "name": "Loi",
+      "value": "Law"
+    },
+    {
+      "name": "Services juridiques",
+      "value": "Legal Services"
+    },
+    {
+      "name": "Fabrication",
+      "value": "Manufacturing "
+    },
+    {
+      "name": "Commercialisation",
+      "value": "Marketing"
+    },
+    {
+      "name": "Services miniers et pétroliers et gaziers",
+      "value": "Mining and Oil and Gas Services"
+    },
+    {
+      "name": "Mobilier de bureau",
+      "value": "Office Furniture"
+    },
+    {
+      "name": "Location de bureau",
+      "value": "Office Rental"
+    },
+    {
+      "name": "Photographie",
+      "value": "Photographic"
+    },
+    {
+      "name": "Édition",
+      "value": "Publishing"
+    },
+    {
+      "name": "Immobilier",
+      "value": "Real Estate"
+    },
+    {
+      "name": "Restaurants",
+      "value": "Restaurants"
+    },
+    {
+      "name": "Détaillants",
+      "value": "Retailers"
+    },
+    {
+      "name": "Sécurité",
+      "value": "Security"
+    },
+    {
+      "name": "Télécommunications",
+      "value": "Telecommunications"
+    },
+    {
+      "name": "Facilitation de voyage",
+      "value": "Travel Facilitation"
+    },
+    {
+      "name": "Vetting/Due Diligence",
+      "value": "Vetting/Due Diligence"
+    },
+    {
+      "name": "Autres",
+      "value": "Others"
+    }
+  ],
+  "ProfilePage": {
+    "EmailLabel": "Email",
+    "BlockChaindAddressLabel": "BlockChain adresse",
+    "PublicKeyLabel": "Clé public",
+    "ChangeProfileLink": "Modifier mon profil",
+    "ChangePasswordLink": "Changer mon mot de passe"
+  },
+  "ProjectListingItemPopUps": {
+    "ProjectWithoutProductNameMessage": "Il faut ajouter la TVA et le nom du produit"
+  },
+  "BillsPage": {
+    "BillId": "ID facture",
+    "CreationDate": "Date d’émission"
+  }
+}

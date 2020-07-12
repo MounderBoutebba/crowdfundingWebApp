@@ -1,0 +1,58 @@
+<div class="container content">
+  <div class="search-box">
+    <form class="form-inline">
+      <div class="form-group" style="margin-right:30px;">
+        <div class="input-group search-border-bottom">
+          <div class="input-group-addon search-icon">
+            <span class="fa fa-search" style="font-size:18px;opacity: 0.8"></span>
+          </div>
+          <input [(ngModel)]="searchInput" type="text" class="form-control search-input search-input-width input-search"
+            [placeholder]="'HomePageSections.SearchProductText' | translate" (keyup.enter)="searchForProjects()" name="searchInput" autocomplete="off">
+          <div class="input-group-addon search-icon">
+            <span [ngStyle]="{'opacity': (searchInput == '') ? 0 : 1}" class="fa fa-close clear-btn" (click)="clearSearchInput()"></span>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn search-button" (click)="searchForProjects()">{{'HomePageSections.SearchButton' | translate}}</button>
+    </form>
+  </div>
+
+  <div class="search-box-xs">
+    <form class="form-vertical">
+      <div class="form-group">
+        <div class="input-group search-border-bottom">
+          <div class="input-group-addon search-icon">
+            <span class="fa fa-search"></span>
+          </div>
+          <input [(ngModel)]="searchInput" type="text" class="form-control search-input search-input-width-xs"
+            [placeholder]="'HomePageSections.SearchProductText' | translate" (keyup.enter)="searchForProjects()" name="searchInput" autocomplete="off">
+          <div class="input-group-addon search-icon">
+            <span [ngStyle]="{'opacity': (searchInput == '') ? 0 : 1}" class="fa fa-close clear-btn" (click)="clearSearchInput()"></span>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn search-button" (click)="searchForProjects()">{{'HomePageSections.SearchButton' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <div class="content" *ngIf="(projectsSearchResult.length != 0 && applySearch) ||
+  (projectsSearchResult.length == 0 && applySearch)">
+    <div id="searchPanel" class="panel panel-default panel-margin">
+      <div style="position:relative">
+        <div class="home-loader" *ngIf="isRunning"></div>
+      </div>
+      <div id="searchResultsPanel" class="panel-body panel-fixed" [ngStyle]="{'opacity': (isRunning) ? 0.5 : 1, 'min-height' : (projectsSearchResult.length == 0 && applySearch && success) ? 'auto': '445px'}">
+        <div class="alert alert-info" *ngIf="projectsSearchResult.length != 0 && applySearch && success">
+          <p class="text-center">{{projectsSearchResult.length}} {{'SearchPage.SearchFindText' | translate}}</p>
+        </div>
+        <div class="alert alert-warning" *ngIf="projectsSearchResult.length == 0 && applySearch && success">
+          <p class="text-center">{{'SearchPage.SearchNotFindText' | translate}}</p>
+        </div>
+        <project-listing-item style="margin-bottom:10px;" class="col-md-4 col-sm-6 col-xs-12" *ngFor="let project of projectsSearchResult"
+          [project]=project>
+        </project-listing-item>
+      </div>
+    </div>
+  </div>
+</div>

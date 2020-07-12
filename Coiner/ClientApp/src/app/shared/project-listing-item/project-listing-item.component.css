@@ -1,0 +1,247 @@
+/* .card { */
+
+/* Add shadows to create the "card" effect */
+
+/* box-shadow: 0 4px 8px 1px rgba(0,0,0,0.2);
+    transition: 0.3s;
+} */
+
+/* On mouse-over, add a deeper shadow */
+
+/* .card:hover {
+    box-shadow: 0 8px 16px 5px rgba(0,0,0,0.2);
+}
+
+.bordered-img {
+    border-top: 1px solid #e7e7e7;
+    margin-top: 24px;
+}
+
+.folder:hover,
+.bordered-img:hover{
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.custom-well{
+    max-height: 98px; 
+    min-height: 98px; 
+    overflow-y: auto;
+    border: none;
+    background-color: white;
+    margin-bottom: 6px;
+}
+
+.slider-padding{
+    padding-right:20px;
+    padding-left:20px;
+}
+
+.btn-ok {
+    padding: 5px 10px;
+    font-weight: bold;
+    color: #FFF;
+    margin: 3px 8px 3px -12px !important;
+    background-color: #99b70a;
+    border-color: #6e9901;
+    border: none;
+}
+.btn-ok:focus {
+    background-color: #6e9901;
+    outline: none;
+}
+
+.label-status{
+    background-color: #99b70a;
+    color: #FFF;
+    font-size: 14px;
+    padding: 8px;
+} */
+
+.item-container {
+  /* height: 345px; */
+  border: 1px solid #F3F4F6;
+  border-radius: 3px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(35, 36, 37, 0.3);
+}
+
+.img-container {
+  /* height: 203px; */
+  min-height: 245px;
+  border: 1px solid #F3F4F6;
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 2px 4px 0 rgba(35, 36, 37, 0.3);
+}
+
+.img-size {
+  /* height: 203px; */
+  min-height: 245px;
+  width: 100%;
+}
+
+.avatar {
+  height: 38px;
+  width: 38px;
+  box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.15);
+}
+
+.name {
+  height: 19px;
+  padding-left: 48px;
+  color: #373E40;
+  font-family: "Open Sans";
+  font-size: 12px;
+  line-height: 19px;
+}
+
+.title-project {
+   height: 22px;
+  padding-left: 48px;
+  color: #313E47;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19px;
+}
+
+.background-container {
+  height: 50px;
+  border-radius: 0 0 0 2px;
+  background-color: #FAFAFA;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+  margin-bottom: 10px;
+}
+
+.backers-number {
+  height: 33px;
+  color: #232425;
+  font-family: "Open Sans";
+  font-size: 24px;
+  line-height: 33px;
+}
+
+.days-left {
+  height: 33px;
+  /* width: 44px; */
+  color: #232425;
+  font-family: "Open Sans";
+  font-size: 24px;
+  line-height: 33px;
+}
+
+.item-label {
+  height: 17px;
+  color: #337BAE;
+  font-family: "Open Sans";
+  font-size: 12px;
+  line-height: 17px;
+}
+
+.bottom-container {
+  height: 8px;
+  border-radius: 0 0 3px 3px;
+  background-color: #E6E8E6;
+}
+
+.project-progress {
+  float: left;
+  width: 0%;
+  height: 8px;
+  border-radius: 0 0 0 3px;
+  transition: width 2s;
+  transition-delay: 5s;
+  /* background-color: #2ECC71;progress */
+  /* background-color: #676b69; end survey*/
+}
+
+.label-status {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.edit-span {
+  float: right;
+  padding: 1px 2px !important;
+  width: 25px;
+  min-height: 25px;
+}
+
+ @media(max-width:820px) {
+  .edit-span {
+    padding: 0px !important;
+  }
+} 
+
+.favorite-icon {
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  padding: 2px 4px;
+}
+
+.favorite-icon .fa-heart {
+  font-size: 30px;
+}
+
+.favorite-icon .fa-heart-o {
+  font-size: 30px;
+  position: absolute;
+}
+.tag {
+  padding-left: 20px;
+  min-height: 30px;
+}
+
+.tag-label {
+  color: #313E47;
+  font-family: "Open Sans";
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.end-funding {
+  position: absolute;
+  right: 0px;
+  padding: 2px 4px;
+  user-select: none;
+}
+
+.backers-icon {
+  position: absolute;
+  right: 6px;
+  bottom: 0px;
+  padding: 4px 4px;
+  display: inline-flex;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .backers-icon img {
+    float: left;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+.backers-number-icon {
+  height: 33px;
+  color: white;
+  font-family: "Open Sans";
+  font-size: 24px;
+  line-height: 33px;
+}
+
+.text-backer {
+  float: left;
+  padding-right: 5px;
+  padding-left: 25px;
+}
+.form-content{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.label1{
+  margin: 0px 0px 20px 5px;
+}

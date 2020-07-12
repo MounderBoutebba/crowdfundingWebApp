@@ -1,0 +1,29 @@
+<div class="container-fluid info-background">
+  <app-loader [isRunning]="isRunning"></app-loader>
+  <div class=" sub-menu">{{'HomePageSections.Products' | translate}} | {{'ProductDetailsPage.ProductFundraising' | translate}}</div>
+  <h1 class="decoration text-center background-size-project" *ngIf="emptyProducts">
+    <span class="nobacgr">{{'HomePageSections.NoProducts' | translate}}</span>
+  </h1>
+  <div class="content background-size-project" *ngIf="!emptyProducts">
+
+    <section class="section content" id="portfolio-list">
+      <div class="wrapper projects font_p" id="contentWrapper">
+        <div class="zone-content clearfix">
+          <!-- <project-filter #projectFilter class="col-xs-12"></project-filter> -->
+          <div class="portfolio-container">
+            <div class="product-numbrer"> {{filteredProductsCount}} {{'ProductDetailsPage.ProductFundraising' | translate}}</div>
+            <product-listing-item #produtcItems class="col-md-4 col-xs-12" *ngFor="let product of products" [product]=product [slider]="'on'">
+            </product-listing-item>
+            <!-- <h1 id="scroll-to" *ngIf="displayScrollTo">ScrollTo</h1> -->
+          </div>
+        </div>
+        <div>
+          <div id="loader" class="loader"></div>
+        </div>
+      </div>
+      <!-- <div *ngIf="seeMore" class="SeeMoreButton col-xs-12">
+        <span (click)="getMoreProjects()"> {{'ProductDetailsPage.seeMore' | translate }}  </span>
+      </div> -->
+    </section>
+  </div>
+</div>

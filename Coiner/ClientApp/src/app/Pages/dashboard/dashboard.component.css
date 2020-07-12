@@ -1,0 +1,110 @@
+/* main{
+    overflow-x: scroll;
+} */
+.dash-row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+  }
+.dash-row > [class*='dash-col'] {
+    display: flex;
+    flex-direction: column;
+  }
+.sidebar{
+    background-color: #337BAE;
+    /* box-shadow: 0 0 8px 0 rgba(0,0,0,0.18), 0 8px 4px 0 rgba(0,0,0,0.24); */
+    /* position: fixed;  */
+    z-index: 1;   
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 61px;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+    min-height: 650px;
+}
+.sidebar-nav{
+    margin: 0;
+    padding: 0;
+}
+.sidebar img{
+    height: 25px;
+    width: 25px;
+    margin-right: 5px;
+    padding-bottom: 5px;
+}
+.sidebar-nav a {
+    text-decoration: none;
+   	padding-top: 15px;
+    color: #F5F6FA;	
+    font-family: Open Sans;		
+    /* font-weight: 400;	 */
+}
+.sidebar-nav li{
+    margin: 0;
+    height: 50px;
+    padding-left: 10px;
+    padding-top: 14px;
+
+}
+.sidebar-nav li:active {
+    background-color: rgba(255,255, 255, 0.2);
+    border-left: 2px solid #62C2D0;  
+}
+.side-text{
+    font-size: 16px;
+}
+.right-arrow{
+   font-size: 15px;
+   padding-right: 20px;
+}
+@media (min-width:979px){
+    .side-text {
+        font-size: 18px !important;
+        }
+    .pull-right{
+        font-size: 22px !important;
+    }    
+}
+@media (max-width: 979px) and (min-width: 768px)
+{
+    .side-text {
+        font-size: 14px !important;
+        }
+        .pull-right{
+            font-size: 18px !important;
+        }  
+}
+.dash-content{
+    margin: 0;
+    padding: 0;
+}
+@media (max-width: 768px){
+    .side-text {
+        font-size: 0px !important;
+        }
+        .pull-right{
+            font-size: 0px !important;
+        }  
+}
+@media (min-width: 1200px){
+.row .col-md-3 {
+    width: 20.076923%;
+}
+.row .col-md-9 {
+    width: 79%;
+}
+}
+@media (min-width: 1450px){
+    .row .col-md-3 {
+        width: 16.176923%;
+    }
+    .row .col-md-9 {
+        width:83%;
+    }
+}
+.row {
+    width: inherit !important;
+  }

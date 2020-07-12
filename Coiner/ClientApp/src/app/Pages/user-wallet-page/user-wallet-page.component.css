@@ -1,0 +1,92 @@
+.card-deck{
+    margin-top:10px;
+  }
+  .card-body {
+    padding:10px 10px;
+    margin:20px 5px;
+    background: white;
+    box-shadow: -5px 5px 50px #888888 ;
+  }
+  .table-responsive>.table>tbody>tr>td, .table-responsive>.table>tbody>tr>th, .table-responsive>.table>tfoot>tr>td, .table-responsive>.table>tfoot>tr>th, .table-responsive>.table>thead>tr>td, .table-responsive>.table>thead>tr>th {
+    white-space: normal;
+  } 
+  .content{
+      width: 100%;
+  } 
+  .container{
+     width: 80%;
+     display: flex;
+
+  }
+  li.active>a {
+    font-family: "Open Sans";
+    font-weight: bold;
+    border-bottom: 3px solid #62C2D0;
+    color: #62C2D0;
+    padding-bottom: 20px;
+    margin-bottom: 1px;
+  }
+  
+  li>a {
+    opacity: 0.75;
+    color: #373E40;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .nav li a:focus, .nav li a:hover {
+    background-color: transparent !important;
+  }
+  
+  nav a:hover, nav a:focus {
+    background-color: transparent !important;
+  }
+  
+  .navbar-nav {
+    float: none !important;
+    margin: 0;
+  }
+.thead-blue
+{
+    background-color:#337BAE;
+    color: aliceblue; 
+}  
+.thead-purple
+{
+    background-color: #7F67AB;
+    color: aliceblue;
+}
+.table{
+    box-shadow: -5px 5px 50px #888888;
+}
+thead>td {
+    font-size: 20px;
+    padding: 10px;
+}
+.blue-btn{
+   padding: 5px 0px;
+   width: 100%;
+}
+.card-footer{
+  padding: 0;
+  margin:0;
+  width: 100%; 
+}
+.send-btn {  
+  height: 40px;
+  border-radius: 5px;
+  color: #FFFFFF;
+  background-color: #337BAE;
+}
+.blue-btn-text{
+  font-size: 18px;
+  font-weight: 400;
+}
+@media (max-width:500px){
+  .blue-btn-text{
+    font-size: 12px;
+    font-weight: 200;
+  }
+}

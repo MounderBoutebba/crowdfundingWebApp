@@ -1,0 +1,47 @@
+<div class="col-md-12 profile-content">
+  <div class="col-lg-4 col-sm-12">
+    <img class="img-size" *ngIf="user.userImage != null && user.provider == 0" [src]="constants.sharedUserImagesPath + user.userImage.path">
+    <img class="img-size" *ngIf="user.userImage == null && user.provider == 0" [src]="constants.sharedUserImagesPath + 'no-image-user.png'">
+    <img class="img-size" *ngIf="user.provider == 1" [src]="user.userImage.path">
+  </div>
+  <div class="col-lg-8 col-sm-12" style="margin-top:20px;">
+    <div>
+      <span class="user-name"> {{user.firstName}} {{user.lastName}} </span>
+    </div>
+    <div class="user-info">
+      <div class="info">
+        <div>
+          <span class="title-info">{{'ProfilePage.EmailLabel' | translate}}</span>
+        </div>
+        <div>
+          <span class="info-content">{{user.email}}</span>
+        </div>
+      </div>
+      <div class="info">
+        <div>
+          <span class="title-info">{{'ProfilePage.BlockChaindAddressLabel' | translate}}</span>
+        </div>
+        <div>
+          <span class="info-content" style="word-wrap: break-word;">{{user.blockChainAddress}}</span>
+        </div>
+      </div>
+      <div class="info">
+        <div>
+          <span class="title-info">{{'ProfilePage.PublicKeyLabel' | translate}}</span>
+        </div>
+        <div>
+          <span class="info-content" style="word-wrap: break-word;">{{user.blockChainPublicKey}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 links-margin">
+    <div>
+      <span class="links cursor-pointer" (click)="openUserModal()"> > {{'ProfilePage.ChangeProfileLink' | translate}}</span>
+    </div>
+    <!-- <div>
+      <span class="links cursor-pointer" (click)="openUserModal()"> > {{'ProfilePage.ChangePasswordLink' | translate}}</span>
+    </div> -->
+  </div>
+</div>
+<user-form #userModal></user-form>

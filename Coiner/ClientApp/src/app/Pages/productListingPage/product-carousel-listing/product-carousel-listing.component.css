@@ -1,0 +1,113 @@
+.leftRs {
+    position: absolute;
+    margin: auto;
+    /* top: 0px; */
+    bottom: 200px;
+    width: 30px;
+    height: 30px;
+    /* box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, .3); */
+    border-radius: 999px;
+    left: -25px;
+    /* background-color: #98b709; */
+    /* border: none; */
+    outline: none;
+    /* opacity: 0.6; */
+    box-sizing: border-box;
+    border: 1px solid #337BAE;
+    background-color: #FFFFFF;
+}
+
+.rightRs {
+    position: absolute;
+    margin: auto;
+    /* top: 0px; */
+    bottom: 200px;
+    width: 30px;
+    height: 30px;
+    /* box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, .3); */
+    border-radius: 999px;
+    right: -25px;
+    /* background-color: #98b709; */
+    /* border: none; */
+    outline: none;
+    /* opacity: 0.6; */
+    box-sizing: border-box;
+    border: 1px solid #337BAE;
+    background-color: #FFFFFF;
+}
+
+.rightRs:hover, .leftRs:hover {
+    opacity: 1;
+}
+
+.custom-chevron {
+    color: #337BAE !important;
+    font-size: 18px !important;
+    padding-bottom: 7px !important;
+}
+
+ngx-tile /deep/ .tile {
+    box-shadow: none;
+}
+
+.see-all-projects {
+  cursor: pointer;
+  color: #337BAE;
+  font-family: "Open Sans";
+  line-height: 38px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.see-all-projects-div {
+    padding-top: 10px;
+    padding-bottom: 35px;
+    text-align: center;
+}
+
+.carousel-title {
+    margin-top: 40px;
+    background-color: #F5F6FA;
+    padding-top: 35px;
+}
+
+/* @media (max-width:998px) {
+    .leftRs {
+        left: 686px;
+    }
+}
+
+@media (max-width:820px) {
+    .leftRs {
+        left: 558px;
+    }
+}
+
+@media (max-width:698px) {
+    .leftRs {
+        left: 392px;
+    }
+}
+
+@media (max-width:520px) {
+    .leftRs {
+        left: 222px;
+    }
+} */
+
+/deep/slick-slider product-listing-item .item-container {
+    margin: 12px !important;
+}
+
+/deep/.slick-list {
+    outline: none !important;
+}
+
+/deep/.slick-slide {
+    outline: none !important;
+}
+
+/deep/.slick-slide:focus {
+    outline: none !important;
+}

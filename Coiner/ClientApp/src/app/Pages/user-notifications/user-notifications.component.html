@@ -1,0 +1,25 @@
+<!-- user notifications -->
+
+<div class="" style="width: 75%; margin-bottom: 80px">
+  <h1 class="fav-text ">
+    <span class="notifications">{{'NotificationsPage.Notifications' | translate}}</span>
+    <span class="badge badge-default badge-coins"> {{notificationNb}} </span></h1>
+    <div class="container" id="accordion" style="width: 100%; margin:0%; padding:0%" *ngIf="isNotificationClicked" [@listStagger]="notificationProduceds.length">
+
+      <div *ngFor="let notificationItem of notificationProduceds">
+      <user-notification-listing-item   (notificationIsRead)="updateNotificationStatus($event)"  [notificationItem]=notificationItem [read]="notificationItem.ReadStatus" [isNotificationClicked]="isNotificationClicked">
+      </user-notification-listing-item>
+      </div>
+
+
+
+
+
+      <div class="portfolio-container" *ngIf="( notificationProduceds.length == 0)">
+        <h2 class="fav-text">{{'NotificationsPage.NoNotificationFound' | translate}}</h2>
+      </div>
+
+
+
+    </div>
+</div>

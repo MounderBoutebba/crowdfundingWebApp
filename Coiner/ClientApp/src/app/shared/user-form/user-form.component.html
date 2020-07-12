@@ -1,0 +1,363 @@
+<app-loader [isRunning]="isRunning"></app-loader>
+<div id="userModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <p class="modal-title modal-text-header" style="float: left;">
+          <strong style="font-size: 22px;" *ngIf="editMode == 'new'">{{'UserFormPage.CreateCompteHeader' | translate}}</strong>
+          <strong style="font-size: 22px;" *ngIf="editMode == 'edit'">{{'UserFormPage.UpdateCompteHeader' | translate}}</strong>
+        </p>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body" id="signUpModal">
+        <form #form="ngForm" style="display: flow-root;" data-ajax="true" (ngSubmit)="createUser(form)">
+          <div style="width: 90%" role="alert" class="alert alert-danger text-center" [hidden]="!(formInvalid && formInputsInvalide)">
+            <span>{{'CommonMessages.CheckInputsFill' | translate}}</span>
+          </div>
+          <div style="width: 90%; margin-bottom: 30px;" role="alert" class="alert alert-danger text-center" *ngIf="(!captchaResponse && checkRecaptchaClicked && submitForm) || (!checkRecaptchaClicked && submitForm)">
+            <span>Captcha invalide!</span>
+          </div>
+          <div style="width: 90%; margin-bottom: 30px;" role="alert" class="alert alert-danger text-center" [hidden]="!(formInvalid && !formInputsInvalide && passwordMisMatch)">
+            <span>{{'UserFormPage.CorrespPasswrdText' | translate}}!</span>
+          </div>
+          <div style="width: 90%; margin-bottom: 30px;" role="alert" class="alert alert-danger text-center" [hidden]="!(formInvalid && Email.invalid)">
+            <span>Email incorrect!</span>
+          </div>
+          <div class="controls controls-row">
+
+            <ul class="nav nav-tabs">
+              <li class=" active" (click)="UserTypeChange(userTypeEnum.Particulier)"><a data-toggle="tab" href="#home">{{'UserFormPage.Particulier'
+                  | translate}}</a></li>
+              <li class="pull-right" (click)="UserTypeChange(userTypeEnum.Entreprise)"><a data-toggle="tab" href="#menu2">{{'UserFormPage.Professionnel'
+                  | translate}}</a></li>
+            </ul>
+
+            <div class="form-group" [ngClass]="usertype == userTypeEnum.Particulier ? 'col-md-6' : 'col-md-12'"
+              [class.has-error]="formInvalid && FirstName.invalid">
+              <label class="control-label col-sm-12" for="FirstName">{{'InputsPlaceholder.Name' | translate}} </label>
+              <div class="col-sm-12">
+                <input type="text" class=" form-control" id="FirstName" name="FirstName" #FirstName="ngModel"
+                  [placeholder]="'InputsPlaceholder.Name' | translate" [(ngModel)]="user.firstName" [value]="user.firstName | firstUpper"
+                  [maxlength]="Constants.userNameMaxLength" required>
+              </div>
+            </div>
+            <div *ngIf="usertype == userTypeEnum.Particulier" class="form-group  col-sm-6" [class.has-error]="formInvalid && LastName.invalid">
+              <label class="control-label col-sm-12" for="LastName">{{'InputsPlaceholder.LastName' | translate}}
+              </label>
+              <div class="col-sm-12">
+                <input type="text" class=" form-control" id="LastName" name="LastName" #LastName="ngModel"
+                  [placeholder]="'InputsPlaceholder.LastName' | translate" [(ngModel)]="user.lastName" [value]="user.lastName | firstUpper"
+                  [maxlength]="Constants.userNameMaxLength" required>
+              </div>
+            </div>
+
+            <div class="form-group col-sm-12" [class.has-error]="formInvalid && Email.invalid">
+              <label class="control-label col-sm-12" for="Email">{{'LoginPage.LoginForm.Email' | translate}} </label>
+              <div class="col-sm-12">
+                <input type="email" class=" form-control" id="Email" name="Email" #Email="ngModel" [placeholder]="'LoginPage.LoginForm.Email' | translate"
+                  [(ngModel)]="user.email" [maxlength]="Constants.EmailMaxLength" email required>
+              </div>
+            </div>
+            <div *ngIf="usertype == userTypeEnum.Entreprise" class="form-group col-lg-12" [class.has-error]="formInvalid && Adresse.invalid">
+              <label class="control-label col-lg-12" for="Adresse">{{'UserFormPage.Adresse'| translate}}</label>
+              <div class="col-lg-12">
+                <input type="text" class=" form-control" id="Adresse" name="Adresse" #Adresse="ngModel" [placeholder]="'UserFormPage.Adresse'| translate"
+                  [(ngModel)]="user.address" [maxlength]="Constants.AddressMaxLength" required>
+              </div>
+            </div>
+            <div *ngIf="usertype == userTypeEnum.Entreprise" class="form-group col-lg-12" [class.has-error]="formInvalid && Phone.invalid">
+              <label class="control-label col-lg-12" for="Phone">{{'UserFormPage.Tel'
+                | translate}}</label>
+              <div class="col-lg-12">
+                <input type="tel" class=" form-control" id="Phone" name="Phone" #Phone="ngModel" [placeholder]="'UserFormPage.Tel'| translate"
+                  [(ngModel)]="user.phoneNumber" [maxlength]="Constants.PhoneNumberMaxLength" [pattern]="Constants.PhoneNumberRegEx">
+              </div>
+            </div>
+
+            <div *ngIf="usertype == userTypeEnum.Entreprise" class="form-group col-lg-12" [class.has-error]="formInvalid && Siren.invalid">
+              <label class="control-label col-lg-12" for="siren">{{'UserFormPage.Siren'
+                | translate}}</label>
+              <div class="col-lg-12">
+                <input type="text" class=" form-control" id="siren" name="siren" #Siren="ngModel" [placeholder]="'UserFormPage.Siren'| translate"
+                  [(ngModel)]="user.siren" [maxlength]="Constants.AddressMaxLength">
+              </div>
+            </div>
+            <div *ngIf="usertype == userTypeEnum.Entreprise" class="form-group col-lg-12" [class.has-error]="formInvalid && Tva.invalid">
+              <label class="control-label col-lg-12" for="tva">{{'UserFormPage.Tva'
+                | translate}} </label>
+              <div class="col-lg-12">
+                <input type="text" class=" form-control" id="tva" name="tva" #Tva="ngModel" [placeholder]="'UserFormPage.Tva'| translate"
+                  [(ngModel)]="user.tva" [maxlength]="Constants.AddressMaxLength">
+              </div>
+            </div>
+
+
+
+
+            <!--<div class="form-group col-lg-6 col-md-6" [class.has-error]="formInvalid && Birthdayme.invalid">
+              <label class="control-label col-lg-12" for="Birthdayme">{{'InputsPlaceholder.BirhtDay' | translate}} </label>
+              <div class="col-lg-12">
+                <input type="text" bsDatepicker [minDate]="minBirthday" [maxDate]="maxBirthday" [bsConfig]="bsConfig" readonly class=" form-control"
+                  id="Birthday" name="Birthdayme" #Birthdayme="ngModel" [placeholder]="'InputsPlaceholder.BirhtDay' | translate"
+                  [(ngModel)]="user.birthDay" required>
+              </div>
+            </div>-->
+            <!-- <div class="form-group col-lg-6">
+          <label class="control-label col-sm-3" for="gender">Sexe </label>
+          <div class="col-sm-8">
+            <select class="form-control select-style " name="gender" [(ngModel)]='user.gender'>
+              <option *ngFor="let gender of genders" [ngValue]='gender.value'>{{gender.name}}</option>
+            </select>
+          </div>
+        </div> -->
+
+
+
+            <!-- <div class="form-group">
+          <label class="control-label col-sm-3" for="Adress2">Complément d'adresse </label>
+          <div class="col-sm-8">
+            <input type="text" class=" form-control" id="Adress2" name="Adress2" #Adress2="ngModel" placeholder="Complément d'adresse"
+              [(ngModel)]="user.address.address2" [maxlength]="Constants.AddressMaxLength">
+          </div>
+        </div> -->
+
+            <!-- <div class="form-group col-lg-6" [class.has-error]="formInvalid && CodePostal.invalid">
+              <label class="control-label col-lg-12" for="CodePostal">Code Postal </label>
+              <div class="col-lg-12">
+                <input type="text" class=" form-control" id="CodePostal" name="CodePostal" #CodePostal="ngModel" placeholder="Code Postal"
+                  [(ngModel)]="user.address.zipCode" [maxlength]="Constants.userNameMaxLength" required>
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group col-lg-6">
+          <label class="control-label col-sm-3" for="Pays">Pays </label>
+          <div class="col-sm-8">
+            <select class="form-control select-style " name="Pays" [(ngModel)]='user.address.country'>
+              <option *ngFor="let country of countries" [ngValue]='country.name'>{{country.name}}</option>
+            </select>
+          </div>
+        </div> -->
+
+
+            <!-- <div class="form-group col-lg-6">
+          <label class="control-label col-sm-3" for="Job">Profession </label>
+          <div class="col-sm-8">
+            <input type="text" class=" form-control" id="Job" name="Job" #Job="ngModel" placeholder="Profession" [(ngModel)]="user.job"
+              [maxLength]="Constants.userNameMaxLength">
+          </div>
+        </div> -->
+            <!-- <div class="form-group col-lg-6">
+                <label class="control-label col-lg-12" for="login">Login </label>
+                <div class="col-lg-12">
+                  <input *ngIf="editMode == 'edit'" type="text" class=" form-control" id="login" name="login" disabled readonly placeholder="login"
+                    [(ngModel)]='user.login'>
+                  <input *ngIf="editMode == 'new'" type="text" class=" form-control" id="login" name="login" disabled readonly placeholder="login"
+                    [(ngModel)]='user.email'>
+                </div>
+              </div> -->
+            <div class="form-group col-sm-12" [class.has-error]="formInvalid && Password.invalid">
+              <label class="control-label col-sm-12" for="Password">{{'InputsPlaceholder.Password' | translate}}
+              </label>
+              <div class="col-sm-12">
+                <input type="password" class=" form-control" id="Password" name="Password" #Password="ngModel"
+                  [placeholder]="'InputsPlaceholder.Password' | translate" [(ngModel)]="user.password" [minlength]="Constants.userPasswordMinLength"
+                  [maxlength]="Constants.userPasswordMaxLength" required>
+              </div>
+            </div>
+
+            <!-- <div *ngIf="editMode == 'edit' && user.provider == 1" class="form-group col-sm-12" [class.has-error]="formInvalid && Password.invalid">
+              <label class="control-label col-sm-12" for="Password">{{'InputsPlaceholder.Password' | translate}}
+              </label>
+              <div class="col-sm-12">
+                <input type="password" class=" form-control" id="Password" name="Password" #Password="ngModel"
+                  [placeholder]="'InputsPlaceholder.Password' | translate" [(ngModel)]="user.password" [minlength]="Constants.userPasswordMinLength"
+                  [maxlength]="Constants.userPasswordMaxLength" required disabled>
+              </div>
+            </div> -->
+
+            <div class="form-group col-sm-12" [class.has-error]="formInvalid && (confirmerPW.invalid || confirmerPW?.value !== Password?.value)">
+              <label class="control-label col-sm-12 " for="confirmerPW">{{'InputsPlaceholder.ConfirmPassword' |
+                translate}} </label>
+              <div class="col-sm-12">
+                <input type="password" class=" form-control" id="confirmerPW" name="confirmerPW" #confirmerPW="ngModel"
+                  [(ngModel)]="user.confirmPassword" [placeholder]="'InputsPlaceholder.ConfirmPassword' | translate"
+                  [minlength]="Constants.userPasswordMinLength" [maxlength]="Constants.userPasswordMaxLength" required>
+              </div>
+            </div>
+
+            <!-- <div *ngIf="editMode == 'edit' && user.provider == 1" class="form-group col-sm-12" [class.has-error]="formInvalid && (confirmerPW.invalid || confirmerPW?.value !== Password?.value)">
+              <label class="control-label col-sm-12 " for="confirmerPW">{{'InputsPlaceholder.ConfirmPassword' |
+                translate}} </label>
+              <div class="col-sm-12">
+                <input type="password" class=" form-control" id="confirmerPW" name="confirmerPW" #confirmerPW="ngModel"
+                  [(ngModel)]="user.confirmPassword" [placeholder]="'InputsPlaceholder.ConfirmPassword' | translate"
+                  [minLength]="Constants.userPasswordMinLength" [maxlength]="Constants.userPasswordMaxLength" required
+                  disabled>
+              </div>
+            </div> -->
+
+            <div *ngIf="editMode == 'edit'" class="form-group col-sm-12">
+              <label class="control-label col-sm-12">{{'UserFormPage.ProfilImage' | translate}} </label>
+            </div>
+            <div *ngIf="editMode == 'edit'" class="col-sm-12 ">
+              <div class="thumbnail">
+                <button type="button" *ngIf="newPicture.img.image != undefined" class="btn-xs btn-primary pull-right button-upload-image"
+                  data-toggle="modal" (click)="getModified()" data-target="#CropImage">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button type="button" *ngIf="newPicture.img.image != undefined" class="btn-xs btn-primary pull-right button-delete"
+                  (click)="deleteImage()">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+                <div class="flexCon" *ngIf="newPicture.img.image == undefined && (editMode == 'new' || user.provider == 0)"
+                  data-toggle="modal" data-target="#CropImage" (click)="resetCropper()">
+                  <div class="bigImage">
+                    <img class="bigimg img-rounded img-responsive cursor-pointer" *ngIf="newPicture.img.image == undefined"
+                      src="/assets/img/imgDragAndDrop.png" alt="Cliquer pour choisir une image d'annonce">
+                  </div>
+                  <div class="bigImageText">
+                    <p class="textOverlayImage">
+                      <span class="browsefileLabel"> {{'ProjectCreationPage.BrowseFileLabel' | translate}} </span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flexCon" *ngIf="editMode == 'edit' && newPicture.img.image == undefined && user.provider == 1"
+                  data-toggle="modal" (click)="resetCropper()">
+                  <div class="bigImage">
+                    <img class="bigimg img-rounded img-responsive cursor-no-drop" *ngIf="newPicture.img.image == undefined"
+                      src="/assets/img/imgDragAndDrop.png" alt="Cliquer pour choisir une image d'annonce">
+                  </div>
+                  <div class="bigImageText">
+                    <p class="textOverlayImage">
+                      <span class="browsefileLabel"> {{'ProjectCreationPage.BrowseFileLabel' | translate}} </span>
+                    </p>
+                  </div>
+                </div>
+                <img class="img-responsive picture-preview-input" *ngIf="newPicture.img.image != undefined" [src]="newPicture.img.image"
+                  [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight" id="picture-preview-main-picture"
+                  alt="Image d'annonce">
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="custom-captcha pull-left ">
+                <re-captcha #recaptchaRef="reCaptcha" (resolved)="resolved($event)" size="small"></re-captcha>
+              </div>
+
+            </div>
+
+            <!-- Edit Mode -->
+            <div class="form-group col-sm-12">
+              <div class="col-xs-12" *ngIf="editMode == 'edit'">
+                <div>
+                  <button *ngIf="user.provider == 0" type="submit" class="base-button-edit pull-right">
+                    <strong>{{'UserFormPage.EditButton' | translate}}</strong>
+                  </button>
+                  <button *ngIf="user.provider == 1" type="submit" class="base-button-edit pull-right">
+                    <strong>{{'UserFormPage.EditButton' | translate}}</strong>
+                  </button>
+                </div>
+                <button style="margin-right:5px;" type="button" class="base-button-edit pull-left" (click)="resetUser()"
+                  data-dismiss="modal">
+                  <strong>{{'Popups.CancelButton' | translate}}</strong>
+                </button>
+              </div>
+            </div>
+
+            <!-- Edit Mode -->
+
+            <!-- New Mode -->
+            <div class="col-xs-12" *ngIf="editMode == 'new'">
+              <div class="text-center">
+                <button type="submit" class="base-button-create">
+                  {{'UserFormPage.CreateMyAccount' | translate}}
+                </button>
+              </div>
+              <div *ngIf="usertype == userTypeEnum.Particulier" class="text-center Ordiv">
+                <hr class="half-hr">
+                <span class="Orlabel"> {{'ProjectCreationPage.OrLabel' | translate }} </span>
+                <hr class="half-hr">
+              </div>
+              <div *ngIf="usertype == userTypeEnum.Particulier" class="text-center">
+                <button type="button" (click)="createUserWithGoogle()" class="base-button-create-google">
+                  <span class="fa fa-google"> </span> {{'LoginPage.SignUpWithGoogle' | translate}}
+                </button>
+              </div>
+            </div>
+            <!-- New Mode -->
+            <div id="error_placeholder" class="form-message text-green"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="userCompteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 *ngIf="editMode == 'new'" class="modal-title modal-text-header" style="float: left;">{{'UserFormPage.NewCompteHeader'
+          | translate}}</h2>
+        <h2 *ngIf="editMode == 'edit'" class="modal-title modal-text-header" style="float: left;">{{'UserFormPage.EditCompteHeader'
+          | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div class="popup-text">
+          <p *ngIf="success && editMode == 'new'">{{'UserFormPage.CreateAccountSuccessText' | translate}}</p>
+          <p *ngIf="success && editMode == 'edit'">{{'UserFormPage.EditAccountSuccessText' | translate}}</p>
+          <p *ngIf="!success && loginExsiste">{{'UserFormPage.ExistingMail' | translate}}</p>
+          <p *ngIf="!success && !loginExsiste">{{'UserFormPage.ErrorCreateAccount' | translate}}</p>
+        </div>
+        <div class="text-center">
+          <button type="button" (click)=" hideUserModal()" class="btn popup-ok-btn" data-dismiss="modal">{{'Popups.CloseButton'
+            | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Add Image -->
+<div id="CropImage" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" #cropModal>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'UserFormPage.AddImage' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" (click)="closeCropModal()" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <label style="text-align: center !important;" class="btn btn-block btn-primary">
+          {{'UserFormPage.UploadImage' | translate}}
+          <input type="file" hidden (change)="fileChangeListener($event)" style="display:none;" accept="image/*">
+        </label>
+        <br>
+        <div class="alert alert-danger" role="alert" *ngIf="isMaxSize == true">
+          {{'Projectfiles.MaxSizeFile' | translate}} ({{formatSizeUnits(Constants.FileUploadMaxSize)}})
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="isNotImage   == true">
+          {{'Projectfiles.InvalidFile' | translate}}
+        </div>
+        <img-cropper #cropper [image]="data" [settings]="cropperSettings" class="img-responsive picture-preview-input">
+        </img-cropper>
+        <div style="padding: 10px"></div>
+        <div class="text-center">
+          <button type="button" [disabled]="data.image == ''" (click)="savePicture(data)" class="btn popup-ok-btn">
+            <span class="glyphicon glyphicon-check"></span>
+            {{'Popups.ConfirmationButton' | translate}}
+          </button>
+          <button type="button" (click)="closeCropModal()" class="btn poup-cancel-btn">
+            <span class="glyphicon glyphicon-remove"></span>
+            {{'Popups.CancelButton' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

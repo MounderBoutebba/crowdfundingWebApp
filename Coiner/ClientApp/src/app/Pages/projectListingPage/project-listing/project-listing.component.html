@@ -1,0 +1,28 @@
+<!-- Projects listing -->
+<div class="container-fluid info-background">
+  <div class=" sub-menu">{{'HomePageSections.Projects' | translate}} | {{'CarouselListing.Title' | translate}}</div>
+    <h1 class="decoration text-center background-size-project" *ngIf="emptyProjects">
+        <span class="nobacgr">{{'HomePageSections.NoProjects' | translate}}</span>
+    </h1>
+  <div class="content background-size-project" *ngIf="!emptyProjects">
+    <section class="section content" id="portfolio-list">
+      <div class="wrapper projects font_p" id="contentWrapper">
+        <div class="zone-content clearfix">
+          <div class="portfolio-container">
+            <div class="product-numbrer" style="margin-bottom: 20px;">{{'CarouselListing.Title' | translate}}</div>
+            <project-filter #projectFilter class="col-xs-12"></project-filter>
+            <project-listing-item class="col-md-4 col-xs-12" *ngFor="let project of projects" [project]=project [slider]="'on'">
+            </project-listing-item>
+            <!-- <h1 id="scroll-to" *ngIf="displayScrollTo">ScrollTo</h1> -->
+          </div>
+        </div>
+        <div>
+          <div id="loader" class="loader"></div>
+        </div>
+      </div>
+      <!-- <div *ngIf="seeMore" class="SeeMoreButton col-xs-12">
+          <span (click)="getMoreProjects()"> {{'UserProjectPage.seeMore' | translate }}  </span>
+      </div> -->
+    </section>
+  </div>
+</div>

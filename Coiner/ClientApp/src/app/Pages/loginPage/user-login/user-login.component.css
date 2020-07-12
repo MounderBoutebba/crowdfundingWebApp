@@ -1,0 +1,83 @@
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 420px !important;
+    margin: 60px auto !important;
+  }
+}
+
+.big-icon {
+  font-size: 22px;
+}
+
+.modal-footer-label1 {
+  height: 27px;
+  color: #495057;
+  font-family: "Open Sans";
+  font-size: 20px;
+  letter-spacing: -0.35px;
+  line-height: 27px;
+  text-align: center;
+}
+
+.modal-footer-label2 {
+  height: 27px;
+  color: #337BAE;
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.35px;
+  line-height: 27px;
+  text-align: center;
+}
+
+.login-btn {
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #337BAE;
+  color: white;
+  height: 40px;
+  margin-top: 6px;
+  padding: 10px 70px;
+  margin-bottom: 6px;
+  min-width: 210px;
+}
+
+.login-btn-google {
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #c23321;
+  color: white;
+  height: 40px;
+  margin-top: 6px;
+  padding: 10px 21px;
+  margin-bottom: 10px;
+  min-width: 210px;
+}
+
+.Ordiv {
+  margin: 10px;
+}
+
+.half-hr {
+  display: inline-block;
+  width: 85px;
+  margin-bottom: 4px;
+  margin-top: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  border-top: 0px;
+}
+
+.Orlabel {
+  color: rgba(0, 0, 0, 0.6);
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.label1 {
+  height: 27px;
+  color: #495057;
+  font-family: "Open Sans";
+  font-size: 20px;
+  letter-spacing: -0.35px;
+  line-height: 27px;
+}

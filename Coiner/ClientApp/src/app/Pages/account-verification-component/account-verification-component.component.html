@@ -1,0 +1,35 @@
+<div class="modal-dialog top-Margin" >
+  <div class="contacts">
+    <div role="dialog">
+      <!-- Modal content-->
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'Popups.AccountActivationHeader' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn"  routerLink="/">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div>
+            <div class="alert alert-info text-center" role="alert" *ngIf="state=='changePasswordSuccess'">
+              {{'Popups.VerificationSucces' | translate}}
+            </div>
+            <div class="alert alert-danger text-center" role="alert" *ngIf="state=='changePasswordFail'">
+              {{'Popups.VerificationFails' | translate}}
+            </div>
+            <div class="alert alert-danger text-center" role="alert" *ngIf="state!='changePasswordSuccess' && state!='changePasswordFail'">
+                {{'Popups.VerificationError' | translate}}
+            </div>
+            
+          </div>
+              <div class="text-center">
+                <button  routerLink="/" class="btn popup-ok-btn">
+                  {{'Popups.CloseButton' | translate}} 
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+

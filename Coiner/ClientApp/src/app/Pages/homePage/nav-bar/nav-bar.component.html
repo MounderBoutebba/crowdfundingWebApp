@@ -1,0 +1,221 @@
+<nav class="navbar navbar-fixed-top navbar-box-shadow">
+  <div class="container-fluid" style="margin-top: 8px;">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header  navbar-height">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+        aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="fa fa-bars fa-2x"></span>
+      </button>
+      <a class="navbar-brand brand-margin-left" [routerLinkActive]="['active']" routerLink="/">
+        <img src="../../assets/img/logo/Logo.svg" class="border-left logo-size">
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a (click)="collapseMenu()" routerLink="/liste-produits">{{'Menu.About' | translate}}</a>
+        </li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a (click)="collapseMenu()" routerLink="/liste-projets">{{'Menu.Projects' | translate}}</a>
+        </li>
+        <li *ngIf="currentUser != null" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a (click)="collapseMenu()" [routerLink]="['/dashboard']" [queryParams]="{ page: 'dashboard' }">
+            <img src="../../../../assets/img/icones/ic_dashboard.svg" alt="ic_account" style="margin-right: 10px;">
+            <span>{{'Menu.Dashboard' | translate }} </span>
+          </a>
+        </li>
+        <!-- <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a (click)="collapseMenu()" routerLink="/mes-favoris">
+            <i class="fa fa-heart-o favorite-sign-o"></i>
+            <i class="fa fa-heart favorite-sign"></i>
+            {{'Menu.FavoriteProjects' | translate}} ({{_projectService.getFavoriteOffersCount()}})
+          </a>
+        </li> -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="currentUser == null" class="cursor-pointer" [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{exact:true}">
+          <a (click)="collapseMenu()" (click)="openUserModal('new')">{{'Menu.Signup' | translate}}</a>
+        </li>
+        <li *ngIf="currentUser == null">
+          <a (click)="collapseMenu()" class="cursor-pointer" (click)="openLoginModal()">{{'Menu.Login' | translate}}</a>
+        </li>
+        <li *ngIf="currentUser != null ">
+          <a *ngIf="currentUser.userType == 1" class="create-project" (click)="checkConnectedUser()">{{'Menu.CreateProject'
+            | translate}}</a>
+        </li>
+        <li *ngIf="currentUser != null">
+          <img src="assets/img/Coin2.png" alt="coins" style="height:35px;margin-top:8px;padding-left: 15px;padding-right: 15px;">
+          <span class="badge badge-default badge-coins">{{currentUser.userCoinsNumber}}</span>
+        </li>
+        <li *ngIf="currentUser != null" class="dropdown cursor-pointer">
+          <div class="dropdown-toggle" data-toggle="dropdown" style="padding-left: 15px;padding-right: 15px;margin-top: 4px;margin-top: 4px;">
+            <div class="userImg">
+              <img *ngIf="currentUser.userImage != null && currentUser.provider == 0" [src]="constants.sharedUserImagesPath + currentUser.userImage.path"
+                class="image-profile-size img-circle">
+              <img *ngIf="currentUser.userImage == null && currentUser.provider == 0" [src]="constants.sharedUserImagesPath + 'no-image-user.png'"
+                class="image-profile-size img-circle">
+              <img *ngIf="currentUser.provider == 1" [src]="currentUser.userImage.path" class="image-profile-size img-circle">
+            </div>
+          </div>
+          <div class="isActive cursor-pointer"></div>
+          <ul class="UserDropDown dropdown-menu" style="margin-top: 8px">
+            <li>
+              <span class="helloUser">{{'ProfileDropDown.Hello' | translate}}</span>
+            </li>
+            <li style="margin-top: 5px;">
+              <a [routerLink]="['/dashboard']" [queryParams]="{ page: 'profile' }">
+                <img src="../../../../assets/img/icones/ic_account_circle.svg" alt="ic_account" style="margin-right: 10px;margin-bottom: 9px;">
+                <span class="ProfileDropUser" style="margin-top: 20px;">{{currentUser.firstName+" "}}
+                  {{currentUser.lastName}}</span>
+              </a>
+            </li>
+            <li style="margin-top: 10px;">
+              <a [routerLink]="['/dashboard']" [queryParams]="{ page: 'myProjects' }">
+                <img src="../../../../assets/img/icones/ic_dashboard.svg" alt="ic_account" style="margin-right: 10px;">
+                <span class="myProjects">{{'ProfileDropDown.MyProjects' | translate}}</span>
+              </a>
+              <a (click)="openBillsModal()">
+                <img src="../../../../assets/img/icones/ic_dashboard.svg" alt="ic_account" style="margin-right: 10px;">
+                <span class="myProjects">{{'ProfileDropDown.MyBills' | translate}}</span>
+              </a>
+            </li>
+
+            <li>
+              <button class="btn popup-ok-btn cursor-pointer" (click)="logoutUser()">
+                <img src="../../../../assets/img/icones/ic_logout.svg" alt="ic_account" style="margin-right: 5px;margin-bottom: 3px;">
+                {{'ProfileDropDown.LogOut' | translate}}
+              </button>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle flag-dropdown cursor-pointer" data-toggle="dropdown">
+            <img class="language-flag-icon image-size" [src]="'assets/img/'+ translate.currentLang +'.png'" alt="flag">
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-flag">
+            <li>
+              <a (click)="translate.use('en')" class="cursor-pointer">
+                <img alt="EN" class="language-flag-icon image-size" src="assets/img/en.png">
+              </a>
+            </li>
+            <li>
+              <a (click)="translate.use('fr')" class="cursor-pointer">
+                <img alt="FR" class="language-flag-icon image-size" src="assets/img/fr.png">
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+
+<user-login #loginModal></user-login>
+<user-form *ngIf="currentUser == null" #userModal></user-form>
+<app-loader [isRunning]="isRunning"></app-loader>
+
+<!-- New Password -->
+<div id="DemandNewPasswordModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'Popups.UpdatePassword' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" (click)="onCloseModal()" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div>
+            <div class="alert alert-danger text-center" role="alert" *ngIf="sendForm && !success && serverError">
+              {{'Popups.ErrorAccessProfil' | translate}}
+            </div>
+            <div class="alert alert-danger text-center" role="alert" *ngIf="formInvalid || (sendForm && !success && mailInvalid)">
+              {{'Popups.EmailInvalid' | translate}}
+            </div>
+            <div class="alert alert-info text-center" role="alert" *ngIf="sendForm && success && emailSent">
+              {{'Popups.EmailSent' | translate}}
+            </div>
+            <div class="alert alert-info text-center" role="alert" *ngIf="!sendForm">
+              {{'Popups.SetEmail' | translate}}
+            </div>
+          </div>
+          <div class="form-content">
+            <form #form="ngForm" (ngSubmit)="demandNewPassword(form)" class="message row form-horizontal" data-ajax="true">
+              <div class="form-group" [class.has-error]="formInvalid && Email.invalid">
+                <p class="label1" for="login">{{'LoginPage.LoginForm.Email' | translate}}</p>
+                <input type="text" class=" form-control" id="Email" name="Email" #Email="ngModel" [placeholder]="'LoginPage.LoginForm.Email' | translate"
+                  [(ngModel)]='email' required>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn popup-ok-btn">
+                  {{'Popups.SendButton' | translate}}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- New Password -->
+
+<!-- Bills List -->
+<div id="MyBills" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'ProfileDropDown.MyBills' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>{{'BillsPage.BillId' | translate}}</th>
+                <th>{{'BillsPage.CreationDate' | translate}}</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bill of bills">
+                <td>{{bill.id}}</td>
+                <td>{{bill.creationDate | date: 'dd/MM/yyyy'}}</td>
+                <td><span (click)="displayPdfInViewer(bill.pdfPath)" class="glyphicon glyphicon-eye-open cursor-pointer"></span></td>
+                <td><a [href]="bill.content" download><span class="glyphicon glyphicon-download-alt"></span></a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Bills List -->
+
+<!-- Bill Viewer PopUp -->
+<div id="BillViewer" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <pdf-viewer [src]="pdfSrc" [original-size]="false" [show-all]="false" [render-text]="true" style="display:block"></pdf-viewer>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Bill Viewer PopUp -->

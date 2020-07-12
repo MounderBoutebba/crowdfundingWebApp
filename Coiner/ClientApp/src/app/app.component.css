@@ -1,0 +1,104 @@
+@media (max-width: 820px) {
+  /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+.body-content {
+    padding-top: 50px;
+}
+}
+
+@media (max-width: 1100px) {
+.footer {
+   text-align: center;
+}
+.carryOutLogo {
+   text-align: center;
+}
+.socialMedia {
+   display: inline-block !important;
+}
+.carryOutLogoImg {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+}
+.carryOutLogoImg {
+  width: 15%;
+}
+#footer {
+  display: table-footer-group;
+  display: flow-root;
+  background-image: url('../assets/img/footerbg.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.carryOutLogo {
+  width: 88%;
+}
+
+.copyrightsText {
+  opacity: 0.5;
+  color: #E6E8E6;
+  font-family: "Open Sans";
+  font-size: 12px;
+  line-height: 22px;
+}
+
+.socialMedia {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+ 
+h6.StartNow{
+  width: 210px;
+  color: #E6E8E6;
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2.4px;
+  line-height: 17px;
+  width:90%;
+}
+
+.beitcan {
+  text-align: center;
+  color: white;
+}
+
+.footbtn {
+  min-width: 141px;
+  min-height: 37px;
+  /*margin-bottom:20px;*/
+}
+
+.scroll-margin {
+  /* min-height: 650px; */
+  margin-top: 71px;
+}
+
+@media (max-width:991px) {
+  .scroll-margin {
+    margin-top: 74px;
+  }
+
+  .scrollable {
+    height: calc(100% - 74px);
+  }
+}
+@media (max-width:767px){
+  #footer{
+    display: block !important;
+    display: flow-root !important;
+  }
+}
+@media (min-width:768) and (max-width:1100px){
+  #footer{
+    display: -ms-grid;
+  }
+  .carryOutLogo{
+    display: block;
+  }
+  .beitcan{
+    display: block;
+  }
+}

@@ -1,0 +1,31 @@
+<div style="position:relative">
+  <div class="home-loader" *ngIf="loader" ></div>
+</div>
+<div class="section-title text-center">{{'CarouselListing.Title' | translate}}</div>
+<div [ngStyle]="{'height': (loader) ? '200px' : 'auto'}">
+
+  <div class="content" style="margin-top:0px;">
+    <slick-slider class="hidden-xs hidden-sm visible-md visible-lg" *ngIf="carouselTileItems" [options]="options">
+      <project-listing-item *ngFor="let slide of carouselTileItems" [project]=slide [slider]="'on'">
+      </project-listing-item>
+    </slick-slider>
+    <ngx-carousel [inputs]="carouselTile" class="custom-width visible-sm visible-xs hidden-md" style="padding-top: 10px;">
+      <ngx-tile NgxCarouselItem *ngFor="let Tile of carouselTileItems">
+        <project-listing-item [project]=Tile [slider]="'on'">
+        </project-listing-item>
+      </ngx-tile>
+      <button NgxCarouselPrev class='leftRs'>
+        <span class="fa fa-arrow-left custom-chevron"></span>
+      </button>
+      <button NgxCarouselNext class='rightRs'>
+        <span class="fa fa-arrow-right custom-chevron"></span>
+      </button>
+    </ngx-carousel>
+  </div>
+</div>
+<div *ngIf="displayAllProjectsButton && !loader" class="see-all-projects-div">
+  <span class="see-all-projects" (click)="dispalyAllProjects()">
+    {{'CarouselListing.ViewMoreProjectsLabel' | translate}}
+  </span>
+  <i class="fa fa-arrow-right custom-chevron"></i>
+</div>

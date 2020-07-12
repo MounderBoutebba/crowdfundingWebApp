@@ -1,0 +1,1363 @@
+<app-loader [isRunning]="isRunning"></app-loader>
+<div class="content page-bottom-margin" style="margin-top: 15px;">
+  <div class="contacts">
+    <!-- <div class="bborder">
+      <p *ngIf="Mode == 'new'" style="text-align: center;font-weight: 700;font-size: 30px;">
+        <strong>Créer Votre Nouveau Projet</strong>
+      </p>
+      <p *ngIf="Mode == 'edit'" style="text-align: center;font-weight: 700;font-size: 30px;">
+        <strong>Modifier Projet</strong>
+      </p>
+    </div> -->
+    <div>
+      <div class="controls controls-row">
+        <section>
+          <div class="wizard" style="margin-top: 0px;">
+            <div class="wizard-inner">
+              <div *ngIf="Mode == 'new'" class="connecting-line-new"></div>
+              <div *ngIf="Mode == 'edit'" class="connecting-line-edit"></div>
+              <!-- ِNew Mode Tabs -->
+              <ul class="nav nav-tabs" style="margin-top: 0px;" role="tablist" *ngIf="Mode == 'new'">
+                <li role="presentation" [class.active]="currentStep == 1">
+                  <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" [title]="'ProjectCreationPage.ProjectType' | translate"
+                    (click)="checkDisabledTab(false, 1)">
+                    <span class="round-tab">
+                      <img class="img" [class.hidden]="currentStep != 1" src="assets/img/icones/ic_step1.svg">
+                      <img class="img" [class.hidden]="currentStep == 1" src="assets/img/icones/ic_step1-inactive.svg">
+                    </span>
+                  </a>
+                </li>
+                <li role="presentation" [class.active]="currentStep == 2" [class.disabled]="lastStep == 1" (click)="checkDisabledTab(lastStep == 1, 2)">
+                  <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" [title]="'ProjectCreationPage.GeneralInformation' | translate">
+                    <span class="round-tab">
+                      <img class="img" [class.hidden]="currentStep != 2" src="assets/img/icones/ic_step2.svg">
+                      <img class="img" [class.hidden]="currentStep == 2" src="assets/img/icones/ic_step2-inactive.svg">
+                    </span>
+                  </a>
+                </li>
+                <li role="presentation" [class.active]="currentStep == 3" [class.disabled]="lastStep == 1 || lastStep == 2"
+                  (click)="checkDisabledTab(lastStep == 1 || lastStep == 2, 3)">
+                  <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" [title]="'ProjectCreationPage.VideoAndImages' | translate">
+                    <span class="round-tab">
+                      <img class="img" style="width: 66%;" [class.hidden]="currentStep != 3" src="assets/img/icones/ic_step3.svg">
+                      <img class="img" style="width: 66%;" [class.hidden]="currentStep == 3" src="assets/img/icones/ic_step3-inactive.svg">
+                    </span>
+                  </a>
+                </li>
+                <li role="presentation" [class.active]="currentStep == 4" [class.disabled]="lastStep == 1 || lastStep == 2 ||  lastStep == 3"
+                  (click)="checkDisabledTab(lastStep == 1 || lastStep == 2 ||  lastStep == 3, 4)">
+                  <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" [title]="'ProjectCreationPage.Documents' | translate">
+                    <span class="round-tab">
+                      <i class="glyphicon glyphicon-paperclip"></i>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+              <!-- ِNew Mode Tabs -->
+              <!-- Edit Mode Tabs -->
+              <div class="edit" *ngIf="Mode == 'edit'">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" [class.active]="currentStep == 2" (click)=" setCurrentStep(2)">
+                    <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" [title]="'ProjectCreationPage.GeneralInformation' | translate">
+                      <span class="round-tab">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                      </span>
+                    </a>
+                  </li>
+                  <li role="presentation" [class.active]="currentStep == 3" (click)=" setCurrentStep(3)">
+                    <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" [title]="'ProjectCreationPage.VideoAndImages' | translate">
+                      <span class="round-tab">
+                        <i class="glyphicon glyphicon-picture"></i>
+                      </span>
+                    </a>
+                  </li>
+                  <li role="presentation" [class.active]="currentStep == 4" (click)=" setCurrentStep(4)">
+
+                    <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" [title]="'ProjectCreationPage.Documents' | translate">
+                      <span class="round-tab">
+                        <i class="glyphicon glyphicon-paperclip"></i>
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Edit Mode Tabs -->
+            </div>
+
+            <div class="tab-content">
+              <div *ngIf="Mode == 'new'" id="step1" class="tab-pane" style="padding-top: 0px;" role="tabpanel"
+                [class.active]="currentStep == 1">
+                <div class="col-md-12">
+                  <div class=" img-label text-center step1Text">
+                    {{'ProjectCreationPage.UpperTextCrooper' | translate}}
+                  </div>
+                </div>
+                <div class="col-sm-12 project-type-container">
+                  <div class="col-xs-10 col-xs-offset-4 col-sm-3 col-sm-offset-1 background cursor-pointer" (click)="setProjectType(1)">
+                    <div class="img-background">
+                      <img class="img" src="assets/img/société.svg">
+                    </div>
+                    <div class="thumbnait-text center-text">
+                      {{'ProjectCreationPage.ProjectTypes.Socity' | translate}}
+                    </div>
+                  </div>
+
+                  <div class="col-xs-10 col-xs-offset-4 col-sm-3 col-sm-offset-1 background cursor-pointer" (click)="setProjectType(3)">
+                    <div class="img-background">
+                      <img class="img" style="width: 64%;" src="assets/img/bien.svg">
+                    </div>
+                    <div class="thumbnait-text center-text">
+                      {{'ProjectCreationPage.ProjectTypes.Product' | translate}}
+                    </div>
+                  </div>
+
+                  <div class="col-xs-10 col-xs-offset-4 col-sm-3 col-sm-offset-1 background cursor-pointer" (click)="setProjectType(0)">
+                    <div class="img-background">
+                      <img class="img" src="assets/img/projet.svg">
+                    </div>
+                    <div class="thumbnait-text center-text">
+                      {{'ProjectCreationPage.ProjectTypes.Project' | translate}}
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-sm-offset-1 col-sm-4  background cursor-pointer" (click)="setProjectType(2)">
+                    <div class="img-background">
+                      <img class="img" src="assets/img/parcour.svg">
+                    </div>
+                    <div class="thumbnait-text center-text">
+                      {{'ProjectCreationPage.ProjectTypes.Career' | translate}}
+                    </div>
+                  </div> -->
+              </div>
+              <div id="step2" class="tab-pane" role="tabpanel" [class.active]="currentStep == 2">
+                <div class="col-md-12 center-title">{{'ProjectCreationPage.GeneralInformation' | translate}}</div>
+                <div class="col-xs-12">
+                  <div role="alert" class="alert alert-danger text-center" *ngIf="formInvalid && formInputsInvalide">
+                    <span>{{'CommonMessages.CheckInputsFill' | translate}}!</span>
+                  </div>
+                </div>
+                <form #form="ngForm" (ngSubmit)="checkInputFileds(form)">
+                  <div [ngSwitch]="project.projectType">
+                    <div *ngSwitchCase="0">
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="projectType">
+                          {{
+                          'ProjectCreationPage.ProjectType' |
+                          translate
+                          }}
+                        </label>
+                        <div class="col-lg-12">
+                          <input [value]="_commonService.getProjectTypeName(project.projectType)" type="text" class="form-control"
+                            id="projectType" [placeholder]="'ProjectCreationPage.ProjectType' | translate" name="projectType"
+                            disabled>
+                        </div>
+                      </div>
+                      <div class="form-group  col-lg-6" [class.has-error]="formInvalid && projectName.invalid">
+                        <label class="control-label col-lg-12" for="projectName">
+                          {{'ProjectCreationPage.ProjectDenomination' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.projectName" type="text" class="form-control" id="projectName"
+                            [placeholder]="'ProjectCreationPage.ProjectDenomination' | translate" name="projectName"
+                            required [maxlength]="Constants.PrjectName" #projectName="ngModel">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="activityType">
+                          {{'ProjectCreationPage.ActivityType' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <select [(ngModel)]="project.activityType" class="form-control select-style" name="activityTypee">
+                            <option *ngFor="let activityType of activityTypes" [ngValue]="activityType.value">{{activityType.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && projectAddress.invalid">
+                        <label class="control-label col-lg-12" for="projectAddress">
+                          {{'ProjectCreationPage.Lieu' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.projectAddress" type="text" class="form-control" id="projectAddress"
+                            [placeholder]="'ProjectCreationPage.Lieu' | translate" name="projectAddress" required
+                            [maxlength]="Constants.ProjectAdress" #projectAddress="ngModel">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && businessPlan.invalid">
+                        <label class="control-label col-lg-12" for="businessPlan">
+                          {{'ProjectCreationPage.BusinessPlane' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.businessPlan" type="text" class="form-control" id="businessPlan"
+                            [placeholder]="'ProjectCreationPage.BusinessPlane' | translate" name="businessPlan"
+                            required [maxLength]="Constants.ProjectAdress" #businessPlan="ngModel">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="webLink">
+                          {{
+                          'ProjectCreationPage.WebLink' |
+                          translate
+                          }}
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.webLink" type="text" class="form-control" id="webLink"
+                            placeholder="https://www.albeyt.com" name="webLink" [maxlength]="Constants.EmailMaxLength">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && fundingGoal.invalid">
+                        <label class="control-label col-lg-12" for="fundingGoal">
+                          {{'ProjectCreationPage.FundingGoal' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.fundingGoal" type="number" class="form-control" id="fundingGoal"
+                            name="fundingGoal" placeholder="10000" name="fundingGoal" required #fundingGoal="ngModel"
+                            oninput="validity.valid||(value='');" min="1" (input)="checkMaxLenght($event,Constants.FundingGoal)">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && projectBeginEstimatedDate">
+                        <label class="control-label col-lg-12" for="projectBeginEstimatedDate">
+                          {{
+                          'ProjectCreationPage.BeginDate'
+                          | translate
+                          }}
+                        </label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxBeginDate" [minDate]="minBeginDate" readonly
+                            [bsConfig]="bsConfig" class=" form-control" id="projectBeginEstimatedDate" name="projectBeginEstimatedDate"
+                            #projectBeginEstimatedDate="ngModel" [placeholder]="'ProjectCreationPage.BeginDate' | translate"
+                            [(ngModel)]='project.beginEstimatedDate'>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="fundraisingPeriod">
+                          {{
+                          'ProjectCreationPage.FundingPeriod'
+                          | translate
+                          }}
+                        </label>
+                        <div class="col-lg-12">
+                          <select [(ngModel)]="project.fundraisingPeriod" class="form-control select-style" name="activityType">
+                            <option *ngFor="let fundraisingPeriod of fundraisingPeriods" [ngValue]="fundraisingPeriod.value">{{fundraisingPeriod.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && percentageAsset.invalid">
+                        <label class="control-label col-lg-12" for="percentageAsset">
+                          {{'ProjectCreationPage.SelPercentage' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.percentageAsset" type="number" class="form-control" id="percentageAsset"
+                            placeholder="5%" name="percentageAsset" required [pattern]="Constants.PercentageAsset"
+                            #percentageAsset="ngModel" (input)="checkPercentLength($event)">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="productName">
+                          {{'ProjectCreationPage.ProductName' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.productName" type="text" class="form-control" id="productName"
+                            [placeholder]="'ProjectCreationPage.ProductName' | translate" name="productName"
+                            [maxlength]="Constants.ProductName">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="walletId">
+                          {{'ProjectCreationPage.UserWalletId' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.user.walletId" type="text" class="form-control" id="walletId"
+                            [placeholder]="'ProjectCreationPage.UserWalletId' | translate" name="walletId" [maxlength]="Constants.PrjectName">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="productTVA">
+                          {{'ProjectCreationPage.ProductTVA' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.product_TVA" type="number" class="form-control" id="productTVA"
+                            [placeholder]="'ProjectCreationPage.ProductTVA' | translate" name="productTVA" [pattern]="Constants.PercentageAsset"
+                            (input)="checkPercentLength($event)">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="commissionTokenStirblock">
+                          {{'ProjectCreationPage.CommissionTokenStirblock' | translate}}
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.commissionTokenStirblock" type="number" class="form-control" id="commissionTokenStirblock"
+                            min="0" max="project.fundingGoal - 1" (input)="ProjectComissionFundingControl($event)"
+                            #commissionTokenStirblock="ngModel" [placeholder]="'ProjectCreationPage.CommissionTokenStirblock' | translate"
+                            name="commissionTokenStirblock">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-6" [class.has-error]="formInvalid && projectBeginEnchereDate">
+                        <label class="control-label col-lg-12" for="projectBeginEnchereDate">
+                          {{
+                          'ProjectCreationPage.BeginEnchereDate'
+                          | translate
+                          }}
+                        </label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxEnchereDate" [minDate]="minEnchereDate"
+                            readonly [bsConfig]="bsConfig" class=" form-control" id="projectBeginEnchereDate" name="projectBeginEnchereDate"
+                            #projectBeginEnchereDate="ngModel" [placeholder]="'ProjectCreationPage.BeginEnchereDate' | translate"
+                            [(ngModel)]='project.beginEnchereDate'>
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-6" [class.has-error]="formInvalid && projectEndEnchereDate">
+                        <label class="control-label col-lg-12" for="projectEndEnchereDate">
+                          {{
+                          'ProjectCreationPage.EndEnchereDate'
+                          | translate
+                          }}
+                        </label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxEnchereDate" [minDate]="project.beginEnchereDate"
+                            readonly [bsConfig]="bsConfig" class=" form-control" id="projectEndEnchereDate" name="projectEndEnchereDate"
+                            #projectEndEnchereDate="ngModel" [placeholder]="'ProjectCreationPage.EndEnchereDate' | translate"
+                            [(ngModel)]='project.endEnchereDate'>
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-12">
+                        <label class="control-label col-lg-12" for="productBillDescription">
+                          {{'ProjectCreationPage.ProductBillDescription' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <textarea [(ngModel)]="project.product_BillDescription" type="text" style="height: 113px !important"
+                            rows="6" class="form-control select-style" id="productBillDescription" [placeholder]="'ProjectCreationPage.ProductBillDescription' | translate"
+                            name="productBillDescription" [maxlength]="Constants.PresentationTeam"
+                            #product_BillDescription="ngModel"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-12" style="height: 136px;" [class.has-error]="formInvalid && projectPresentation.invalid">
+                        <label class="control-label col-lg-12" for="projectPresentation">
+                          {{'ProjectCreationPage.IntreduceYourself' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <textarea [(ngModel)]="project.projectPresentation" type="text" style="height: 113px !important"
+                            rows="6" class="form-control select-style" id="projectPresentation" [placeholder]="'ProjectCreationPage.IntreduceYourself' | translate"
+                            name="projectPresentation" required [maxlength]="Constants.PresentationTeam"
+                            #projectPresentation="ngModel"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngSwitchCase="1">
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="projectType">{{'ProjectCreationPage.ProjectType' |
+                          translate}}</label>
+                        <div class="col-lg-12">
+                          <input [value]="_commonService.getProjectTypeName(project.projectType)" type="text" class="form-control"
+                            id="projectType" [placeholder]="'ProjectCreationPage.ProjectType' | translate" name="projectType"
+                            disabled>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && projectName.invalid">
+                        <label class="control-label col-lg-12" for="projectName">
+                          {{'ProjectCreationPage.ProjectName' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.projectName" type="text" class="form-control" id="projectName"
+                            [placeholder]="'ProjectCreationPage.ProjectName' | translate" name="projectName"
+                            [maxlength]="Constants.PrjectName" required #projectName="ngModel">
+                        </div>
+                      </div>
+                      <!-- <div class="form-group col-lg-6" [class.has-error]="formInvalid && socityName.invalid">
+                        <label class="control-label col-lg-12" for="societyName">
+                          {{'ProjectCreationPage.SocityName' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.society_Name" type="text" class="form-control" id="societyName" [placeholder]="'ProjectCreationPage.SocityName' | translate"
+                            name="societyName" [maxlength]="Constants.PrjectName" required #socityName="ngModel">
+                        </div>
+                      </div> -->
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="societyLegaleIdentification">
+                          {{'ProjectCreationPage.legalIdentification' | translate}}
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.society_LegaleIdentification" type="text" class="form-control" id="societyLegaleIdentification"
+                            placeholder="SIREN …." name="societyLegaleIdentification" [maxlength]="Constants.PrjectName">
+                        </div>
+                      </div>
+                      <!-- <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="societyStructureType">{{'ProjectCreationPage.structureType' | translate}}</label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.society_StructureType" type="text" class="form-control" id="societyStructureType" placeholder="SAS, EURL …"
+                            name="societyStructureType" [maxlength]="Constants.PrjectName">
+                        </div>
+                      </div> -->
+                      <!-- <div class="form-group col-lg-6" [class.has-error]="formInvalid && adressProject.invalid">
+                        <label class="control-label col-lg-12" for="projectAddress">
+                          {{'HomePageSections.Adress' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.projectAddress" type="text" class="form-control" id="projectAddress" [placeholder]="'HomePageSections.Adress' | translate"
+                            name="projectAddress" [maxlength]="Constants.ProjectAdress" required #adressProject="ngModel">
+                        </div>
+                      </div> -->
+                      <!-- <div class="form-group col-lg-6" [class.has-error]="formInvalid && creationDate.invalid">
+                        <label class="control-label col-lg-12" for="societyCreationDate">
+                          {{'ProjectCreationPage.CreationDate' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="mincreationDateSocity" [minDate]="creationDateSocity" [bsConfig]="bsConfig" readonly
+                            class=" form-control" id="societyCreationDate" name="societyCreationDate" [placeholder]="'ProjectCreationPage.CreationDate' | translate"
+                            [(ngModel)]='project.society_CreationDate' required #creationDate="ngModel">
+                        </div>
+                      </div> -->
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && activityTypee.invalid">
+                        <label class="control-label col-lg-12" for="activityType">
+                          {{'ProjectCreationPage.ActivityType' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <select [(ngModel)]="project.activityType" class="form-control select-style" name="activityTypee"
+                            required #activityTypee="ngModel">
+                            <option *ngFor="let activityType of activityTypes" [ngValue]="activityType.value">{{activityType.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- <div class="form-group col-lg-6" [class.has-error]="formInvalid && evolutionPerspective.invalid">
+                        <label class="control-label col-lg-12" for="businessPlan">
+                          {{'ProjectCreationPage.Perspective' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.businessPlan" type="text" class="form-control" id="businessPlan" [placeholder]="'ProjectCreationPage.Perspective' | translate"
+                            name="businessPlan" [maxlength]="Constants.PrjectName" required #evolutionPerspective="ngModel">
+                        </div>
+                      </div> -->
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="webLink">{{'ProjectCreationPage.WebLink' |
+                          translate}}</label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.webLink" type="text" class="form-control" id="webLink"
+                            placeholder="https://www.albeyt.com" name="webLink" [maxlength]="Constants.EmailMaxLength">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && fundingGoal.invalid">
+                        <label class="control-label col-lg-12" for="fundingGoal">
+                          {{'ProjectCreationPage.FundingGoal' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.fundingGoal" type="number" class="form-control" id="fundingGoal"
+                            name="fundingGoal" placeholder="10000" name="fundingGoal" oninput="validity.valid||(value='');"
+                            min="1" required #fundingGoal="ngModel" (input)="checkMaxLenght($event,Constants.FundingGoal)">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && projectBeginEstimatedDate.invalid">
+                        <label class="control-label col-lg-12" for="projectBeginEstimatedDate">{{'ProjectCreationPage.BeginDate'
+                          | translate}}</label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxBeginDate" [minDate]="minBeginDate" readonly
+                            [bsConfig]="bsConfig" class=" form-control" id="projectBeginEstimatedDate" name="projectBeginEstimatedDate"
+                            #projectBeginEstimatedDate [placeholder]="'ProjectCreationPage.BeginDate' | translate"
+                            [(ngModel)]='project.beginEstimatedDate'>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="fundraisingPeriod">{{'ProjectCreationPage.FundingPeriod'
+                          | translate}}</label>
+                        <div class="col-lg-12">
+                          <select [(ngModel)]="project.fundraisingPeriod" class="form-control select-style" name="activityType">
+                            <option *ngFor="let fundraisingPeriod of fundraisingPeriods" [ngValue]="fundraisingPeriod.value">{{fundraisingPeriod.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && percentageAsset.invalid">
+                        <label class="control-label col-lg-12" for="percentageAsset">
+                          {{'ProjectCreationPage.SelPercentage' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.percentageAsset" type="number" class="form-control" id="percentageAsset"
+                            placeholder="5%" name="percentageAsset" required [pattern]="Constants.PercentageAsset"
+                            #percentageAsset="ngModel" (input)="checkPercentLength($event)">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="productName">
+                          {{'ProjectCreationPage.ProductName' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.productName" type="text" class="form-control" id="productName"
+                            [placeholder]="'ProjectCreationPage.ProductName' | translate" name="productName"
+                            [maxlength]="Constants.ProductName">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="walletId">
+                          {{'ProjectCreationPage.UserWalletId' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.user.walletId" type="text" class="form-control" id="walletId"
+                            [placeholder]="'ProjectCreationPage.UserWalletId' | translate" name="walletId" [maxlength]="Constants.PrjectName">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="productTVA">
+                          {{'ProjectCreationPage.ProductTVA' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.product_TVA" type="number" class="form-control" id="productTVA"
+                            [placeholder]="'ProjectCreationPage.ProductTVA' | translate" name="productTVA" [pattern]="Constants.PercentageAsset"
+                            (input)="checkPercentLength($event)">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="commissionTokenStirblock">
+                          {{'ProjectCreationPage.CommissionTokenStirblock' | translate}}
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.commissionTokenStirblock" type="number" class="form-control" id="commissionTokenStirblock"
+                            min="0" max="project.fundingGoal - 1" (input)="ProjectComissionFundingControl($event)"
+                            #commissionTokenStirblock="ngModel" [placeholder]="'ProjectCreationPage.CommissionTokenStirblock' | translate"
+                            name="commissionTokenStirblock">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-6" [class.has-error]="formInvalid && projectBeginEnchereDate">
+                        <label class="control-label col-lg-12" for="projectBeginEnchereDate">{{'ProjectCreationPage.BeginEnchereDate'
+                          | translate}}</label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxEnchereDate" [minDate]="minEnchereDate"
+                            readonly [bsConfig]="bsConfig" class=" form-control" id="projectBeginEnchereDate" name="projectBeginEnchereDate"
+                            #projectBeginEnchereDate="ngModel" [placeholder]="'ProjectCreationPage.BeginEnchereDate' | translate"
+                            [(ngModel)]='project.beginEnchereDate'>
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-6" [class.has-error]="formInvalid && projectEndEnchereDate">
+                        <label class="control-label col-lg-12" for="projectEndEnchereDate">{{'ProjectCreationPage.EndEnchereDate'
+                          | translate}}</label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxEnchereDate" [minDate]="project.beginEnchereDate"
+                            readonly [bsConfig]="bsConfig" class=" form-control" id="projectEndEnchereDate" name="projectEndEnchereDate"
+                            #projectEndEnchereDate="ngModel" [placeholder]="'ProjectCreationPage.EndEnchereDate' | translate"
+                            [(ngModel)]='project.endEnchereDate'>
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-12">
+                        <label class="control-label col-lg-12" for="productBillDescription">
+                          {{'ProjectCreationPage.ProductBillDescription' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <textarea [(ngModel)]="project.product_BillDescription" type="text" style="height: 113px !important"
+                            rows="6" class="form-control select-style" id="productBillDescription" [placeholder]="'ProjectCreationPage.ProductBillDescription' | translate"
+                            name="productBillDescription" [maxlength]="Constants.PresentationTeam"
+                            #product_BillDescription="ngModel"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngSwitchCase="2">
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="projectType">{{'ProjectCreationPage.ProjectType' |
+                          translate}}</label>
+                        <div class="col-lg-12">
+                          <input [value]="_commonService.getProjectTypeName(project.projectType)" type="text" class="form-control"
+                            id="projectType" [placeholder]="'ProjectCreationPage.ProjectType' | translate" name="projectType"
+                            disabled>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && profilName.invalid">
+                        <label class="control-label col-lg-12" for="projectName">
+                          {{'ProjectCreationPage.ProfilDenomination' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.projectName" type="text" class="form-control" id="projectName"
+                            [placeholder]="'ProjectCreationPage.ProfilDenomination' | translate" name="projectName"
+                            required [maxlength]="Constants.PrjectName" #profilName="ngModel">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && profilAddress.invalid">
+                        <label class="control-label col-lg-12" for="projectAddress">
+                          {{'ProjectCreationPage.Lieu' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.projectAddress" type="text" class="form-control" id="projectAddress"
+                            [placeholder]="'ProjectCreationPage.Lieu' | translate" name="projectAddress" required
+                            [maxlength]="Constants.ProjectAdress" #profilAddress="ngModel">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && activityTypee.invalid">
+                        <label class="control-label col-lg-12" for="activityType">
+                          {{'ProjectCreationPage.ActivityType' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <select [(ngModel)]="project.activityType" class="form-control select-style" name="activityTypee"
+                            required #activityTypee="ngModel">
+                            <option *ngFor="let activityType of activityTypes" [ngValue]="activityType.value">{{activityType.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="businessPlan">
+                          {{'ProjectCreationPage.ProjectionRealisation' | translate}}
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.businessPlan" type="text" class="form-control" id="businessPlan"
+                            [placeholder]="'ProjectCreationPage.ProjectionRealisation' | translate" name="businessPlan"
+                            [maxlength]="Constants.PrjectName">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="webLink">{{'ProjectCreationPage.WebLink' |
+                          translate}}</label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.webLink" type="text" class="form-control" id="webLink"
+                            placeholder="https://www.albeyt.com" name="webLink" [maxlength]="Constants.EmailMaxLength">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && fundingGoal.invalid">
+                        <label class="control-label col-lg-12" for="fundingGoal">
+                          {{'ProjectCreationPage.FundingGoal' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.fundingGoal" type="number" class="form-control" id="fundingGoal"
+                            name="fundingGoal" placeholder="10000" name="fundingGoal" oninput="validity.valid||(value='');"
+                            min="1" required #fundingGoal="ngModel" (input)="checkMaxLenght($event,Constants.FundingGoal)">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && projectBeginEstimatedDate.invalid">
+                        <label class="control-label col-lg-12" for="projectBeginEstimatedDate">{{'ProjectCreationPage.BeginDate'
+                          | translate}}</label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxBeginDate" [minDate]="minBeginDate" readonly
+                            [bsConfig]="bsConfig" class=" form-control" id="projectBeginEstimatedDate" name="projectBeginEstimatedDate"
+                            #projectBeginEstimatedDate="ngModel" [placeholder]="'ProjectCreationPage.BeginDate' | translate"
+                            [(ngModel)]='project.beginEstimatedDate'>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="fundraisingPeriod">{{'ProjectCreationPage.FundingPeriod'
+                          | translate}}</label>
+                        <div class="col-lg-12">
+                          <select [(ngModel)]="project.fundraisingPeriod" class="form-control select-style" name="activityType">
+                            <option *ngFor="let fundraisingPeriod of fundraisingPeriods" [ngValue]="fundraisingPeriod.value">{{fundraisingPeriod.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && engagementYear.invalid">
+                        <label class="control-label col-lg-12" for="career_EngagementYears">
+                          {{'ProjectCreationPage.EngagementYear' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.career_EngagementYears" type="number" class="form-control" id="career_EngagementYears"
+                            placeholder="5 années " name="career_EngagementYears" required #engagementYear="ngModel"
+                            max="999" (input)="checkMaxLenght($event,Constants.PercentageMaxLength)">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && percentageAsset.invalid">
+                        <label class="control-label col-lg-12" for="percentageAsset">
+                          {{'ProjectCreationPage.EngagementPercentage' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.percentageAsset" type="number" class="form-control" id="percentageAsset"
+                            placeholder="5%" name="percentageAsset" required [pattern]="Constants.PercentageAsset"
+                            #percentageAsset="ngModel" (input)="checkPercentLength($event)">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="productName" style="margin-bottom:25px;">
+                          {{'ProjectCreationPage.ProductName' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.productName" type="text" class="form-control" id="productName"
+                            [placeholder]="'ProjectCreationPage.ProductName' | translate" name="productName"
+                            [maxlength]="Constants.ProductName">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="walletId">
+                          {{'ProjectCreationPage.UserWalletId' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.user.walletId" type="text" class="form-control" id="walletId"
+                            [placeholder]="'ProjectCreationPage.UserWalletId' | translate" name="walletId" [maxlength]="Constants.PrjectName">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="productTVA">
+                          {{'ProjectCreationPage.ProductTVA' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.product_TVA" type="number" class="form-control" id="productTVA"
+                            [placeholder]="'ProjectCreationPage.ProductTVA' | translate" name="productTVA" [pattern]="Constants.PercentageAsset"
+                            (input)="checkPercentLength($event)">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="commissionTokenStirblock">
+                          {{'ProjectCreationPage.CommissionTokenStirblock' | translate}}
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.commissionTokenStirblock" type="number" class="form-control" id="commissionTokenStirblock"
+                            min="0" max="project.fundingGoal -1 " (input)="ProjectComissionFundingControl($event)"
+                            #commissionTokenStirblock="ngModel" [placeholder]="'ProjectCreationPage.CommissionTokenStirblock' | translate"
+                            name="commissionTokenStirblock">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-6" [class.has-error]="formInvalid && projectBeginEnchereDate">
+                        <label class="control-label col-lg-12" for="projectBeginEnchereDate">{{'ProjectCreationPage.BeginEnchereDate'
+                          | translate}}</label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxEnchereDate" [minDate]="minEnchereDate"
+                            readonly [bsConfig]="bsConfig" class=" form-control" id="projectBeginEnchereDate" name="projectBeginEnchereDate"
+                            #projectBeginEnchereDate="ngModel" [placeholder]="'ProjectCreationPage.BeginEnchereDate' | translate"
+                            [(ngModel)]='project.beginEnchereDate'>
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-6" [class.has-error]="formInvalid && projectEndEnchereDate">
+                        <label class="control-label col-lg-12" for="projectEndEnchereDate">{{'ProjectCreationPage.EndEnchereDate'
+                          | translate}}</label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxEnchereDate" [minDate]="project.beginEnchereDate"
+                            readonly [bsConfig]="bsConfig" class=" form-control" id="projectEndEnchereDate" name="projectEndEnchereDate"
+                            #projectEndEnchereDate="ngModel" [placeholder]="'ProjectCreationPage.EndEnchereDate' | translate"
+                            [(ngModel)]='project.endEnchereDate'>
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-12">
+                        <label class="control-label col-lg-12" for="productBillDescription">
+                          {{'ProjectCreationPage.ProductBillDescription' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <textarea [(ngModel)]="project.product_BillDescription" type="text" style="height: 113px !important"
+                            rows="6" class="form-control select-style" id="productBillDescription" [placeholder]="'ProjectCreationPage.ProductBillDescription' | translate"
+                            name="productBillDescription" [maxlength]="Constants.PresentationTeam"
+                            #product_BillDescription="ngModel"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-12" style="height: 136px" [class.has-error]="formInvalid && profilPresentation.invalid">
+                        <label class="control-label col-lg-12" for="projectPresentation">
+                          {{'ProjectCreationPage.IntreduceYourself' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <textarea [(ngModel)]="project.projectPresentation" type="text" style="height: 113px !important"
+                            rows="6" class="form-control select-style" id="projectPresentation" [placeholder]="'ProjectCreationPage.IntreduceYourself' | translate"
+                            name="projectPresentation" required [maxlength]="Constants.PresentationTeam"
+                            #profilPresentation="ngModel"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngSwitchCase="3">
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="projectType">{{'ProjectCreationPage.ProjectType' |
+                          translate}}</label>
+                        <div class="col-lg-12">
+                          <input [value]="_commonService.getProjectTypeName(project.projectType)" type="text" class="form-control"
+                            id="projectType" [placeholder]="'ProjectCreationPage.ProjectType' | translate" name="projectType"
+                            disabled>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && profilName.invalid">
+                        <label class="control-label col-lg-12" for="projectName">
+                          {{'ProjectCreationPage.ProductDenomination' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.projectName" type="text" class="form-control" id="projectName"
+                            [placeholder]="'ProjectCreationPage.ProductDenomination' | translate" name="projectName"
+                            required [maxlength]="Constants.PrjectName" #profilName="ngModel">
+                        </div>
+                      </div>
+                      <!-- <div class="form-group col-lg-6" [class.has-error]="formInvalid && profilAddress.invalid">
+                        <label class="control-label col-lg-12" for="projectAddress">
+                          {{'ProjectCreationPage.LieuProduct' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.projectAddress" type="text" class="form-control" id="projectAddress" [placeholder]="'ProjectCreationPage.LieuProduct' | translate"
+                            name="projectAddress" required [maxlength]="Constants.ProjectAdress" #profilAddress="ngModel">
+                        </div>
+                      </div> -->
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && activityTypee.invalid">
+                        <label class="control-label col-lg-12" for="activityType">
+                          {{'ProjectCreationPage.ProductType' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <select [(ngModel)]="project.activityType" class="form-control select-style" name="activityTypee"
+                            required #activityTypee="ngModel">
+                            <option *ngFor="let activityType of activityTypes" [ngValue]="activityType.value">{{activityType.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="product_SalesPercepective">
+                          {{'ProjectCreationPage.SelPerspective' | translate}}
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.product_SalesPercepective" type="text" [minDate]="minBeginDate"
+                            readonly [bsConfig]="bsConfig" bsDatepicker class="form-control" id="product_SalesPercepective"
+                            name="product_SalesPercepective" [placeholder]="'ProjectCreationPage.SelPerspective' | translate">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="webLink">{{'ProjectCreationPage.WebLink' |
+                          translate}}</label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.webLink" type="text" class="form-control" id="webLink"
+                            placeholder="https://www.albeyt.com" name="webLink" [maxlength]="Constants.EmailMaxLength">
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && fundingGoal.invalid">
+                        <label class="control-label col-lg-12" for="fundingGoal">
+                          {{'ProjectCreationPage.FundingGoal' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.fundingGoal" type="number" class="form-control" id="fundingGoal"
+                            name="fundingGoal" placeholder="10000" name="fundingGoal" oninput="validity.valid||(value='');"
+                            min="1" required #fundingGoal="ngModel" (input)="checkMaxLenght($event,Constants.FundingGoal)">
+                        </div>
+                      </div>
+                      <!-- <div class="form-group col-lg-6" [class.has-error]="formInvalid && projectBeginEstimatedDate.invalid">
+                        <label class="control-label col-lg-12" for="projectBeginEstimatedDate">{{'ProjectCreationPage.BeginDate' | translate}}</label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxBeginDate" [minDate]="minBeginDate" readonly [bsConfig]="bsConfig" class=" form-control"
+                            id="projectBeginEstimatedDate" name="projectBeginEstimatedDate" #projectBeginEstimatedDate="ngModel"
+                            [placeholder]="'ProjectCreationPage.BeginDate' | translate" [(ngModel)]='project.beginEstimatedDate'>
+                        </div>
+                      </div> -->
+                      <div class="form-group col-lg-6">
+                        <label class="control-label col-lg-12" for="fundraisingPeriod">{{'ProjectCreationPage.FundingPeriod'
+                          | translate}}</label>
+                        <div class="col-lg-12">
+                          <select [(ngModel)]="project.fundraisingPeriod" class="form-control select-style" name="activityType">
+                            <option *ngFor="let fundraisingPeriod of fundraisingPeriods" [ngValue]="fundraisingPeriod.value">{{fundraisingPeriod.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6" [class.has-error]="formInvalid && percentageAsset.invalid">
+                        <label class="control-label col-lg-12" for="percentageAsset">
+                          {{'ProjectCreationPage.ProductSelPercentage' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.percentageAsset" type="number" class="form-control" id="percentageAsset"
+                            placeholder="5%" name="percentageAsset" required [pattern]="Constants.PercentageAsset"
+                            #percentageAsset="ngModel" (input)="checkPercentLength($event)">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="productName">
+                          {{'ProjectCreationPage.ProductName' | translate}}
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.productName" type="text" class="form-control" id="productName"
+                            [placeholder]="'ProjectCreationPage.ProductName' | translate" name="productName"
+                            [maxlength]="Constants.ProductName">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="walletId">
+                          {{'ProjectCreationPage.UserWalletId' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.user.walletId" type="text" class="form-control" id="walletId"
+                            [placeholder]="'ProjectCreationPage.UserWalletId' | translate" name="walletId" [maxlength]="Constants.PrjectName">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="productTVA">
+                          {{'ProjectCreationPage.ProductTVA' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.product_TVA" type="number" class="form-control" id="productTVA"
+                            [placeholder]="'ProjectCreationPage.ProductTVA' | translate" name="productTVA" [pattern]="Constants.PercentageAsset"
+                            (input)="checkPercentLength($event)">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group  col-lg-6">
+                        <label class="control-label col-lg-12" for="commissionTokenStirblock">
+                          {{'ProjectCreationPage.CommissionTokenStirblock' | translate}}
+                        </label>
+                        <div class="col-lg-12">
+                          <input [(ngModel)]="project.commissionTokenStirblock" type="number" class="form-control" id="commissionTokenStirblock"
+                            min="0" max="project.fundingGoal - 1" (input)="ProjectComissionFundingControl($event)"
+                            #commissionTokenStirblock="ngModel" [placeholder]="'ProjectCreationPage.CommissionTokenStirblock' | translate"
+                            name="commissionTokenStirblock">
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-6" [class.has-error]="formInvalid && projectBeginEnchereDate">
+                        <label class="control-label col-lg-12" for="projectBeginEnchereDate">{{'ProjectCreationPage.BeginEnchereDate'
+                          | translate}}</label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxEnchereDate" [minDate]="minEnchereDate"
+                            readonly [bsConfig]="bsConfig" class=" form-control" id="projectBeginEnchereDate" name="projectBeginEnchereDate"
+                            #projectBeginEnchereDate="ngModel" [placeholder]="'ProjectCreationPage.BeginEnchereDate' | translate"
+                            [(ngModel)]='project.beginEnchereDate'>
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-6" [class.has-error]="formInvalid && projectEndEnchereDate">
+                        <label class="control-label col-lg-12" for="projectEndEnchereDate">{{'ProjectCreationPage.EndEnchereDate'
+                          | translate}}</label>
+                        <div class="col-lg-12">
+                          <input type="text" bsDatepicker [maxDate]="maxEnchereDate" [minDate]="project.beginEnchereDate"
+                            readonly [bsConfig]="bsConfig" class=" form-control" id="projectEndEnchereDate" name="projectEndEnchereDate"
+                            #projectEndEnchereDate="ngModel" [placeholder]="'ProjectCreationPage.EndEnchereDate' | translate"
+                            [(ngModel)]='project.endEnchereDate'>
+                        </div>
+                      </div>
+                      <div *ngIf="user.login == adminLogin" class="form-group col-lg-12">
+                        <label class="control-label col-lg-12" for="productBillDescription">
+                          {{'ProjectCreationPage.ProductBillDescription' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <textarea [(ngModel)]="project.product_BillDescription" type="text" style="height: 113px !important"
+                            rows="6" class="form-control select-style" id="productBillDescription" [placeholder]="'ProjectCreationPage.ProductBillDescription' | translate"
+                            name="productBillDescription" [maxlength]="Constants.PresentationTeam"
+                            #product_BillDescription="ngModel"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-12" style="height: 136px" [class.has-error]="formInvalid && profilPresentation.invalid">
+                        <label class="control-label col-lg-12" for="projectPresentation">
+                          {{'ProjectCreationPage.IntreduceYourself' | translate}}
+                          <span class="red-obligation">*</span>
+                        </label>
+                        <div class="col-lg-12">
+                          <textarea [(ngModel)]="project.projectPresentation" type="text" style="height: 113px !important"
+                            rows="6" class="form-control select-style" id="projectPresentation" [placeholder]="'ProjectCreationPage.IntreduceYourself' | translate"
+                            name="projectPresentation" required [maxlength]="Constants.PresentationTeam"
+                            #profilPresentation="ngModel"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-lg-12" [class.has-error]="formInvalid && froalaEditorValid">
+                    <div class="row" style="margin-bottom: 15px;">
+                      <label class="control-label col-lg-12" style="margin-left: 15px" for="description">
+                        {{'ProjectCreationPage.ProjectDescreption' | translate}}
+                        <span class="red-obligation">*</span>
+                      </label>
+                    </div>
+                    <div class="col-lg-12">
+                      <textarea id="froalaEditor" placeholder="Description" name="projectDescription" required></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <div style="margin:20px">
+                        <button *ngIf="Mode == 'new'" type="button" class="base-button-left btn-size " (click)="prevStep()">
+                          <strong>
+                            <i class="fa fa-angle-left" style=" font-size: 20px;font-weight:800;"></i>
+                            {{'ProjectCreationPage.PreviosButton' | translate}}
+                          </strong>
+                        </button>
+                        <button *ngIf="Mode == 'new'" type="submit" class="base-button base-button-r btn-size">
+                          <strong>
+                            {{'ProjectCreationPage.NextButton' | translate}}
+                            <i class="fa fa-angle-right" style=" font-size: 20px;font-weight:800;"> </i>
+                          </strong>
+                        </button>
+                        <button *ngIf="Mode == 'edit'" type="button" class="base-button base-button-r btn-size" (click)="changeCurrentStep()">
+                          <strong>
+                            {{'ProjectCreationPage.NextButton' | translate}}
+                            <i class="fa fa-angle-right" style=" font-size: 20px;font-weight:800;"> </i>
+                          </strong>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div id="step3" class="tab-pane" role="tabpanel" [class.active]="currentStep == 3">
+                <div>
+                  <div class="col-md-12">
+                    <div class=" img-label text-center">
+                      {{'ProjectCreationPage.UpperTextCrooper' | translate}}
+                    </div>
+                  </div>
+                  <div class="col-md-12 bigImage12">
+                    <div class="col-md-12">
+                      <div class="thumbnail">
+                        <button type="button" *ngIf="pictures[0] != undefined" class="btn-xs btn-primary pull-right button-upload-image"
+                          data-toggle="modal" (click)="getModified(0)" data-target="#CropImage1">
+                          <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button type="button" *ngIf="pictures[0] != undefined" class="btn-xs btn-primary pull-right button-delete"
+                          (click)="deleteImage(0)">
+                          <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                        <div class="flexCon" *ngIf="pictures[0] == undefined" data-toggle="modal" data-target="#CropImage1"
+                          (click)="setPictureId(0)">
+                          <div class="bigImage">
+                            <img class="bigimg img-rounded img-responsive cursor-pointer " *ngIf="pictures[0] == undefined"
+                              src="/assets/img/imgDragAndDrop.png" alt="Cliquer pour choisir une image d'annonce">
+                          </div>
+                          <div class="bigImageText">
+                            <p class="textOverlayImage">
+                              <!--<span class="DragAndDropLabel"> {{'ProjectCreationPage.DragAndDropLabel' | translate}} </span>-->
+                              <!--<br /> <span class="orLabel"> {{'ProjectCreationPage.OrLabel' | translate}} </span>-->
+                              <span class="browsefileLabel"> {{'ProjectCreationPage.BrowseFileLabel' | translate}}</span>
+                            </p>
+                          </div>
+                        </div>
+                        <img class="img-responsive picture-preview-input" style="width:450px" *ngIf="pictures[0] != undefined"
+                          [src]="pictures[0].img.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight"
+                          id="picture-preview-main-picture" alt="Image d'annonce">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="picture-preview-input-row row-flex row-flex-wrap">
+                  <div class="col-md-3 col-xs-6">
+                    <div class="thumbnail">
+                      <button type="button" *ngIf="pictures[1] != undefined" class="btn-xs btn-primary pull-right button-upload-image"
+                        data-toggle="modal" (click)="getModified(1)" data-target="#CropImage1">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                      </button>
+                      <button type="button" *ngIf="pictures[1] != undefined" class="btn-xs btn-primary pull-right button-set-as-default"
+                        (click)="setImageAsDefault(1)">
+                        <span class="glyphicon glyphicon-picture"></span>
+                      </button>
+                      <button type="button" *ngIf="pictures[1] != undefined" class="btn-xs btn-primary pull-right button-delete"
+                        (click)="deleteImage(1)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </button>
+                      <div class="flexCon" data-toggle="modal" data-target="#CropImage1" (click)="setPictureId(1)">
+                        <img class="bigimg img-rounded img-responsive cursor-pointer" *ngIf="pictures[1] == undefined"
+                          src="/assets/img/imgDragAndDrop.png" id="picture-preview-main-picture" alt="Cliquer pour choisir une image d'annonce">
+                      </div>
+                      <img class="img-responsive picture-preview-input" *ngIf="pictures[1] != undefined" [src]="pictures[1].img.image"
+                        [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight" id="picture-preview-main-picture"
+                        alt="Image d'annonce">
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-xs-6">
+                    <div class="thumbnail">
+                      <button type="button" *ngIf="pictures[2] != undefined" class="btn-xs btn-primary pull-right button-upload-image"
+                        data-toggle="modal" (click)="getModified(2)" data-target="#CropImage1">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                      </button>
+                      <button type="button" *ngIf="pictures[2] != undefined" class="btn-xs btn-primary pull-right button-set-as-default"
+                        (click)="setImageAsDefault(2)">
+                        <span class="glyphicon glyphicon-picture"></span>
+                      </button>
+                      <button type="button" *ngIf="pictures[2] != undefined" class="btn-xs btn-primary pull-right button-delete"
+                        (click)="deleteImage(2)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </button>
+                      <div class="flexCon" data-toggle="modal" data-target="#CropImage1" (click)="setPictureId(2)">
+                        <img class="bigimg img-rounded img-responsive cursor-pointer" *ngIf="pictures[2] == undefined"
+                          src="/assets/img/imgDragAndDrop.png" id="picture-preview-main-picture" alt="Cliquer pour choisir une image d'annonce">
+                      </div>
+                      <img class="img-responsive picture-preview-input" *ngIf="pictures[2] != undefined" [src]="pictures[2].img.image"
+                        [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight" alt="Image d'annonce">
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-xs-6">
+                    <div class="thumbnail">
+                      <button type="button" *ngIf="pictures[3] != undefined" class="btn-xs btn-primary pull-right button-upload-image"
+                        data-toggle="modal" (click)="getModified(3)" data-target="#CropImage1">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                      </button>
+                      <button type="button" *ngIf="pictures[3] != undefined" class="btn-xs btn-primary pull-right button-set-as-default"
+                        (click)="setImageAsDefault(3)">
+                        <span class="glyphicon glyphicon-picture"></span>
+                      </button>
+                      <button type="button" *ngIf="pictures[3] != undefined" class="btn-xs btn-primary pull-right button-delete"
+                        (click)="deleteImage(3)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </button>
+                      <div class="flexCon" data-toggle="modal" data-target="#CropImage1" (click)="setPictureId(3)">
+                        <img class="bigimg img-rounded img-responsive cursor-pointer" *ngIf="pictures[3] == undefined"
+                          src="/assets/img/imgDragAndDrop.png" id="picture-preview-main-picture" alt="Cliquer pour choisir une image d'annonce">
+                      </div>
+                      <img class="img-responsive picture-preview-input" *ngIf="pictures[3] != undefined" [src]="pictures[3].img.image"
+                        [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight" id="picture-preview-main-picture"
+                        alt="Image d'annonce">
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-xs-6">
+                    <div class="thumbnail ">
+                      <button type="button" *ngIf="pictures[4] != undefined" class="btn-xs btn-primary pull-right button-upload-image"
+                        data-toggle="modal" (click)="getModified(4)" data-target="#CropImage1">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                      </button>
+                      <button type="button" *ngIf="pictures[4] != undefined" class="btn-xs btn-primary pull-right button-set-as-default"
+                        (click)="setImageAsDefault(4)">
+                        <span class="glyphicon glyphicon-picture"></span>
+                      </button>
+                      <button type="button" *ngIf="pictures[4] != undefined" class="btn-xs btn-primary pull-right button-delete"
+                        (click)="deleteImage(4)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </button>
+                      <div class="flexCon" data-toggle="modal" data-target="#CropImage1" (click)="setPictureId(4)">
+                        <img class="bigimg img-rounded img-responsive cursor-pointer" *ngIf="pictures[4] == undefined"
+                          src="/assets/img/imgDragAndDrop.png" id="picture-preview-main-picture" alt="Cliquer pour choisir une image d'annonce">
+                      </div>
+                      <img class="img-responsive picture-preview-input" *ngIf="pictures[4] != undefined" [src]="pictures[4].img.image"
+                        [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight" id="picture-preview-main-picture"
+                        alt="Image d'annonce">
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="pull-right flip">
+                    <button class="btn btn-success button-margin-right" type="button" (click)="prevStep()">{{ 'ControlButtons.Previous' | translate }}</button>
+                    <button class="btn btn-success" type="button" (click)="nextStep(f)">{{ 'ControlButtons.Next' | translate }}</button>
+                  </div> -->
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div style="margin:20px">
+                      <button type="button" class="base-button-left btn-size " (click)="prevStep()">
+                        <strong>
+                          <i class="fa fa-angle-left" style=" font-size: 20px;font-weight:800;"></i>
+                          {{'ProjectCreationPage.PreviosButton' | translate}}
+                        </strong>
+                      </button>
+                      <button type="button" class="base-button  btn-size" (click)="changeCurrentStep()">
+                        <strong>
+                          {{'ProjectCreationPage.NextButton' | translate}}
+                          <i class="fa fa-angle-right" style=" font-size: 20px;font-weight:800;"> </i>
+                        </strong>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="step4" class="tab-pane" role="tabpanel" [class.active]="currentStep == 4">
+                <div *ngIf="Mode == 'edit'" class="col-xs-12">
+                  <div role="alert" class="alert alert-danger text-center" [hidden]="!(formInvalid && formInputsInvalide)">
+                    <span>{{'CommonMessages.CheckInputsFill' | translate}}</span>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class=" img-label text-center">
+                    {{'ProjectCreationPage.UpperTextCrooper' | translate}}
+                  </div>
+                </div>
+                <div class="col-xs-12">
+                  <div class="col-sm-4 col-sm-offset-4 col-xs-12 pull-left">
+                    <label class="base-button btn-block" style="padding-top: 5px">
+                      {{'ProjectCreationPage.Projectfiles.AddFiles' | translate}}
+                      <p class="glyphicon glyphicon-plus text-center">
+                      </p>
+                      <input type="file" hidden (change)="onFileChange($event)" style="display:none; " multiple
+                        #fileInput accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx, .pdf, .mp4">
+                    </label>
+                    <br>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="alert alert-danger" role="alert" *ngIf="isMaxSize == true">
+                    {{'ProjectCreationPage.Projectfiles.MaxSizeFile' | translate}}
+                    ({{formatSizeUnits(fileUploadMaxSize)}})
+                  </div>
+                  <div class="alert alert-danger" role="alert" *ngIf="isMaxNumberFiles == true">
+                    {{'ProjectCreationPage.Projectfiles.MaxNumberFiles' | translate}} ({{maxNumberFiles}})
+                  </div>
+                  <div class="panel panel-default table-responsive">
+                    <!-- Default panel contents -->
+                    <!-- Table -->
+                    <table class="table">
+                      <thead>
+                        <tr style="background-color: #337BAE; color:whitesmoke; opacity: 0.8;">
+                          <th class="col-md-4">{{'ProjectCreationPage.Projectfiles.FileTitle' | translate}}</th>
+                          <th class="col-md-5">{{'ProjectCreationPage.Projectfiles.FileDescreption' | translate}}</th>
+                          <th class="col-md-1"></th>
+                          <th class="col-md-1">{{'ProjectCreationPage.Projectfiles.FileSize' | translate}}</th>
+                          <th class="col-md-1"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let file of files">
+                          <td class="col-md-4">
+                            <input [(ngModel)]="file.fileName" type="text" class="form-control" id="fileName" name="fileName"
+                              style="border:0">
+                          </td>
+                          <td class="col-md-5">
+                            <textarea [(ngModel)]="file.description" class="form-control select-style" rows="1" id="description"
+                              name="fileDescription" placeholder="{{'ProjectCreationPage.Projectfiles.FileDescreptionPlaceHolder' | translate}}"
+                              style="border:0"></textarea>
+                          </td>
+                          <td class="col-md-1">
+                            <img style="height:auto !important;width:45% !important;" [src]="(file.extention == 'pdf') ? '../assets/img/pdf.png' :
+                                    (file.extention == 'xlsx' || file.extention == 'xls') ? '../assets/img/excel.png':
+                                    (file.extention == 'mp4') ? '../assets/img/youtube.png':
+                                    (file.extention == 'docx' || file.extention == 'doc') ? '../assets/img/word.png':
+                                    (file.extention == 'pptx' || file.extention == 'ppt') ? '../assets/img/powerpoint.png' : ''"
+                              alt="">
+                          </td>
+                          <td *ngIf="Mode == 'new'" class="col-md-1">{{formatSizeUnits(file.size)}}</td>
+                          <td class="col-md-1">
+                            <i class="glyphicon glyphicon-trash" (click)="deleteFile(file)" style="cursor:pointer;color:red;font-size:20px;"></i>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div *ngIf="files.length == 0">
+                      <p class="text-center">{{'ProjectCreationPage.Projectfiles.NoneFilesFound' | translate}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div style="margin:20px">
+                      <button *ngIf="Mode == 'edit'" type="submit" class="base-button btn-size" (click)="checkInputFileds(form)">
+                        <strong>
+                          {{'UserFormPage.EditButton' | translate}}
+                          <i class="fa fa-check" style="margin-bottom: 5px; font-size: 15;font-weight:800;"> </i>
+                        </strong>
+                      </button>
+                      <button *ngIf="Mode == 'edit'" style="margin-right: 10px" type="button" class="base-button btn-size"
+                        routerLink="/" (click)="_commonService.scrollTop()">
+                        <strong>
+                          {{'Popups.CancelButton' | translate}}
+                          <i class="fa fa-times" style="margin-bottom: 5px; font-size: 15;font-weight:800; "> </i>
+                        </strong>
+                      </button>
+                      <button type="button" class="base-button-left btn-size" (click)="prevStep()">
+                        <strong>
+                          <i class="fa fa-angle-left" style=" font-size: 20px;font-weight:800;"> </i>
+                          {{'ProjectCreationPage.PreviosButton' | translate}}
+                        </strong>
+                      </button>
+                      <button *ngIf="Mode == 'new'" type="button" class="base-button btn-size" (click)="createProject()">
+                        <strong>
+                          {{'ProjectCreationPage.CreateButton' | translate}}
+                          <i class="fa fa-check" style=" font-size: 15;font-weight:800;"> </i>
+                        </strong>
+                      </button>
+                      <!-- <button *ngIf="Mode == 'edit'" type="button" class="btn-funder pull-left" (click)=" ">
+                        <strong>Annuler</strong>
+                      </button> -->
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="projectModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-top-bar-info"></div>
+        <div class="modal-header">
+          <h2 class="modal-title modal-text-header" style="float: left;">{{'ProjectCreationPage.NewProject' |
+            translate}}</h2>
+          <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+        </div>
+        <div class="modal-body">
+          <div class="popup-text">
+            <p [hidden]="!success">{{'ProjectCreationPage.SuccessCreationProjectText' | translate}}</p>
+            <p [hidden]="success">{{'ProjectCreationPage.ErrorCreationProjectText' | translate}}</p>
+          </div>
+          <div style="padding: 10px"></div>
+          <div class="text-center">
+            <button type="button" class="btn popup-ok-btn" data-dismiss="modal">{{'Popups.CloseButton' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div id="projectEditModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-top-bar-info"></div>
+        <div class="modal-header">
+          <h2 class="modal-title modal-text-header" style="float: left;">{{'ProjectCreationPage.EditProject' |
+            translate}}</h2>
+          <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+        </div>
+        <div class="modal-body">
+          <div class="popup-text">
+            <p [hidden]="!success">{{'ProjectCreationPage.SuccessEditProjectText' | translate}}</p>
+            <p [hidden]="success">{{'ProjectCreationPage.ErrorEditProjectText' | translate}}</p>
+          </div>
+          <div style="padding: 10px"></div>
+          <div class="text-center">
+            <button type="button" class="btn popup-ok-btn" data-dismiss="modal">{{'Popups.CloseButton' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Add Image -->
+<div id="CropImage1" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" #cropModal1>
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'UserFormPage.AddImage' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" (click)="closeCropModal()" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <label class="btn btn-block btn-primary" style="text-align: center !important;">
+          {{'UserFormPage.UploadImage' | translate}}
+          <input type="file" hidden (change)="fileChangeListener($event)" style="display:none;" accept="image/*">
+        </label>
+        <br>
+        <div class="alert alert-danger" role="alert" *ngIf="isMaxSize == true">
+          {{'UserFormPage.maxSizeImage' | translate}} ({{formatSizeUnits(fileUploadMaxSize)}})
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="isNotImage == true">
+          {{'Projectfiles.InvalidFile' | translate}}
+        </div>
+        <img-cropper #cropper1 [image]="data" [settings]="cropperSettings" class="img-responsive picture-preview-input">
+        </img-cropper>
+        <div style="padding: 10px"></div>
+        <div class="text-center">
+          <button type="button" [disabled]="data.image == ''" (click)="savePicture(data)" class="btn popup-ok-btn">
+            <span class="glyphicon glyphicon-check"></span>
+            {{'Popups.ConfirmationButton' | translate}}
+          </button>
+          <button type="button" (click)="closeCropModal()" class="btn poup-cancel-btn">
+            <span class="glyphicon glyphicon-remove"></span>
+            {{'Popups.CancelButton' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

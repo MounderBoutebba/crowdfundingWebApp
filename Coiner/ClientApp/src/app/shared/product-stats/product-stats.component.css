@@ -1,0 +1,149 @@
+.book-panel {
+    border-radius: 0px !important;
+    box-shadow: 0 2px 4px 0 rgba(35, 36, 37, 0.3);
+}
+
+.book-body {
+    min-height: 380px;
+    max-height: 380px;
+    padding: 4px !important;
+}
+
+@media(max-width:991px) {
+    .book-body {
+        min-height: 450px;
+        max-height: 450px;
+        padding: 4px !important;
+    }
+}
+@media(min-width:1200px) {
+    .book-body {
+        min-height: 450px;
+        max-height: 450px;
+        padding: 4px !important;
+    }
+}
+@media(max-width:698px) {
+    .book-body {
+        min-height: auto;
+        max-height: auto;
+        padding: 4px !important;
+    }
+}
+
+.actions-label {
+    height: 24px;
+    opacity: 0.75;
+    color: #373E40;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 58px;
+    line-height: 0px;
+    margin-left: 5px;
+}
+
+.buy-circle-icon {
+    font-size: 10px;
+    color: #9F82D2;
+}
+
+.sell-circle-icon {
+    font-size: 10px;
+    color: #337BAE;
+}
+
+.buy-label {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 600;
+    color: #9F82D2;
+}
+
+.sell-label {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 600;
+    color: #337BAE;
+}
+
+.histogramme-title {
+    height: 17px;
+    width: 200.16px;
+    color: #485465;
+    font-family: "Open Sans";
+    font-size: 12px;
+    line-height: 17px;
+}
+
+.period-btn {
+    margin: 4px;
+    border: 1px solid #337BAE;
+    opacity: 0.75;
+    border-radius: 3px;
+    padding: 3px 18px;
+}
+
+.period-label {
+    color: #2B2B2B;
+    font-family: "Open Sans";
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    line-height: 25px;
+    text-align: center;
+}
+
+.background {
+    position: absolute;
+    top: 0px;
+    left: 14px;
+    width: 94%;
+    height: 96%;
+    background-color: black;
+    opacity: 0.2;
+    z-index: 100;
+}
+
+.spinner {
+    position: absolute;
+    left: 41%;
+    top: 48%;
+    margin-top: -40px;
+    width: 80px;
+    height: 80px;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+/* Safari */
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.syncData {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+/* canvas {
+    width: 100% !important;
+    max-width: 450px !important;
+    height: 240px !important;
+} */

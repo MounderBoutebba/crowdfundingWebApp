@@ -1,0 +1,25 @@
+
+<div class="row card" id="accordion" >
+
+          <div class="col-xs-12 border cursor-pointer card-header" id="heading-{{notificationItem.Id}}"
+          data-toggle="collapse" attr.href="#{{notificationItem.Id}}" role="button" aria-expanded="false" attr.aria-controls="{{notificationItem.Id}}" 
+           [ngStyle]="{'background-color': read? '#F5F6FA':'white'}" (click)="updateNotificationStatus()">
+              <span class="dot col-xs-1"[ngStyle]="{'background-color': read? '#C8C8C8':'#337BAE'}"></span>
+            <div class="col-xs-10">
+            <p class="text col-xs-12">
+              <strong>{{notificationItem.Title}}  </strong>
+            </p>
+            <span class=" text col-xs-12" style="font-size: 15px;">{{notificationItem.CreateDate | timeAgo}}</span>
+          </div>
+          <div class="col-xs-12 col-sm-1 seeMore" >
+            <div [hidden]="showContent">{{'NotificationsPage.Show' | translate}}</div>
+            <div [hidden]="!showContent">{{'NotificationsPage.Hide' | translate}}</div> 
+          </div>
+          <div class="col-xs-12 line-breaker collapse" attr.aria-labelledby="heading-{{notificationItem.Id}}" id="{{notificationItem.Id}}" style="padding-left: 61px;"  data-parent="#accordion"> <p>{{notificationItem.Content}}</p>    </div>
+          </div>
+
+        </div>
+        
+
+        
+       

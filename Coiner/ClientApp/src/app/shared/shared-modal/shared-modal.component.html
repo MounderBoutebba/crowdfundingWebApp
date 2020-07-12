@@ -1,0 +1,24 @@
+<!-- Accept Offer Modal -->
+<div id="sharedModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 32px;">&times;</button>
+        <h4 class="modal-title">
+          <span class="product-header">{{modalTitle}}</span>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="modalType =='success'" class="alert alert-success alert-dismissible fade in text-center" role="alert">
+          {{modalMessage}}
+        </div>
+        <div *ngIf="modalType =='fail'" class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+          {{modalMessage}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Accept Offer Modal -->

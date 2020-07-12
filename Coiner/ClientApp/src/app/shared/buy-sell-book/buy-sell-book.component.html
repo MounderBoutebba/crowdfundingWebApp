@@ -1,0 +1,216 @@
+<!-- All -->
+<div *ngIf="displayType == 'all'" class="panel book-panel">
+  <div class="panel-body book-body">
+    <div class="col-md-12" style="padding:8px 12px;">
+      <div class="pull-left">
+        <img src="/assets/img/actions.png" style="width:16%;margin-bottom: 3px;">
+        <i class="actions-label">{{'BuySellBook.Actions' | translate}}</i>
+      </div>
+      <!-- <div class="pull-right">
+        <i class="see-all-label">{{'BuySellBook.SeeAll' | translate}}</i>
+        <img src="/assets/img/icones/ic_arrow-right.png" style="width:16%;margin-bottom: 3px;">
+      </div> -->
+    </div>
+    <div class="col-xs-12" style="padding:8px 16px;">
+      <div class="col-xs-12 col-sm-6" style="padding:0px;">
+        <i class="sell-label">{{'BuySellBook.Sale' | translate}}</i>
+        <i class="fa fa-circle sell-circle-icon" aria-hidden="true"></i>
+        <p class="sell-label" style="font-size: 13px; width: 190px;">{{'BuySellBook.SaleInfo' | translate}}</p>
+
+      </div>
+      <div class="col-xs-12  col-sm-6" style="padding:0px; float: right; text-align:right;">
+        <div style=" float: right; text-align:right; width:100%">
+          <i class="fa fa-circle buy-circle-icon" aria-hidden="true"></i>
+          <i class="buy-label" style="text-align:right;">{{'BuySellBook.Buy' | translate}}</i></div>
+        <p class="buy-label" style="font-size: 13px; width: 190px; text-align: right; float:right">{{'BuySellBook.BuyInfo'
+          | translate}}</p>
+
+      </div>
+    </div>
+    <!-- Sell -->
+    <div id="sellOffersTable" class="col-xs-12 col-sm-6" style="padding: 0px !important;">
+      <div class="table-responsive">
+        <table class="table" style="border-right: 0.5px solid #C2C9D1;">
+          <thead>
+            <tr>
+              <th class="col-md-3 fix-border-top th-label"></th>
+              <th class="col-md-1 fix-border-top th-label">{{'ProductDetailsPage.Price' | translate}}</th>
+              <th class="col-md-1 fix-border-top th-label">{{'BuySellBook.Qte' | translate}}</th>
+              <th class="col-md-1 fix-border-top th-label">{{'ProductDetailsPage.Price' | translate}}/cn</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="productOffersSell?.length==0 " style="height: 40px;">
+              <td class="noSellOffer">
+                {{'ProductDetailsPage.NoSellOffers' | translate}}</td>
+            </tr>
+            <tr *ngFor="let productOffer of productOffersSell | orderBy: 'pxCoin' : false">
+              <td class="col-md-3">
+                <div *ngIf="currentUser != null">
+                  <div (click)="productOffer.offerTpye = 0;showAcceptOfferModal(productOffer)" *ngIf="productOffer.fromAddress != currentUser.blockChainAddress"
+                    class="sell-btn text-sell">
+                    <!-- {{'ProductDetailsPage.Buy' | translate}} -->
+                    {{'BuySellBook.interessted' | translate}}
+
+                  </div>
+                  <div (click)="showCancelOfferModal(productOffer)" *ngIf="productOffer.fromAddress == currentUser.blockChainAddress"
+                    class="revoke-btn text-sell">
+                    {{'Popups.CancelButton' | translate}}
+                  </div>
+                </div>
+                <div *ngIf="currentUser == null">
+                  <div (click)="productOffer.offerTpye = 0;showAcceptOfferModal(productOffer)" class="sell-btn text-sell">
+                    <!-- {{'ProductDetailsPage.Buy' | translate}} -->
+                    {{'BuySellBook.interessted' | translate}}
+                  </div>
+                </div>
+              </td>
+
+              <td class="col-md-1 td-label">{{productOffer.askQuantity}}</td>
+              <td class="col-md-1 td-label">{{productOffer.offerQuantity}}</td>
+              <td class="col-md-1 td-label">{{productOffer.pxCoin}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Sell -->
+
+    <!-- Buy -->
+    <div id="buyOffersTable" class="col-xs-12 col-sm-6" style="padding: 0px !important;">
+      <div class="table-responsive">
+        <table class="table" style="border-left: 0.5px solid #C2C9D1;">
+          <thead>
+            <tr>
+              <th class="col-md-1 fix-border-top th-label">{{'ProductDetailsPage.Price' | translate}}/cn</th>
+              <th class="col-md-1 fix-border-top th-label">{{'BuySellBook.Qte' | translate}}</th>
+              <th class="col-md-1 fix-border-top th-label">{{'ProductDetailsPage.Price' | translate}}</th>
+              <th class="col-md-3 fix-border-top th-label"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="productOffersBuy?.length==0" style="height: 40px; ">
+              <td class="noBuyOffer"> {{'ProductDetailsPage.NoBuyOffers' | translate}} </td>
+            </tr>
+            <tr *ngFor="let productOffer of productOffersBuy | orderBy: 'pxCoin' : true">
+              <td class="col-md-1 td-label">{{productOffer.pxCoin}}</td>
+              <td class="col-md-1 td-label">{{productOffer.askQuantity}}</td>
+              <td class="col-md-1 td-label">{{productOffer.offerQuantity}}</td>
+              <td class="col-md-3">
+                <div *ngIf="currentUser != null">
+                  <div (click)="productOffer.offerTpye = 1;showAcceptOfferModal(productOffer)" *ngIf="productOffer.fromAddress != currentUser.blockChainAddress"
+                    class="buy-btn text-sell">
+                    <!-- {{'ProductDetailsPage.Sale' | translate}} -->
+                    {{'BuySellBook.interessted' | translate}}
+                  </div>
+                  <div (click)="showCancelOfferModal(productOffer)" *ngIf="productOffer.fromAddress == currentUser.blockChainAddress"
+                    class="revoke-btn text-sell">
+                    {{'Popups.CancelButton' | translate}}
+                  </div>
+                </div>
+                <div (click)="productOffer.offerTpye = 1;showAcceptOfferModal(productOffer)" *ngIf="currentUser == null">
+                  <div class="buy-btn text-sell">
+                    <!-- {{'ProductDetailsPage.Sale' | translate}} -->
+                    {{'BuySellBook.interessted' | translate}}
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Buy -->
+  </div>
+</div>
+<!-- All -->
+
+<!-- Sell -->
+<div *ngIf="displayType == 'sell' && productOffersSell!=null && productOffersSell.length>0" id="sellOffersTable" class="col-md-12"
+  style="padding: 0px !important;">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-md-2 fix-border-top th-label"></th>
+          <th class="col-md-3 fix-border-top th-label">{{'ProductDetailsPage.Price' | translate}}</th>
+          <th class="col-md-2 fix-border-top th-label">{{'BuySellBook.Qte' | translate}}</th>
+          <th class="col-md-2 fix-border-top th-label">{{'ProductDetailsPage.Price' | translate}}/cn</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr [class.redColor]="isBetterPrice" *ngFor="let productOffer of productOffersSell | orderBy: 'pxCoin' : false">
+          <td class="col-md-2">
+            <div *ngIf="currentUser != null">
+              <div (click)="showAcceptOfferModal(productOffer)" *ngIf="productOffer.fromAddress != currentUser.blockChainAddress"
+                class="sell-btn text-sell">
+                {{'ProductDetailsPage.Buy' | translate}}
+              </div>
+              <div (click)="showCancelOfferModal(productOffer)" *ngIf="productOffer.fromAddress == currentUser.blockChainAddress"
+                class="revoke-btn text-sell">
+                {{'Popups.CancelButton' | translate}}
+              </div>
+            </div>
+            <div (click)="showAcceptOfferModal(productOffer)" *ngIf="currentUser == null">
+              <div class="sell-btn text-sell">
+                {{'ProductDetailsPage.Buy' | translate}}
+              </div>
+            </div>
+          </td>
+          <td class="col-md-3 td-label">{{productOffer.askQuantity}}</td>
+          <td class="col-md-2 td-label">{{productOffer.offerQuantity}}</td>
+          <td class="col-md-2 td-label">{{productOffer.pxCoin}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="currentUser.blockChainAddress != null" class="intro-label">
+      {{'ProductDetailsPage.ProposePrice' | translate}}
+    </div>
+  </div>
+</div>
+<!-- Sell -->
+
+<!-- Buy -->
+<div *ngIf="displayType == 'buy' && productOffersBuy!=null && productOffersBuy.length>0" id="buyOffersTable" class="col-md-12"
+  style="padding: 0px !important;">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-md-2 fix-border-top th-label">{{'ProductDetailsPage.Price' | translate}}/cn</th>
+          <th class="col-md-2 fix-border-top th-label">{{'BuySellBook.Qte' | translate}}</th>
+          <th class="col-md-3 fix-border-top th-label">{{'ProductDetailsPage.Price' | translate}}</th>
+          <th class="col-md-2 fix-border-top th-label"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr [ngClass]="{'redColor': isBetterPrice}" *ngFor="let productOffer of productOffersBuy | orderBy: 'pxCoin' : true">
+          <td class="col-md-2 td-label">{{productOffer.pxCoin}}</td>
+          <td class="col-md-2 td-label">{{productOffer.askQuantity}}</td>
+          <td class="col-md-3 td-label">{{productOffer.offerQuantity}}</td>
+          <td class="col-md-2">
+            <div *ngIf="currentUser != null">
+              <div (click)="showAcceptOfferModal(productOffer)" *ngIf="productOffer.fromAddress != currentUser.blockChainAddress"
+                class="buy-btn text-sell">
+                {{'ProductDetailsPage.Sale' | translate}}
+              </div>
+              <div (click)="showCancelOfferModal(productOffer)" *ngIf="productOffer.fromAddress == currentUser.blockChainAddress"
+                class="revoke-btn text-sell">
+                {{'Popups.CancelButton' | translate}}
+              </div>
+            </div>
+            <div (click)="showAcceptOfferModal(productOffer)" *ngIf="currentUser == null">
+              <div class="buy-btn text-sell">
+                {{'ProductDetailsPage.Sale' | translate}}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="currentUser.blockChainAddress != null" class="intro-label">
+      {{'ProductDetailsPage.ProposePrice' | translate}}
+    </div>
+  </div>
+</div>
+<!-- Buy -->

@@ -1,0 +1,23 @@
+<!-- Projects listing -->
+<app-loader [isRunning]="isRunning"></app-loader>
+<div class=" page-bottom-margin">
+  <h1 class="fav-text">
+    <span>{{'FavoritePage.Myfavourites' | translate}}</span>
+  </h1>
+  <section>
+    <div class="wrapper projects font_p" id="contentWrapper">
+      <div class="zone-content clearfix">
+        <div class="list-projects-container">
+          <project-listing-item class="col-xs-12 col-sm-6 col-lg-4" style="padding-top: 30px;" *ngFor="let project of favoriteProjects" [project]=project [slider]="'on'">
+          </project-listing-item>
+        </div>
+          <div class="portfolio-container" *ngIf="(success && favoriteProjects.length == 0) || emptyFavorites">
+            <h2 class="fav-text">{{'FavoritePage.NoneFavoritesFound' | translate}}</h2>
+          </div>
+      </div>
+      <div>
+        <div id="loader" class="loader"></div>
+      </div>
+    </div>
+  </section>
+</div>

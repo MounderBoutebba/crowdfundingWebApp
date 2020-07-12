@@ -1,0 +1,288 @@
+<app-loader [isRunning]="isRunning"></app-loader>
+<div class="item-container">
+  <div *ngIf="slider == 'on' && currentUser!=null " class="favorite-icon" data-toggle="tooltip" data-container="body"
+    data-placement="top" (click)="_projectService.addToFavorites(project.id)" [attr.data-original-title]="(_projectService.checkOfferAlreadyFavorite(project.id)) ? ('ProjectFavorite.RemoveFavoriteTooltipMessage' | translate) : ('ProjectFavorite.AddToFavoriteTooltipMessage' | translate)">
+    <i class="fa fa-heart-o"></i>
+    <i class="fa fa-heart" [ngStyle]="{'color': (_projectService.checkOfferAlreadyFavorite(project.id)) ? '#d84d4d' : '#c5c5c5'}"></i>
+  </div>
+  <div *ngIf="(slider == 'on') && (project.projectStatus == 2)" style="position: relative;">
+    <div class="end-funding">
+      <i class="label label-warning">{{'ProjectDetailsPage.EndOfLeve' | translate}}</i>
+    </div>
+  </div>
+  <div class="img-container cursor-pointer" (click)="getDetails()">
+    <img class="img-size" *ngIf="project.projectImages.length != 0" [src]=" constants.sharedImagesPath + project.projectImages[0].path"
+      alt="Avatar">
+    <img class="img-size" *ngIf="project.projectImages.length == 0" [src]=" constants.sharedImagesPath + 'no-image.Jpeg'"
+      alt="Avatar" style="background-color: #F5F6FA">
+  </div>
+  <div style="position: relative;">
+    <div class="backers-icon">
+      <img src="assets/img/icones/ic_bakers.svg">
+      <div class="backers-number-icon">
+        {{project.backers}}
+      </div>
+    </div>
+  </div>
+  <div style="margin: 15px 15px 10px 15px;">
+    <div class="">
+      <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage != null && project.user.provider == 0"
+        [src]="constants.sharedUserImagesPath + project.user.userImage.path">
+      <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage == null && project.user.provider == 0"
+        [src]="constants.sharedUserImagesPath + 'no-image-user.png'">
+      <img style="float:left" class="img-circle avatar" *ngIf="project.user.provider == 1" [src]="project.user.userImage.path">
+    </div>
+    <div>
+      <div class="name">
+        {{project.user.firstName}} {{project.user.lastName}}
+        <div class="pull-right" *ngIf="slider == 'off'">
+          <button (click)="editProject()" data-toggle="tooltip" [attr.data-original-title]="'UserProjectPage.EditProject' | translate"
+            class="btn btn-warning glyphicon glyphicon-pencil edit-span" type="button" style="margin-left: 5px;">
+          </button>
+          <button (click)="ShowProjectNewsModel()" data-toggle="tooltip" [attr.data-original-title]="'UserProjectPage.AddNew' | translate"
+            class="btn btn-primary glyphicon glyphicon-list-alt edit-span" type="button" style="margin-left: 5px;">
+          </button>
+          <button *ngIf="currentUser.login == adminLogin && project.projectStatus == 1" (click)="refundUsers(project.id)"
+            data-toggle="tooltip" [attr.data-original-title]="'UserProjectPage.RefundUsers' | translate" class="btn btn-warning fa fa-undo edit-span"
+            type="button" style="margin-left: 5px;">
+          </button>
+          <button *ngIf="currentUser.login == adminLogin && project.projectStatus == 0" (click)="ShowConfirmProjectModel()"
+            data-toggle="tooltip" [attr.data-original-title]="'UserProjectPage.RefundUsers' | translate" class="btn btn-success glyphicon glyphicon-ok edit-span"
+            type="button" style="margin-left: 5px;">
+          </button>
+          <button *ngIf="(project.receivedFunding >= project.fundingGoal)&&(currentUser.login == adminLogin)&&(project.projectStatus == 1)"
+            (click)="ShowConfirmEndSurveyModal()" data-toggle="tooltip" [attr.data-original-title]="'fin de levée'"
+            class="btn btn-primary glyphicon glyphicon-arrow-up edit-span" type="button" style="margin-left: 5px;">
+          </button>
+        </div>
+      </div>
+      <div class="title-project cursor-pointer" (click)="getDetails()">
+        {{ (project.projectName.length > 25) ? (project.projectName | slice:0:25)+'...' : (project.projectName) }}
+      </div>
+    </div>
+    <div class="label-status" *ngIf="slider == 'off'">
+      <span class="label" [ngClass]="(project.projectStatus == 0)?
+                                     'label-primary fa fa-hourglass-half':
+                                     (project.projectStatus == 1) ? 
+                                     'label-success fa fa-check':
+                                     (project.projectStatus == 3) ?
+                                     'label-danger fa fa-close':
+                                     'label-warning fa fa-check'">
+        {{ ('ProjectValidationStatus.' + _commonService.getProjectValidationStatusString(project.projectStatus)) |
+        translate }}
+      </span>
+    </div>
+  </div>
+  <div class="tag" *ngIf="slider == 'on'">
+    <div class="tag-label" style=" float : left;">
+      #{{ ('ProjectTypes.' + _commonService.getProjectTypeNameString(project.projectType)) | translate }} #{{
+      _commonService.getActivityTypeString(project.activityType)
+      | translate }}</div>
+  </div>
+  <div class="background-container">
+    <div class="col-xs-7 text-backer">
+      <div class="pull-left">
+        <div class="backers-number">
+          {{_commonService.getProgressionPercentage(project.receivedFunding, project.fundingGoal)}}<i style="font-size: 16px">%</i>
+        </div>
+        <div class="item-label">
+          {{'ProjectListingItem.ReceivedFunding' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-5 ">
+      <div class="pull-right">
+        <div class="days-left">
+          {{_commonService.getDays(project.beginEstimatedDate)}}<i style="font-size: 16px">jrs</i>
+        </div>
+        <div class="item-label">
+          {{'ProjectDetailsPage.SideBar.RemainingDays' | translate}}
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="bottom-container">
+    <div class="project-progress" [ngStyle]="{'backgroundColor': (project.projectStatus == 2) ? '#f0ad4e' : '#2ECC71'}"
+      [style.width.%]="_commonService.getProgressionPercentage(project.receivedFunding, project.fundingGoal)">
+    </div>
+  </div>
+</div>
+
+<div id="confirmProject" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'Popups.ConfirmationHeader' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div class="popup-text">
+          <span>{{'ProjectListingItem.ConfirmProjectText' | translate}}</span>
+        </div>
+        <div style="padding: 10px"></div>
+        <div class="text-center">
+          <button type="button" class="btn popup-ok-btn" data-dismiss="modal" (click)="confirmProject()">{{'Popups.ConfirmationButton'
+            | translate}}</button>
+          <button type="button" class="btn poup-cancel-btn" data-dismiss="modal">{{'Popups.CancelButton' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="confirmEndSurvey" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'Popups.ConfirmationHeader' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div class="popup-text">
+          <span>Êtes-vous sur de vouloir finir la cotation ?</span>
+        </div>
+        <div style="padding: 10px"></div>
+        <div class="text-center">
+          <button type="button" class="btn popup-ok-btn" (click)="endSurvey()">{{'Popups.ConfirmationButton'
+            | translate}}</button>
+          <button type="button" class="btn poup-cancel-btn" data-dismiss="modal">{{'Popups.CancelButton' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="confirmProjectError" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'Popups.ConfirmationHeader' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div class="popup-text">
+          {{'ProjectListingItemPopUps.ProjectWithoutProductNameMessage' | translate}}
+        </div>
+        <div style="padding: 10px"></div>
+        <div class="text-center">
+          <button type="button" class="btn popup-ok-btn" data-dismiss="modal">{{'Popups.CloseButton' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="editProjectConfirm" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'UserProjectPage.EditProjectRequest' |
+          translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <!--<div class="modal-body">
+        <div class="popup-text">
+          <span>{{ 'UserProjectPage.ProjectModificationRequest' | translate}} {{ project.projectName}} </span>
+        </div>
+        <div style="padding: 10px"></div>
+        <div class="text-center">
+          <button type="button" class="btn popup-ok-btn" data-dismiss="modal" (click)="editProjectConfirmation()">{{'Popups.ConfirmationButton' | translate}}</button>
+          <button type="button" class="btn poup-cancel-btn" data-dismiss="modal">{{'Popups.CancelButton' | translate}}</button>
+        </div>
+      </div>-->
+      <form #projectForm="ngForm" class="message row form-horizontal" data-ajax="true" (ngSubmit)="editProjectConfirmation(projectForm)">
+
+        <div class="modal-body">
+          <div>
+            <div>
+              <div class="alert alert-info text-center" role="alert" *ngIf="DefaultProjectMessage">
+                {{'UserProjectPage.ProjectModificationRequest' | translate}}
+              </div>
+              <div class="alert alert-success text-center" role="alert" *ngIf="!DefaultProjectMessage && projectInfosAdded">
+                {{'UserProjectPage.NewsSuccess' | translate}}
+              </div>
+              <div class="alert alert-danger text-center" role="alert" *ngIf="!DefaultProjectMessage && !projectInfosAdded">
+                {{'Popups.ErrorAccessProfil' | translate}}
+              </div>
+            </div>
+            <div class="form-content">
+              <div class="controls controls-row">
+                <div class="form-group" [class.has-error]="projectFormInvalid && projectDescription.invalid">
+                  <p class="label1" for="login">
+                    {{'UserProjectPage.ProjectModifiactionInfos' | translate}}
+                    <span class="red-obligation">*</span>
+                  </p>
+                  <textarea [(ngModel)]="projectEditText" class="form-control select-style" rows="5" name="projectDescription"
+                    [placeholder]="'UserProjectPage.ProjectModifiactionInfos' | translate" #projectDescription="ngModel"
+                    required [maxlength]="constants.ProjectDescreption"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn popup-ok-btn">{{'UserProjectPage.sendRequestButton' | translate}}</button>
+            <button type="button" class="btn poup-cancel-btn" data-dismiss="modal">{{'Popups.CloseButton' | translate}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="askAddNewsModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'UserProjectPage.AddNewsRequest' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+
+      <form #newsForm="ngForm" class="message row form-horizontal" data-ajax="true" (ngSubmit)="askToAddNews(newsForm)">
+
+        <div class="modal-body">
+          <div>
+            <div>
+              <div class="alert alert-info text-center" role="alert" *ngIf="DefaultNewsMessage">
+                {{'UserProjectPage.NewsBroadcastRequest' | translate}}
+              </div>
+              <div class="alert alert-success text-center" role="alert" *ngIf="!DefaultNewsMessage && newsAdded">
+                {{'UserProjectPage.NewsSuccess' | translate}}
+              </div>
+              <div class="alert alert-danger text-center" role="alert" *ngIf="!DefaultNewsMessage && !newsAdded">
+                {{'Popups.ErrorAccessProfil' | translate}}
+              </div>
+            </div>
+            <div class="form-content">
+              <div class="controls controls-row">
+                <div class="form-group" [class.has-error]="newsFormInvalid && newsDescription.invalid">
+                  <p class="label1" for="login">
+                    {{'UserProjectPage.NewsDescription' | translate}}
+                    <span class="red-obligation">*</span>
+                  </p>
+                  <textarea [(ngModel)]="newsText" name="newsDescription" class="form-control select-style" rows="5"
+                    [placeholder]="'UserProjectPage.NewsDescription' | translate" #newsDescription="ngModel" required
+                    [maxlength]="constants.ProjectDescreption"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn popup-ok-btn">{{'UserProjectPage.sendRequestButton' | translate}}</button>
+            <button type="button" class="btn poup-cancel-btn" data-dismiss="modal">{{'Popups.CloseButton' | translate}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.fav-text {
+    text-align: center;
+    opacity: 0.75;
+    color: #373E40;
+    margin-bottom: 60px;
+}
+.badge-coins {
+    vertical-align: top;
+    background-color: #337BAE;
+    left: 60%;
+    top: -4%;
+  }
+  @media (max-width: 979px){
+.notifications{
+  font-size: 29px;}}

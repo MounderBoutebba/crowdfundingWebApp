@@ -1,0 +1,21 @@
+.table{
+    box-shadow: -5px 5px 50px #888888;
+}
+thead>td {
+    font-size: 20px;
+    padding: 10px;
+}
+.thead-blue
+{
+    background: #337BAE; 
+    color: aliceblue; 
+} 
+.content{
+    width: 100%;
+} 
+.container{
+   width: 100%;
+}
+.table-responsive>.table>tbody>tr>td, .table-responsive>.table>tbody>tr>th, .table-responsive>.table>tfoot>tr>td, .table-responsive>.table>tfoot>tr>th, .table-responsive>.table>thead>tr>td, .table-responsive>.table>thead>tr>th {
+    white-space: normal;
+  } 

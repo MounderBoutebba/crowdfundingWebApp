@@ -1,0 +1,84 @@
+<div class="container-fluid" style="background-color: #F5F6FA">
+    <div class="row dash-row">
+        <div class="dash-col col-xs-2 col-sm-4 col-md-3 col-lg-2 hidden-xs-down bg-faded sidebar">
+            <ul class="sidebar-nav">
+                <li class="cursor-pointer" (click)="changePage('dashboard');DashboardClicked()" [ngStyle]="{'border-left': isDashboardClicked ? '2px solid #62C2D0':'none',
+                'background-color': isDashboardClicked ? 'rgba(255,255,255,0.2)':'transparent'}">
+                    <a>
+                        <img src="../../../assets/img/icones/ic_dashboard2.svg" alt=" ">
+                        <span class="side-text"> {{ 'SideBar.Dashboard' | translate }} </span>
+                    </a>
+                </li>
+                <li (click)="changePage('profile');ProfileClicked()" class="cursor-pointer" [ngStyle]="{'border-left': isProfileClicked ? '2px solid #62C2D0':'none',
+                'background-color': isProfileClicked ? 'rgba(255,255,255,0.2)':'transparent'}">
+                    <a>
+                        <img src="../../../../assets/img/icones/../../../../assets/img/icones/user-circle-solid.svg" alt=" ">
+                        <span class="side-text">{{'SideBar.MyProfile' | translate}} </span>
+                        <i class="fa fa-angle-right pull-right right-arrow"></i>
+                    </a>
+                </li>
+                <li (click)="changePage('wallet');WalletClicked()" class="cursor-pointer" [ngStyle]="{'border-left': isWalletClicked ? '2px solid #62C2D0':'none',
+                'background-color': isWalletClicked ? 'rgba(255,255,255,0.2)':'transparent'}">
+                    <a>
+                        <img src="../../../assets/img/icones/ic_vente.svg" alt=" ">
+                        <span class="side-text">{{'SideBar.MyWallet' | translate }}</span>
+                        <i class="fa fa-angle-right pull-right right-arrow"></i>
+                    </a>
+                </li>
+                <li (click)="changePage('myProjects');ProjectClicked()" class="cursor-pointer" [ngStyle]="{'border-left': isProjectClicked ? '2px solid #62C2D0':'none',
+                'background-color': isProjectClicked ? 'rgba(255,255,255,0.2)':'transparent'}">
+                    <a>
+                        <img src="../../../assets/img/icones/ic_project.svg" alt=" ">
+                        <span class="side-text">{{'SideBar.MyProjects' | translate}} </span>
+                        <i class="fa fa-angle-right pull-right right-arrow"></i>
+                    </a>
+                </li>
+                <li (click)="changePage('stats');StatClicked()" class="cursor-pointer" [ngStyle]="{'border-left': isStatClicked ? '2px solid #62C2D0':'none',
+                'background-color': isStatClicked ? 'rgba(255,255,255,0.2)':'transparent'}">
+                    <a>
+                        <img src="../../../assets/img/icones/ic_stat.svg" alt=" ">
+                        <span class="side-text">{{'SideBar.MyStats' | translate}} </span>
+                        <i class="fa fa-angle-right pull-right right-arrow"></i>
+                    </a>
+                </li>
+                <li (click)="changePage('favorites');FavClicked()" class="cursor-pointer" [ngStyle]="{'border-left': isFavClicked ? '2px solid #62C2D0':'none',
+                'background-color': isFavClicked ? 'rgba(255,255,255,0.2)':'transparent'}">
+                    <a>
+                        <img src="../../../assets/img/icones/ic_fav.svg" alt=" ">
+                        <span class="side-text">{{'SideBar.Favourites' | translate}} </span>
+                        <i class="fa fa-angle-right pull-right right-arrow"></i>
+                    </a>
+                </li>
+                <li (click)="changePage('notifications');NotificationClicked()" class="cursor-pointer" [ngStyle]="{'border-left': isNotificationClicked ? '2px solid #62C2D0':'none',
+                'background-color': isNotificationClicked ? 'rgba(255,255,255,0.2)':'transparent'}">
+                    <a>
+                        <img src="../../../assets/img/icones/ic_notification.svg" alt=" ">
+                        <span class="side-text">{{'SideBar.Notifications' | translate}} ({{userNotificationsComponent.notificationNb}}) </span>
+                        <i class="fa fa-angle-right pull-right right-arrow"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- cette partie est provisoire pour le moment-->
+        <main class="dash-col col-xs-10 offset-xs-2 col-sm-8 offset-sm-4 col-md-9 col-lg-10 offset-lg-2 offset-md-3 main-content">
+            <div class="dash-content" *ngIf="isFavClicked">
+                <app-user-favorite-projects></app-user-favorite-projects>
+            </div>
+            <div class="dash-content" [hidden]="!isNotificationClicked">
+                <user-notifications #UserNotificationsComponent [isNotificationClicked]="isNotificationClicked"></user-notifications>
+            </div>
+            <div class="dash-content" *ngIf="isProfileClicked">
+                <user-profile-details [user]="currentUser"></user-profile-details>
+            </div>
+            <div class="dash-content" *ngIf="isWalletClicked">
+                <user-wallet-page></user-wallet-page>
+            </div>
+            <div class="dash-content" *ngIf="isStatClicked">
+                <user-stats-page></user-stats-page>    
+            </div>
+            <div class="dash-content" *ngIf="isProjectClicked">
+                <app-user-projects></app-user-projects>
+            </div>
+        </main>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+@media (min-width: 821px) {
+  .form-inline .form-control {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 821px) {
+  .panel-body{
+    padding: 15px 0px 15px 0px !important;
+  }
+}

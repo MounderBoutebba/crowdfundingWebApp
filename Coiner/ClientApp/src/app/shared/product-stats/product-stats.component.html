@@ -1,0 +1,41 @@
+<div class="panel book-panel">
+  <div *ngIf="isRunning" class="background">
+    <div class="spinner"></div>
+  </div>
+  <div class="panel-body book-body">
+    <div class="col-md-12" style="padding:8px 12px;">
+      <div class="pull-left">
+        <img src="/assets/img/icones/ic_stats.png" style="width:13%;margin-bottom: 8px;">
+        <i class="actions-label">{{'StatsPanel.StatsTitle' | translate}}</i>
+      </div>
+    </div>
+    <div class="col-md-12" style="padding:8px 16px;">
+      <!-- <div class="pull-left">
+        <i class="histogramme-title">{{'StatsPanel.HistoGrammeTitle' | translate}}</i>
+      </div> -->
+      <div class="pull-right">
+        <i class="fa fa-circle sell-circle-icon" aria-hidden="true"></i>
+        <i class="sell-label">{{'StatsPanel.Sale' | translate}}</i>
+      </div>
+    </div>
+    <div class="col-md-12" style="padding:8px 16px;">
+      <div class="pull-left">
+        <i class="actions-label">{{'StatsPanel.PeriodLabel' | translate}}</i>
+        <div (click)="setZoom('week')" class="btn period-btn" [ngStyle]="{'backgroundColor': (zoom == 'week') ? '#90AFC5' : ''}">
+          <i class="period-label">{{'StatsPanel.PeriodButtons.WeekButton' | translate}}</i>
+        </div>
+        <div (click)="setZoom('month')" class="btn period-btn" [ngStyle]="{'backgroundColor': (zoom == 'month') ? '#90AFC5' : ''}">
+          <i class="period-label">{{'StatsPanel.PeriodButtons.MonthButton' | translate}}</i>
+        </div>
+        <div (click)="setZoom('year')" class="btn period-btn" [ngStyle]="{'backgroundColor': (zoom == 'year') ? '#90AFC5' : ''}">
+          <i class="period-label">{{'StatsPanel.PeriodButtons.YearButton' | translate}}</i>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <canvas baseChart *ngIf="stats != undefined" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+        [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
+      </canvas>
+    </div>
+  </div>
+</div>

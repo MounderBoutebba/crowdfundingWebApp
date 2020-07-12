@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="18px" height="19px" viewBox="0 0 18 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_account_balance</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M2.54761905,8.63095238 L2.54761905,14.6309524 L5.11904762,14.6309524 L5.11904762,8.63095238 L2.54761905,8.63095238 L2.54761905,8.63095238 Z M7.69047619,8.63095238 L7.69047619,14.6309524 L10.2619048,14.6309524 L10.2619048,8.63095238 L7.69047619,8.63095238 L7.69047619,8.63095238 Z M0.833333333,18.9166667 L17.1190476,18.9166667 L17.1190476,16.3452381 L0.833333333,16.3452381 L0.833333333,18.9166667 L0.833333333,18.9166667 Z M12.8333333,8.63095238 L12.8333333,14.6309524 L15.4047619,14.6309524 L15.4047619,8.63095238 L12.8333333,8.63095238 L12.8333333,8.63095238 Z M8.97619048,0.916666667 L0.833333333,5.20238095 L0.833333333,6.91666667 L17.1190476,6.91666667 L17.1190476,5.20238095 L8.97619048,0.916666667 L8.97619048,0.916666667 Z" id="path-1"></path>
+    </defs>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_account_balance">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill="#696F70" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,178 @@
+.book-panel {
+    border-radius: 0px !important;
+    box-shadow: 0 2px 4px 0 rgba(35, 36, 37, 0.3);
+}
+
+.noSellOffer {
+    position: absolute;
+     width:100%;
+     font-family: "Open Sans";
+     font-size: 13px; 
+     font-weight: 600;
+     color: #337BAE;
+}
+
+.noBuyOffer {
+    position: absolute;
+     width:100%;
+     font-family: "Open Sans";
+     font-size: 13px; 
+     font-weight: 600;
+     color: #9F82D2;
+}
+
+.book-body {
+    min-height: 380px;
+    max-height: 380px;
+    padding: 4px !important;
+}
+.intro-label {
+    color: #212121;
+    font-family: "Open Sans";
+    font-size: 18px;
+    line-height: 36px;
+    text-align: center;
+  }
+  
+
+.redColor:nth-child(1)
+{
+    background-color: #fcf8e3;   
+}
+@media(max-width:991px) {
+    .book-body {
+        min-height: 450px;
+        max-height: 450px;
+        padding: 4px !important;
+    }
+}
+@media(min-width:1200px) {
+    .book-body {
+        min-height: 450px;
+        max-height: 450px;
+        padding: 4px !important;
+    }
+}
+
+@media(max-width:698px) {
+    .book-body {
+        min-height: auto;
+        max-height: auto;
+        padding: 4px !important;
+    }
+}
+
+.actions-label {
+    height: 24px;
+    opacity: 0.75;
+    color: #373E40;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 58px;
+    line-height: 0px;
+    margin-left: 5px;
+}
+
+.sell-btn {
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 5px 2px;
+    border-radius: 3px;
+    background-color: #9F82D2;
+}
+
+.buy-btn {
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 5px 2px;
+    border-radius: 3px;
+    background-color: #337BAE;
+}
+
+.revoke-btn {
+    cursor: pointer;
+    padding: 2px 10px;
+    border-radius: 3px;
+    background-color: #E06950;
+}
+
+.text-sell {
+    color: #FFFFFF;
+    font-family: "Open Sans";
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 19px;
+    text-align: center;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 6px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    text-align: center
+}
+
+#sellOffersTable .fix-border-top {
+    border-top: none !important;
+    border-bottom: 2px solid #337BAE !important;
+}
+
+#buyOffersTable .fix-border-top {
+    border-top: none !important;
+    border-bottom: 2px solid #9F82D2 !important;
+}
+
+.th-label {
+    color: #232425;
+    font-family: "Open Sans";
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+}
+
+.td-label {
+    /* opacity: 0.75; */
+    color: #000000;
+    font-family: "Open Sans";
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+}
+
+.see-all-label {
+    color: #000000;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 600;
+    text-align: right;
+}
+
+.buy-circle-icon {
+    font-size: 10px;
+    color: #9F82D2;
+}
+
+.sell-circle-icon {
+    font-size: 10px;
+    color: #337BAE;
+}
+
+.buy-label {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 600;
+    color: #9F82D2;
+}
+.label-small
+{
+    font-size: 13px;
+    width: 190px;
+}
+
+.sell-label {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 600;
+    color: #337BAE;
+}

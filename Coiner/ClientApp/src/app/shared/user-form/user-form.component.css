@@ -1,0 +1,252 @@
+.button-upload-image {
+  position: absolute;
+  right: 35px;
+  top: 5px;
+}
+
+canvas {
+  max-width: 100% !important;
+}
+
+.base-button-edit {
+  min-width: 107px;
+  height: 36px;
+  border-radius: 5px;
+  background-color: #337BAE;
+  color: #FFFFFF;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19px;
+  text-align: center !important;
+  border: none;
+}
+
+.base-button-create {
+  min-width: 107px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #337BAE;
+  color: #FFFFFF;
+  font-family: "Open Sans";
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center !important;
+  border: none;
+  width: 243px;
+  margin-bottom: 6px;
+}
+
+.base-button-create-google {
+  min-width: 107px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #c23321;
+  color: #FFFFFF;
+  font-family: "Open Sans";
+  font-size: 14px;
+  margin-top: 6px;
+  line-height: 19px;
+  text-align: center !important;
+  border: none;
+  width: 243px;
+  margin-bottom: 10px;
+}
+
+.row {
+  width: 106% !important
+}
+
+.button-delete {
+  position: absolute;
+  right: 65px;
+  top: 5px;
+}
+
+.button-margin-right {
+  margin-right: 10px;
+}
+
+.custom-captcha {
+  margin-left: 15px;
+  transform: scale(0.77);
+  -webkit-transform: scale(0.77);
+  transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+}
+
+label {
+  text-align: left !important
+}
+
+/* .form-control {
+  font-family: "Open Sans";
+  font-size: 16px;
+  letter-spacing: -0.35px;
+  line-height: 10px;
+  -webkit-text-fill-color: #251a1a;
+} */
+
+.bborder {
+  min-height: 73px;
+}
+
+/* @media (min-width: 1200px) {
+  .form-control {
+    width: 116%;
+  }
+  .form-horizontal .form-group {
+    margin-right: 14px;
+    margin-left: -17px;
+  }
+} */
+
+/* 
+@supports (-ms-ime-align: auto) {
+   /* Microsoft EdgeV13&14 CSS styles go here 
+  #signUpModal {
+    display:inline;
+   }
+}
+
+@supports (-ms-accelerator: true) {
+  /* Microsoft EdgeV13 CSS styles go here 
+  #signUpModal {
+    display:inline;
+   }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10 & IE11 CSS styles go here 
+  #signUpModal {
+    display:inline;
+   }
+}
+ */
+
+#signUpModal {
+  display: inline-block;
+}
+
+.thumbnail {
+  text-align: center;
+  border: 1px dashed #337BAE;
+  background-color: #F6F6F6;
+  border-radius: 8px;
+  min-height: 122px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.browsefileLabel {
+  height: 24px;
+  width: 155px;
+  color: #337BAE;
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  line-height: 24px;
+}
+
+.flexCon {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.bigImage {
+  margin-right: 5px;
+}
+
+.bigImageText {
+  margin-left: 15px;
+  padding-top: 40px;
+}
+
+.thumbnail img.bigimg {
+  padding-top: 25px;
+}
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+  .flexCon {
+    display: -ms-inline-flexbox;
+  }
+}
+
+.Ordiv {
+  margin: 10px;
+}
+
+.half-hr {
+  display: inline-block;
+  width: 100px;
+  margin-bottom: 4px;
+  margin-top: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  border-top: 0px;
+}
+
+.Orlabel {
+  color: rgba(0, 0, 0, 0.6);
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+li.active>a {
+  font-family: "Open Sans";
+  font-weight: bold;
+  border-bottom: 3px solid #62C2D0;
+  color: #62C2D0;
+  padding-bottom: 20px;
+  margin-bottom: 1px;
+}
+
+li>a {
+  opacity: 0.75;
+  color: #373E40;
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.nav li a:focus,
+.nav li a:hover {
+  background-color: transparent !important;
+}
+
+nav a:hover,
+nav a:focus {
+  background-color: transparent !important;
+}
+
+.navbar-nav {
+  float: none !important;
+  margin: 0;
+  margin-bottom: 23px;
+}
+
+.nav-tabs {
+  margin-bottom: 23px;
+}
+
+.nav-tabs>li:not(.active)>a {
+  border: none;
+  /* line-height: 0.5; */
+}
+
+ul {
+  margin: 0px;
+}
+
+/* .modal-body {
+  padding: 0%;
+  padding-bottom: 10px;
+  padding-top: 10px;
+} */
+
+li {
+  width: 50%;
+}

@@ -1,0 +1,30 @@
+<div style="position:relative">
+  <div class="home-loader" *ngIf="loader"></div>
+</div>
+<div class="content">
+  <div class="section-title text-center">{{'ProductDetailsPage.ProduitCote' | translate}}</div>
+  <div [ngStyle]="{'height': (loader) ? '250px' : 'auto'}">
+    <slick-slider class="hidden-xs hidden-sm visible-md visible-lg" *ngIf="carouselTileItems" [options]="options">
+      <product-listing-item *ngFor="let slide of carouselTileItems" [product]=slide [slider]="'on'">
+      </product-listing-item>
+    </slick-slider>
+    <ngx-carousel [inputs]="carouselTile" class="custom-width visible-sm visible-xs hidden-md" style="padding-top: 10px;">
+      <ngx-tile NgxCarouselItem *ngFor="let Tile of carouselTileItems">
+        <product-listing-item [product]=Tile [slider]="'on'">
+        </product-listing-item>
+      </ngx-tile>
+      <button NgxCarouselPrev class='leftRs'>
+        <span class="fa fa-arrow-left custom-chevron"></span>
+      </button>
+      <button NgxCarouselNext class='rightRs'>
+        <span class="fa fa-arrow-right custom-chevron"></span>
+      </button>
+    </ngx-carousel>
+  </div>
+  <div *ngIf="displayAllProductsButton && !loader" class="see-all-projects-div">
+    <span class="see-all-projects" (click)="dispalyAllProducts()">
+      {{'CarouselListing.ViewMoreProductsLabel' | translate}}
+    </span>
+    <i class="fa fa-arrow-right custom-chevron"></i>
+  </div>
+</div>

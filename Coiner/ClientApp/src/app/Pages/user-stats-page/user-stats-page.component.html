@@ -1,0 +1,24 @@
+<div style="margin-top:50px; width: 90%">
+  <table class="table text-center">
+      <thead class="thead-blue">
+        <td colspan="4">
+           {{'StatsPage.ProfitsAndLosses' | translate}}
+        </td>
+      </thead>
+        <p *ngIf=" productStatsList == null || productStatsList?.length == 0" class="text-center" style="font-size:16px;margin-top:10px;font-weight: lighter "> {{'WalletPage.noSellHistory' | translate}}  </p> 
+      <tbody>
+          <tr *ngIf=" productStatsList != null && productStatsList?.length > 0" style="font-weight: lighter; ">
+            <td>{{'WalletPage.CoinName' | translate}}</td> 
+             <td>{{'StatsPage.Bought' | translate}}</td>
+            <td>{{'StatsPage.Sold' | translate}}</td>
+            <td>{{'StatsPage.Performance' | translate}}</td>
+          </tr> 
+          <tr *ngFor="let item of productStatsList" style="font-weight: bold;">
+            <th scope="row" style="color: #337BAE;text-align: center;"> <span class="cursor-pointer" (click)="goToProduct(item.projectId)">{{item.productName}} </span></th>
+            <td><span *ngIf="item.totalBuy!=0">{{item.totalBuy}} €</span> <span *ngIf="item.totalBuy==0">-</span></td>
+            <td><span *ngIf="item.totalSell!=0">{{item.totalSell}} €</span> <span *ngIf="item.totalSell==0">-</span></td>
+            <td [ngStyle]="{'color': (item.totalSell - item.totalBuy)>=0 ? '#2ECC71':'#ff4447'}"><span *ngIf="item.totalBuy!=0 && item.totalSell!=0">{{item.totalSell - item.totalBuy}} €</span><span *ngIf="item.totalBuy==0 || item.totalSell==0" style="color:black">-</span></td>
+          </tr>
+      </tbody>
+  </table>
+  </div>

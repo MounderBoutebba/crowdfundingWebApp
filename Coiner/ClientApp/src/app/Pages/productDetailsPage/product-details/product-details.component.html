@@ -1,0 +1,811 @@
+<app-loader [isRunning]="isRunning"></app-loader>
+<div class="container-fluid fix-panel description_page info-background">
+  <div class="clear"></div>
+  <div class="content">
+    <div class="cols">
+      <!-- Product Informations -->
+      <div class="head-text col-md-12 ">
+        <div class="col-md-6">
+          <div class="col-md-6">
+            <img class="img" src="/assets/img/icones/product_logo_v1.svg">
+            <p class="h3 Font" style="margin-top: 4px">
+              <strong>{{product.project.productName}} </strong>
+            </p>
+            <p class="h5 Font" style="padding-left: 44px">{{product.project.projectName}}</p>
+          </div>
+          <div *ngIf="currentUser != null" class="col-md-6">
+            <p class="Font" style="font-weight: 600;padding-top: 5px;">{{'ProductDetailsPage.userAssetBalance' |
+              translate }}</p>
+            <p class="h5 Font"> {{userAssetBalance}} Coins</p>
+          </div>
+        </div>
+        <div class="col-md-6 " style="padding-right:-0px; text-align: right; float: right;	width: 330px;">
+          <div>
+            <span class="pull-right">{{'ProductDetailsPage.LastExchange' | translate }}</span><br>
+
+            <span class="Font2" style="vertical-align: sub;"> {{product.lastTransaction}}€</span>
+            <span class="green-text" [ngStyle]="{'color': product.transactionVariation>=0 ? '#2ECC71':'#ff4447'}">
+              (<span *ngIf="product.transactionVariation>0">+</span>{{product.transactionVariation}} %)
+            </span>
+          </div>
+          <div class="pull-left" style="margin-left: 24px; text-align:left; text-align: center; color: #373E40;">
+            {{'ProductDetailsPage.CoinsTotalNumber' | translate}}
+            <p>
+              <span>
+                <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/CoinProduct.svg">
+              </span>
+              <span class="coins">{{product.totalCoinNumber}} Coins</span>
+            </p>
+          </div>
+          <div class="vertical-line" style=" margin-top: 11px; margin-left: 14px;"></div>
+          <div class="pull-right" style="text-align:right;  color: #373E40;">
+            {{'ProductDetailsPage.CurrentValue' | translate}}
+            <p>
+              <span>
+                <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/ic_account_balance.svg">
+              </span>
+              <span class="coins">{{product.totalCapitalization}}€</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Product Informations -->
+    </div>
+    <div class="cols">
+      <!-- Statistics -->
+      <div class="col-md-6">
+        <product-stats #productStats [product]=product></product-stats>
+      </div>
+      <!-- Statistics -->
+      <!-- Carnet  -->
+      <div class="col-md-6">
+        <buy-sell-book (acceptOffer)="onAcceptOffer($event)" [productOffersBuy]="productOffersBuy" [productOffersSell]="productOffersSell"
+          [currentUser]="currentUser" [displayType]="'all'">
+        </buy-sell-book>
+      </div>
+      <!-- Carnet  -->
+    </div>
+  </div>
+  <!-- buy and sell section -->
+  <div>
+    <div class="col-md-6 fix-panel">
+      <div class="sell-panel">
+        <div class="panel-body">
+          <div class="panel-icon">
+            <img src="/assets/img/icones/ic_vente.svg">
+          </div>
+          <div class="panel-label">
+            {{'ProductDetailsPage.SaleText' | translate}}
+          </div>
+          <div class="text-center" style="margin-top: 25px;">
+            <button class="btn btn-sell" (click)="offerType = 1;getCreateOfferModal()">
+              <span class="sell-text">{{'ProductDetailsPage.SaleButton' | translate}}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 fix-panel">
+      <div class="buy-panel">
+        <div class="panel-body">
+          <div class="panel-icon">
+            <img src="/assets/img/icones/ic_achat.svg">
+          </div>
+          <div class="panel-label">
+            {{'ProductDetailsPage.BuyText' | translate}}
+          </div>
+          <div class="text-center" style="margin-top: 25px;">
+            <button class="btn btn-sell" (click)="offerType = 0;getCreateOfferModal()">
+              <span class="buy-text">{{'ProductDetailsPage.BuyButton' | translate}}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- buy and sell section -->
+</div>
+<div class="container-fluid fix-panel description_page page-bottom-margin">
+  <!-- product details section  -->
+  <div class="content description">
+    <div class="tabbable" style="margin-bottom: 18px;">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="#tab1" data-toggle="tab">{{'ProjectDetailsPage.Tabs.Description' | translate}}</a>
+        </li>
+        <li>
+          <a href="#tab4" data-toggle="tab">{{'ProjectDetailsPage.Tabs.News' | translate}}</a>
+        </li>
+        <li>
+          <a href="#tab3" data-toggle="tab">
+            {{'ProjectDetailsPage.Tabs.Discussion' | translate}}
+          </a>
+        </li>
+        <li>
+          <a href="#tab2" *ngIf="project.documents.length!=0" data-toggle="tab">{{'ProjectDetailsPage.Tabs.Documents' |
+            translate}}</a>
+        </li>
+      </ul>
+      <div id="tabs_pages">
+      </div>
+    </div>
+    <div class="tab-content col-lg-8" style="padding-bottom: 9px;">
+      <div class="tab-pane active" id="tab1">
+        <div class="">
+          <div style="margin-top:25px;">
+            <div [froalaView]="project.projectDescription"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tab-pane" id="tab3">
+        <div id="description_content">
+          <!-- Discussion Content -->
+          <div style="margin-top:25px" *ngFor="let discussion of project.discussions">
+            <!-- Display Question Content -->
+            <div>
+              <div>
+                <img style="float:left" class="img-circle avatar" *ngIf="discussion.user.userImage != null && discussion.user.provider == 0 "
+                  [src]="constants.sharedUserImagesPath + discussion.user.userImage.path">
+                <img style="float:left" class="img-circle avatar" *ngIf="discussion.user.userImage == null && discussion.user.provider == 0 "
+                  [src]="constants.sharedUserImagesPath + 'no-image-user.png'">
+                <img style="float:left" class="img-circle avatar" *ngIf="discussion.user.provider == 1" [src]="discussion.user.userImage.path">
+              </div>
+              <div class="name">
+                {{discussion.user.firstName}}
+                <i class="time-ago pull-right">{{discussion.questionCreation | timeAgo}}</i>
+              </div>
+              <div class="disscussion-content">
+                {{discussion.questionContent}}
+              </div>
+              <div *ngIf="currentUser != null">
+                <div *ngIf="(currentUser.id == project.user.id) && (discussion.answerContent == null)" class="pull-right"
+                  style="cursor: pointer;">
+                  <i class="fa fa-reply"></i>
+                  <i class="respond-btn" (click)="openAnswerModal(discussion)">{{'ProductDetailsPage.ReplyButton' |
+                    translate}}</i>
+                </div>
+              </div>
+              <div class="line"></div>
+            </div>
+            <!-- Display Question Content -->
+
+            <!-- Display Answer Content -->
+            <div style="padding-left: 87px;margin-top: 25px;" *ngIf="discussion.answerContent != null">
+              <div>
+                <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage != null && project.user.provider ==0 "
+                  [src]="constants.sharedUserImagesPath + project.user.userImage.path">
+                <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage == null && project.user.provider ==0"
+                  [src]="constants.sharedUserImagesPath + 'no-image-user.png'">
+                <img style="float:left" class="img-circle avatar" *ngIf="project.user.provider == 1 " [src]="project.user.userImage.path">
+              </div>
+              <div class="name">
+                {{project.user.firstName}}
+                <i class="time-ago pull-right">{{discussion.answerCreation | timeAgo}}</i>
+              </div>
+              <div class="disscussion-content">
+                {{discussion.answerContent}}
+              </div>
+
+            </div>
+            <div class="line" *ngIf="discussion.answerContent != null" style="margin-left:0px !important;"></div>
+            <!-- Display Answer Content -->
+          </div>
+          <!-- Discussion Content -->
+
+          <!-- Ask Question Form -->
+          <div style="margin-top:25px;" *ngIf="currentUser != null && currentUser.id != project.user.id">
+            <div>
+              <span>{{'ProductDetailsPage.AskQuestion' | translate}}</span>
+            </div>
+            <div class="form-group">
+              <textarea [(ngModel)]="discussion.questionContent" class="form-control" rows="3" id="questionContent"
+                name="questionContent" [maxlength]="constants.ProjectDescreption" placeholder="" #questionContent="ngModel"
+                required></textarea>
+            </div>
+            <div>
+              <img *ngIf="currentUser.userImage != null && currentUser.provider == 0 " [src]="constants.sharedUserImagesPath + currentUser.userImage.path"
+                class="image-profile-size img-circle">
+              <img *ngIf="currentUser.userImage == null && currentUser.provider == 0" [src]="constants.sharedUserImagesPath + 'no-image-user.png'"
+                class="image-profile-size img-circle">
+              <img *ngIf="currentUser.provider == 1" [src]="currentUser.userImage.path" class="image-profile-size img-circle">
+              <button class="btn btn-primary" style="margin-left: 20px;" (click)="addQuestionToProject()">{{'ProductDetailsPage.AskQuestionButton'
+                | translate}}</button>
+            </div>
+          </div>
+          <!-- Ask Question Form -->
+        </div>
+      </div>
+
+      <div class="tab-pane" id="tab2">
+        <div style="margin-top:25px;">
+          <div class="panel panel-default table-responsive">
+            <!-- Default panel contents -->
+            <!-- Table -->
+            <table class="table">
+              <thead>
+                <tr class="success">
+                  <th class="col-md-5 col-xs-5">{{'ProjectDetailsPage.DocumentsTable.FileTitle' | translate}}</th>
+                  <th class="col-md-5 col-xs-5">{{'ProjectDetailsPage.DocumentsTable.FileDescription' | translate}}</th>
+                  <th class="col-md-2 col-xs-2"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let document of project.documents">
+                  <td class="col-md-5 col-xs-5">
+                    <img style="float: left;margin-right: 12px;width: 15%;" [src]="(document.extention == 'pdf') ? '../assets/img/pdf.png' : 
+                          (document.extention == 'xlsx' || document.extention == 'xls') ? '../assets/img/excel.png':
+                          (document.extention == 'docx' || document.extention == 'doc') ? '../assets/img/word.png':
+                          (document.extention == 'mp4') ? '../assets/img/youtube.png':
+                          (document.extention == 'pptx' || document.extention == 'ppt') ? '../assets/img/powerpoint.png' : ''"
+                      alt="">
+                    <span>
+                      {{document.title}}
+                    </span>
+                  </td>
+                  <td class="col-md-5 col-xs-5">
+                    <span>{{document.description}}</span>
+                  </td>
+                  <td class="col-md-2 col-xs-2">
+                    <a [href]="constants.sharedDocumentsPath + document.path">
+                      <i class="fa fa-download" style="cursor:pointer;color:green;">
+                      </i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="tab4">
+        <div id="description_content">
+
+          <div class=" row" style="margin-bottom: 18px; margin-top:25px;" *ngIf="project.projectUpdates.length == 0 ">
+            <div class="col-md-12 text-news">
+              {{'ProductDetailsPage.NoActuality' | translate}}
+            </div>
+          </div>
+
+          <div *ngIf="project.projectUpdates.length > 0 " style="margin-bottom: 18px; margin-top:25px;">
+            <div *ngFor="let news of project.projectUpdates">
+              <div class="row ">
+                <div class="col-md-12 text-right" style="margin-top : 10px; margin-bottom : 10px;">
+                  <span class="day-style">
+                    {{ 'createdAt' | translate:{date: news.creationDate | localizedDate :'dd'} }}
+                  </span>
+                  <div class="month-year-style">
+                    <div class="">
+                      {{ 'createdAt' | translate:{date: news.creationDate | localizedDate : 'MMMM yyyy' } }}
+                    </div>
+                    <div class="">
+                      {{ 'createdAt' | translate:{date: news.creationDate | localizedDate : 'EEEE' } }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class=" row">
+                <div class="col-md-12 text-news">
+                  <div [froalaView]="news.newsContent"></div>
+                  <!-- {{news.newsContent}} -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row col-lg-4  rectangle no-margin-total" style="margin-left: 20px">
+      <div class="col-md-12 col-xs-12" style="padding-top:15px">
+        <div class="col-md-12 col-xs-12">
+
+        </div>
+        <div class="col-md-12 col-xs-12">
+          {{'ProductDetailsPage.LastExchange' | translate }}
+          <p>
+            <span class="Font2" style="vertical-align: sub;"> {{product.lastTransaction}}€</span>
+            <span class="green-text" [ngStyle]="{'color': product.transactionVariation>=0 ? '#2ECC71':'#ff4447'}">
+              (<span *ngIf="product.transactionVariation>0">+</span>{{product.transactionVariation}} %)
+            </span>
+          </p>
+        </div>
+        <div class="col-md-12 col-xs-12" style="text-align:left;  color: #373E40;">
+          {{'ProductDetailsPage.CoinsTotalNumber' | translate}}
+          <p>
+            <span>
+              <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/CoinProduct.svg">
+            </span>
+            <span class="coins">{{product.totalCoinNumber}} Coins</span>
+          </p>
+        </div>
+        <div class="col-md-12 col-xs-12" style="text-align:left;  color: #373E40;">
+          {{'ProductDetailsPage.CurrentValue' | translate}}
+          <p>
+            <span>
+              <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/ic_account_balance.svg">
+            </span>
+            <span class="coins">{{product.totalCapitalization}}€</span>
+          </p>
+        </div>
+        <div *ngIf="product.project.projectType==3" class="col-md-12 col-xs-12" style="text-align:left;  float:left; color: #373E40;">
+          {{'ProjectDetailsPage.SideBar.DaysBeforSell' | translate}}
+          <p>
+            <span>
+              <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/ic_time.svg">
+            </span>
+            <span class="coins">{{product.project.product_SalesPercepective*365}} {{'ProjectDetailsPage.SideBar.Days' |
+              translate}}</span>
+          </p>
+        </div>
+        <div class="col-md-12 col-xs-12" style="text-align:left;  color: #373E40;">
+          {{'ProjectDetailsPage.SideBar.Progress' | translate}}
+          <p>
+            <span>
+              <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/percentage.svg">
+            </span>
+            <span class="coins">{{product.project.percentageAsset}}%</span>
+          </p>
+        </div>
+        <!-- <div class="col-md-12 col-xs-12" style="text-align:left;  color: #373E40;">
+          <p>
+            <span>
+              <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/ic_baker.svg">
+            </span>
+            <span class="coins">{{project.backers}} {{'ProjectDetailsPage.SideBar.Backers' | translate}}</span>
+          </p>
+        </div> -->
+        <div>
+        </div>
+        <div class="row col-md-12 col-xs-12" style="margin-left:0px; padding:0px;">
+          <div class="col-xs-6 col-md-6 no-margin-total border-left">
+            <div style="  margin-bottom:-13px">
+              <div class="sell-btn text-sell cursor-pointer" (click)="offerType = 1;getCreateOfferModal()">
+                {{'ProductDetailsPage.Sale' | translate}}
+              </div>
+              <div class="number">
+                <!-- {{product.sell}} -->
+                {{product.maxSellValue}}
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-md-6 no-margin-total">
+            <div>
+              <div class="buy-btn text-sell cursor-pointer" (click)="offerType = 0;getCreateOfferModal()">
+                {{'ProductDetailsPage.Buy' | translate}}
+              </div>
+              <div class="number">
+                <!-- {{product.buy}} -->
+                {{product.minBuyValue}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="no-gutters bottom-container ">
+        <div class="rectangle-copy-2">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- product details section  -->
+</div>
+<!-- 
+<div *ngIf="currentUser != null" id="productToaster" class="productToaster">
+
+  <div>
+    <div class="toasterHeader">
+      <button *ngIf="ToasterVisible" type="button" class="close" (click)="productToasterHide()" style="font-size: 32px;color: #fff;opacity: 1;">&times;</button>
+      <button *ngIf="!ToasterVisible" type="button" class="close" (click)="productToasterShow()" style="font-size: 32px;color: #fff;opacity: 1;">&#9776;</button>
+      <div id="toasterTitle" class="toasterTitle"> <strong>{{product.project.productName}} </strong> </div>
+
+    </div>
+    <div id="toasterBody" class="toasterBody">
+      <div *ngIf="userAssetBalance"> u have {{userAssetBalance}} </div>
+      <div *ngIf="!userAssetBalance"> u have no asset balance </div>
+    </div>
+  </div>
+
+</div> -->
+
+<!-- Create Offer Modal -->
+<div id="createOfferModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 32px;">&times;</button>
+        <h4 class="modal-title">
+          <span *ngIf="(offerType==1)&& product.minBuyValue !='-'"> <span class="product-header">{{project.productName}}
+              - </span> {{'ProductDetailsPage.LimitBuy'
+            | translate}}</span><span *ngIf="(offerType==0)&& product.maxSellValue !='-'"> <span class="product-header">{{project.productName}}
+              - </span> {{'ProductDetailsPage.LimitSale' | translate}}</span>
+        </h4>
+        <h4 class="modal-title">
+          <!-- product.maxSellValue != "-" -->
+
+          <span *ngIf="(offerType==1)&& product.minBuyValue =='-' "><span class="product-header">{{project.productName}}
+              - </span> {{'ProductDetailsPage.NoLimit'
+            | translate}}</span><span *ngIf="(offerType==0)&& product.maxSellValue =='-'"><span class="product-header">{{project.productName}}
+              - </span> {{'ProductDetailsPage.NoLimit' | translate}}</span>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="formInvalid" class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+          {{'CommonMessages.CheckInputsFill' | translate}} !
+        </div>
+
+        <!-- <div *ngIf="sendForm && success" class="alert alert-success alert-dismissible fade in text-center" role="alert">
+          Votre offre a été crée avec succés
+        </div>
+        <div *ngIf="sendForm && !success" class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+          Une erreur s'est produite lors de la création de votre offre !
+        </div> -->
+        <div *ngIf="currentUser != null">
+          <div>
+            <buy-sell-book *ngIf="currentUser.blockChainAddress != null" (acceptOffer)="onAcceptOffer($event)"
+              [productOffersBuy]="productOffersBuy" [productOffersSell]="productOffersSell" [isBetterPrice]="(this.offerType == 0 && betterSellValue)||(this.offerType == 1 && betterBuyValue)"
+              [currentUser]="currentUser" [displayType]="(offerType == 0) ? 'sell' : 'buy'">
+            </buy-sell-book>
+          </div>
+          <!-- <div *ngIf="currentUser.blockChainAddress != null" class="intro-label">
+            {{'ProductDetailsPage.ProposePrice' | translate}}
+          </div> -->
+          <div *ngIf="currentUser.blockChainAddress != null && offerType == 0 && betterSellValue" class=" col-xs-12 alert alert-warning alert-dismissible fade in text-center transition">
+            {{'ProductDetailsPage.BetterBuyPrice' | translate}}
+          </div>
+          <div *ngIf="currentUser.blockChainAddress != null && offerType == 1 && betterBuyValue" class="col-xs-12 alert alert-warning alert-dismissible fade in text-center">
+            {{'ProductDetailsPage.BetterSellPrice' | translate}}
+          </div>
+          <div style="display:table">
+            <form *ngIf="currentUser.blockChainAddress != null" #form="ngForm" (ngSubmit)="sendToCreateBlockChainOffer(form)">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="input-label" for="productQuantity">{{'ProductDetailsPage.Amount' | translate}}</label>
+                  <input [(ngModel)]="blockChainOfferDto.productQuantity" #productQuantity="ngModel" (input)="ProductQuantityControl();blockChainOfferDto.totalPrice = blockChainOfferDto.unitPrice * blockChainOfferDto.productQuantity;updateValues()"
+                    class="form-control custom-input" id="productQuantity" name="productQuantity" type="number" min="1"
+                    step="1" [max]="product.totalCoinNumber" oninput="validity.valid||(value='');" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="input-label" for="unitPrice">{{'ProductDetailsPage.Price' | translate}}/Cn</label>
+                  <input [(ngModel)]="blockChainOfferDto.unitPrice" (input)="blockChainOfferDto.totalPrice = blockChainOfferDto.unitPrice * blockChainOfferDto.productQuantity;updateValues()"
+                    (change)="updateValues()" type="number" oninput="validity.valid||(value='');" min="1" class="form-control custom-input"
+                    id="unitPrice" name="unitPrice" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="input-label" for="totalPrice">{{'ProductDetailsPage.TotalPrice' | translate}}</label>
+                  <input [(ngModel)]="blockChainOfferDto.totalPrice" (input)="blockChainOfferDto.unitPrice = blockChainOfferDto.totalPrice / blockChainOfferDto.productQuantity"
+                    (change)="updateValues()" type="number" oninput="validity.valid||(value='');" min="1" class="form-control custom-input"
+                    name="totalPrice" id="totalPrice" required>
+                </div>
+              </div>
+              <div *ngIf="blockChainOfferDto.totalPrice != null && offerType == 0" class="col-md-12">
+                <span class="label label-primary pull-right">+ {{ blockChainOfferDto.commissionFees }} € frais
+                  transaction</span>
+              </div>
+              <div *ngIf="blockChainOfferDto.totalPrice != null && offerType == 0" class="col-md-12">
+                <span class="label label-primary">avec cette offre vous estimez la valeur totale du bien à
+                  {{totalPBuy}}</span>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="input-label" for="privateKey">{{'ProductDetailsPage.PrivateKey' | translate}}</label>
+                  <input [(ngModel)]="blockChainOfferDto.privateKey" type="password" class="form-control" name="privateKey"
+                    id="privateKey" required>
+                </div>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn send-btn">{{'Popups.SendButton' | translate}}</button>
+              </div>
+            </form>
+            <form *ngIf="currentUser.blockChainAddress == null" #form="ngForm" (ngSubmit)="creditCurrency(form)">
+              <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible fade in text-center" role="alert">
+                  {{'ProductDetailsPage.WarningUserText' | translate}}
+                </div>
+                <div class="form-group">
+                  <div class="alert alert-info alert-dismissible fade in text-center" role="alert">
+                    {{'ProductDetailsPage.PayPlatform' | translate}}
+                  </div>
+                  <label class="input-label" for="currencyQuantity">{{'ProductDetailsPage.AmountDevice' | translate}}</label>
+                  <input [class.has-error]="formInvalid && CurrencyQuantity.invalid" #CurrencyQuantity="ngModel"
+                    [(ngModel)]="creditCurrencyDto.currencyQuantity" type="number" class="form-control" name="currencyQuantity"
+                    id="currencyQuantity" oninput="validity.valid||(value='');" min="1" required>
+                </div>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn send-btn">{{'Popups.SendButton' | translate}}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Create Offer Modal -->
+
+<!-- Offers Creation errors popup -->
+<div id="actionsErrorModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'BlockChainMessages.Error' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+          {{errorModalMessage}}
+        </div>
+
+        <div style="padding: 10px"></div>
+        <div class="text-center" *ngIf="showModalButtons">
+          <button type="button" class="btn popup-ok-btn" data-dismiss="modal" (click)="openBuypopup()">{{'BlockChainMessages.BuyCrypto'
+            | translate}}</button>
+          <button type="button" class="btn poup-cancel-btn" data-dismiss="modal">{{'Popups.CancelButton' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Offers Creation errors popup -->
+
+<!-- Buy more crypto-euro popup -->
+<div id="buyCryptomodal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'BlockChainMessages.BuyCrypto' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+
+        <form #form="ngForm" (ngSubmit)="creditCurrency(form)">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="alert alert-info alert-dismissible fade in text-center" role="alert">
+                {{'ProductDetailsPage.PayPlatform' | translate}}
+              </div>
+              <label class="input-label" for="currencyQuantity">{{'ProductDetailsPage.AmountDevice' | translate}}</label>
+              <input [class.has-error]="formInvalid && CurrencyQuantity.invalid" #CurrencyQuantity="ngModel"
+                [(ngModel)]="creditCurrencyDto.currencyQuantity" type="number" min="1" oninput="validity.valid||(value='');"
+                class="form-control" name="currencyQuantity" id="currencyQuantity" required>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn send-btn">{{'Popups.SendButton' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Buy more crypto-euro popup -->
+
+<!-- Accept Offer Modal -->
+<div id="acceptOfferModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 32px;">&times;</button>
+        <h4 class="modal-title">
+          <span class="product-header">{{'ProductDetailsPage.AcceptOffer' | translate}}</span>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="formInvalid" class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+          {{'CommonMessages.CheckInputsFill' | translate}}
+        </div>
+        <!-- <div *ngIf="sendForm && success" class="alert alert-success alert-dismissible fade in text-center" role="alert">
+          Votre offre a été crée avec succés
+        </div>
+        <div *ngIf="sendForm && !success" class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+          Une erreur s'est produite lors de la création de votre offre !
+        </div> -->
+        <div *ngIf="currentUser != null">
+          <form *ngIf="currentUser.blockChainAddress != null">
+            <div class="col-md-12">
+              <div class="alert alert-warning alert-dismissible fade in text-center" role="alert">
+                {{'ProductDetailsPage.AcceptOfferConfirmText' | translate}}.
+              </div>
+              <div class="alert alert-info alert-dismissible fade in text-center" role="alert" *ngIf="accetpedProductOffer != undefined">
+                <span *ngIf="accetpedProductOffer.offerAssetName == constants.eur">
+                  {{'ProductDetailsPage.Exchange' | translate}} {{accetpedProductOffer.askQuantity}}
+                  {{'ProductDetailsPage.CoinOf' | translate}}
+                  ({{product.project.productName}}) {{'ProductDetailsPage.With' | translate}}
+                  ({{accetpedProductOffer.offerQuantity}}
+                  {{accetpedProductOffer.offerAssetName}})
+                </span>
+                <span *ngIf="accetpedProductOffer.offerAssetName != constants.eur">
+                  {{'ProductDetailsPage.Exchange' | translate}} {{accetpedProductOffer.offerQuantity}}
+                  {{'ProductDetailsPage.With' | translate}} ({{accetpedProductOffer.askQuantity}}
+                  {{accetpedProductOffer.askAssetName}})<br>
+                  (+ {{offerDto.commissionFees}} euro(s) de commission sur opération).<br>
+                  Avec cette opération vous estimez le prix total du bien à {{totalPSale}} euro(s).
+                </span>
+              </div>
+              <div class="form-group">
+                <label class="input-label" for="acceptPrivateKey">{{'ProductDetailsPage.PrivateKey' | translate}}</label>
+                <input [(ngModel)]="offerDto.privateKey" type="password" class="form-control" name="acceptPrivateKey"
+                  id="acceptPrivateKey" required>
+              </div>
+            </div>
+            <div class="text-center">
+              <button (click)="getUserCryptoCurrencyAmountAcceptOffer()" type="submit" class="btn send-btn">{{'Popups.SendButton'
+                |
+                translate}}</button>
+            </div>
+          </form>
+          <form *ngIf="currentUser.blockChainAddress == null" #form="ngForm" (ngSubmit)="creditCurrency(form)">
+            <div class="col-md-12">
+              <div class="alert alert-warning alert-dismissible fade in text-center" role="alert">
+                {{'ProductDetailsPage.WarningUserText' | translate}}
+              </div>
+              <div class="form-group">
+                <div class="alert alert-info alert-dismissible fade in text-center" role="alert">
+                  {{'ProductDetailsPage.PayPlatform' | translate}}
+                </div>
+                <label class="input-label" for="currencyQuantity">{{'ProductDetailsPage.AmountDevice' | translate}}</label>
+                <input [class.has-error]="formInvalid && CurrencyQuantity.invalid" #CurrencyQuantity="ngModel"
+                  [(ngModel)]="creditCurrencyDto.currencyQuantity" type="number" min="1" oninput="validity.valid||(value='');"
+                  class="form-control" name="currencyQuantity" id="currencyQuantity" required>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn send-btn">{{'Popups.SendButton' | translate}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Accept Offer Modal -->
+
+<!-- Cancel Offer Modal -->
+<div id="cancelOfferModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 32px;">&times;</button>
+        <h4 class="modal-title">
+          <span class="product-header">{{'ProductDetailsPage.CancelOffer' | translate}}</span>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="formInvalid" class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+          {{'CommonMessages.CheckInputsFill' | translate}}
+        </div>
+        <!-- <div *ngIf="sendForm && success" class="alert alert-success alert-dismissible fade in text-center" role="alert">
+          Votre offre a été annulé avec succés
+        </div>
+        <div *ngIf="sendForm && !success" class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+          Une erreur s'est produite lors de l'annulation de votre offre !
+        </div> -->
+        <div *ngIf="currentUser != null">
+          <form *ngIf="currentUser.blockChainAddress != null">
+            <div class="col-md-12">
+              <div class="alert alert-warning alert-dismissible fade in text-center" role="alert">
+                {{'ProductDetailsPage.CancelOfferConfirmText' | translate}}
+              </div>
+              <div class="form-group">
+                <label class="input-label" for="acceptPrivateKey">{{'ProductDetailsPage.PrivateKey' | translate}}</label>
+                <input [(ngModel)]="offerDto.privateKey" type="password" class="form-control" name="acceptPrivateKey"
+                  id="acceptPrivateKey" required>
+              </div>
+            </div>
+            <div class="text-center">
+              <button (click)="sendCancelOffer()" type="submit" class="btn send-btn">{{'Popups.SendButton' |
+                translate}}</button>
+            </div>
+          </form>
+          <form *ngIf="currentUser.blockChainAddress == null" #form="ngForm" (ngSubmit)="creditCurrency(form)">
+            <div class="col-md-12">
+              <div class="alert alert-warning alert-dismissible fade in text-center" role="alert">
+                {{'ProductDetailsPage.WarningUserText' | translate}}
+              </div>
+              <div class="form-group">
+                <div class="alert alert-info alert-dismissible fade in text-center" role="alert">
+                  {{'ProductDetailsPage.PayPlatform' | translate}}
+                </div>
+                <label class="input-label" for="currencyQuantity">{{'ProductDetailsPage.AmountDevice' | translate}}</label>
+                <input [class.has-error]="formInvalid && CurrencyQuantity.invalid" #CurrencyQuantity="ngModel"
+                  [(ngModel)]="creditCurrencyDto.currencyQuantity" type="number" oninput="validity.valid||(value='');"
+                  class="form-control" name="currencyQuantity" id="currencyQuantity" required>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn send-btn">{{'Popups.SendButton' | translate}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Cancel Offer Modal -->
+
+<!-- answer question Modal -->
+<div id="answerQuestionModal" class="modal fade" role="dialog" *ngIf="currentUser != null">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'Popups.ReplyQuestionHeader' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div style="margin-top: 25px;">
+          <div>
+            <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage != null && project.user.provider == 0"
+              [src]="constants.sharedUserImagesPath + project.user.userImage.path">
+            <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage == null && project.user.provider == 0"
+              [src]="constants.sharedUserImagesPath + 'no-image-user.png'">
+            <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage != null && project.user.provider == 1"
+              [src]="project.user.userImage.path">
+          </div>
+          <div class="name">
+            {{currentUser.firstName}}
+          </div>
+          <div class="disscussion-content">
+            <div class="form-group">
+              <textarea [(ngModel)]="answerContent" class="form-control" rows="3" id="answerContent" name="answerContent"
+                placeholder="" [maxlength]="constants.ProjectDescreption" #answerContentName="ngModel" required></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn popup-ok-btn" data-dismiss="modal" (click)="addAnswerToQuestion()">{{'Popups.SendButton'
+            | translate}}</button>
+          <button type="button" class="btn poup-cancel-btn" data-dismiss="modal">{{'Popups.CancelButton' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- answer question Modal -->
+
+<div id="buyCryptoEuroDoneModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div *ngIf="buyCryptoEuroDone" class="modal-top-bar-info"></div>
+      <div *ngIf="!buyCryptoEuroDone" class="modal-top-bar-warning"></div>
+      <div class="modal-header">
+        <h2 *ngIf="buyCryptoEuroDone" class="modal-title modal-text-header" style="float: left;">{{'Popups.SuccessHeader'
+          |
+          translate}}</h2>
+        <h2 *ngIf="!buyCryptoEuroDone" class="modal-title modal-text-header" style="float: left;">{{'Popups.ErrorHeader'
+          |
+          translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div class="popup-text">
+          <p *ngIf="buyCryptoEuroDone">{{'Popups.OperationSuccessText' | translate}}</p>
+          <p *ngIf="!buyCryptoEuroDone">{{'Popups.OperationErrorText' | translate}}</p>
+        </div>
+        <div class="padding:10px"></div>
+        <div class="text-center">
+          <button type="button" class="btn popup-ok-btn" data-dismiss="modal">{{'Popups.CloseButton' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Shared Modal -->
+<shared-modal #sharedModal></shared-modal>
+<!-- Shared Modal -->

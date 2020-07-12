@@ -1,0 +1,366 @@
+<app-loader [isRunning]="isRunning"></app-loader>
+<!-- Shared Modal -->
+<shared-modal #sharedModal1></shared-modal>
+<!-- Shared Modal -->
+<div class="container">
+  <div class="content">
+    <div class="card-deck row">
+      <div class="card text-center col-xs-12 col-sm-6">
+        <div class="card-body">
+          <h4 class="card-title">{{'WalletPage.CryptoEuro' | translate}}</h4>
+          <img class="card-img-top" style="width:200px" src="../../../assets/img/icones/ic_coin.svg" alt="Card image">
+          <p class="card-text" style="margin-top:10px">{{'WalletPage.CurrentBalance' | translate}} : {{balance}} € </p>
+          <div class="card-footer row">
+            <div class="col-xs-6" style="padding:0 3px;">
+              <button class="btn btn-primary blue-btn" (click)=" openBuypopup()">
+                <span class="blue-btn-text">
+                  {{
+                  'WalletPage.BuyButton'
+                  | translate
+                  }}
+                </span>
+              </button>
+            </div>
+            <div class="col-xs-6" style="padding:0 3px;">
+              <button class="btn btn-primary blue-btn" (click)="openPayOutPopup()">
+                <span class="blue-btn-text">{{'WalletPage.EncaseButton'|translate}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card text-center col-xs-12 col-sm-6">
+        <div class="card-body">
+          <h4 class="card-title">{{'WalletPage.OpportunityCoin' | translate}}</h4>
+          <img class="card-img-bottom" style="width:200px" src="../../../assets/img/icones/CoinProduct.svg" alt="Card image">
+          <p class="card-text" style="margin-top:10px"> {{'WalletPage.CurrentBalance' | translate}} : {{coinsBalance}}
+            Coin</p>
+          <button class="btn btn-primary blue-btn" style="width:50%;" (click)=" openBuypopup2()"><span class="blue-btn-text">{{'WalletPage.BuyButton'
+              | translate}}</span> </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-bottom:50px;">
+  <div class="content" style="margin-top: 5px;">
+    <div class="tabbable" style="margin-bottom: 18px;">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="#tab1" data-toggle="tab"> {{'WalletPage.OpenPosition' | translate}} </a>
+        </li>
+        <li>
+          <a href="#tab2" data-toggle="tab"> {{'WalletPage.CompletedTransactions' | translate}} </a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content" style="margin-top: 25px; min-height: 300px;">
+      <div class="tab-pane active" id="tab1">
+        <div style="margin-top:25px;">
+          <table class="table text-center">
+            <thead class="thead-blue">
+              <td colspan="7">
+                {{'WalletPage.YourCurrentSales' | translate}}
+              </td>
+            </thead>
+            <p *ngIf=" sellList == null || sellList?.length == 0" class="text-center" style="font-size:16px;margin-top: 10px;font-weight: lighter">
+              {{"ProductDetailsPage.NoSellOffers" | translate}}
+            </p>
+
+            <tbody>
+              <tr *ngIf=" sellList != null && sellList?.length>0" style="font-weight: lighter; ">
+                <td>{{'WalletPage.CoinName' | translate}}</td>
+                <td>{{'WalletPage.Date' | translate}}</td>
+                <td>{{'WalletPage.TransactionRef' | translate}}</td>
+                <td>{{'WalletPage.CoinPrice' | translate}}</td>
+                <td>{{'WalletPage.Quantity' | translate}}</td>
+                <td>{{'WalletPage.TotalPrice' | translate}}</td>
+                <td></td>
+              </tr>
+              <tr *ngFor="let item of sellList" style="font-weight: bold;">
+                <th scope="row" style="color: #337BAE;text-align: center;" class="cursor-pointer" (click)="gotoProduct(item.askAssetName)">
+                  {{item.offerAssetName}}
+                </th>
+                <td>{{item.date}}</td>
+                <td>{{item.txId}} </td>
+                <td>{{item.pxCoin}} €</td>
+                <td>{{item.offerQuantity}}</td>
+                <td>{{item.askQuantity}} €</td>
+                <td>
+                  <button class="btn" style="background:#E06950;color: #fff;" (click)="openCancelPopUp(item,item.offerAssetName)">
+                    {{'WalletPage.CancelButton' | translate}}
+                  </button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <table class="table text-center">
+            <thead class="thead-purple">
+              <td colspan="7">
+                {{'WalletPage.YourCurrentBuys' | translate}}
+              </td>
+            </thead>
+            <p *ngIf=" buyList == null || buyList?.length == 0" class="text-center" style="font-size:16px;margin-top: 10px;font-weight: lighter">
+              {{
+              "ProductDetailsPage.NoBuyOffers"
+              | translate
+              }}
+            </p>
+
+            <tbody>
+              <tr *ngIf=" buyList != null && buyList?.length > 0" style="font-weight: lighter;">
+                <td>{{'WalletPage.CoinName' | translate}}</td>
+                <td>{{'WalletPage.Date' | translate}}</td>
+                <td>{{'WalletPage.TransactionRef' | translate}}</td>
+                <td>{{'WalletPage.CoinPrice' | translate}}</td>
+                <td>{{'WalletPage.Quantity' | translate}}</td>
+                <td>{{'WalletPage.TotalPrice' | translate}}</td>
+                <td></td>
+              </tr>
+              <tr *ngFor="let item of buyList" style="font-weight: bold;">
+                <th scope="row" style="color: #337BAE;text-align: center;" class="cursor-pointer" (click)="gotoProduct(item.offerAssetName)">
+                  {{item.askAssetName}}
+                </th>
+                <td>{{item.date}}</td>
+                <td>{{item.txId}} </td>
+                <td>{{item.pxCoin}} €</td>
+                <td>{{item.askQuantity}}</td>
+                <td>{{item.offerQuantity}} €</td>
+                <td>
+                  <button class="btn" style="background:#E06950;color: #fff;" (click)="openCancelPopUp(item,item.askAssetName)">
+                    {{'WalletPage.CancelButton' | translate}}
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane" id="tab2">
+        <div style="margin-top:25px;">
+          <table class="table text-center">
+            <thead class="thead-blue">
+              <td colspan="6">
+                {{'WalletPage.SalesMade' | translate}}
+              </td>
+            </thead>
+            <p *ngIf="sellHistory == null || sellHistory?.length == 0" class="text-center" style="font-size:16px; margin-top: 10px;font-weight: lighter">
+              {{'WalletPage.noSellHistory' | translate}}
+            </p>
+            <tbody>
+              <tr *ngIf="sellHistory != null && sellHistory?.length > 0" style="font-weight: lighter;">
+                <td>{{'WalletPage.CoinName' | translate}}</td>
+                <td>{{'WalletPage.Date' | translate}}</td>
+                <td>{{'WalletPage.TransactionRef' | translate}}</td>
+                <td>{{'WalletPage.CoinPrice' | translate}}</td>
+                <td>{{'WalletPage.Quantity' | translate}}</td>
+                <td>{{'WalletPage.TotalPrice' | translate}}</td>
+              </tr>
+              <tr *ngFor="let item of sellHistory" style="font-weight: bold;text-align: center;">
+                <th scope="row" style="color: #337BAE;text-align: center;" class="cursor-pointer" (click)="gotoProduct(item.askAssetName)">
+                  {{item.offerAssetName}}
+                </th>
+                <td>{{item.date}}</td>
+                <td>{{item.txId}} </td>
+                <td>{{item.pxCoin}} €</td>
+                <td>{{item.offerQuantity}}</td>
+                <td>{{item.askQuantity}} €</td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+          <table class="table text-center">
+            <thead class="thead-purple">
+              <td colspan="6">
+                {{'WalletPage.PurchasesMade' | translate}}
+              </td>
+            </thead>
+            <p *ngIf="buyHistory == null || buyHistory?.length == 0" class="text-center" style="font-size:16px;margin-top: 10px;font-weight: lighter">
+              {{'WalletPage.noBuyHistory' | translate}}
+            </p>
+            <tbody>
+              <tr *ngIf="buyHistory != null && buyHistory?.length > 0" style="font-weight: lighter;text-align: center;">
+                <td>{{'WalletPage.CoinName' | translate}}</td>
+                <td>{{'WalletPage.Date' | translate}}</td>
+                <td>{{'WalletPage.TransactionRef' | translate}}</td>
+                <td>{{'WalletPage.CoinPrice' | translate}}</td>
+                <td>{{'WalletPage.Quantity' | translate}}</td>
+                <td>{{'WalletPage.TotalPrice' | translate}}</td>
+              </tr>
+              <tr *ngFor="let item of buyHistory" style="font-weight: bold;text-align: center;">
+                <th scope="row" style="color: #337BAE;text-align: center;" class="cursor-pointer" (click)="gotoProduct(item.offerAssetName)">
+                  {{item.askAssetName}}
+                </th>
+                <td>{{item.date}}</td>
+                <td>{{item.txId}} </td>
+                <td>{{item.pxCoin}} €</td>
+                <td>{{item.askQuantity}}</td>
+                <td>{{item.offerQuantity}} €</td>
+
+              </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="buyCryptomodal1" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'BlockChainMessages.BuyCrypto' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <form #formBuyCryptoCurrency="ngForm" (ngSubmit)="creditCurrency(formBuyCryptoCurrency)">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="alert alert-info alert-dismissible fade in text-center" role="alert">
+                {{'ProductDetailsPage.PayPlatform' | translate}}
+              </div>
+              <label class="input-label" for="currencyQuantity">{{'ProductDetailsPage.AmountDevice' | translate}}</label>
+              <input [class.has-error]="formInvalidBuyCryptoCurrency && CurrencyQuantity.invalid" #CurrencyQuantity="ngModel"
+                [(ngModel)]="creditCurrencyDto.currencyQuantity" type="number" oninput="validity.valid||(value='');"
+                class="form-control" name="currencyQuantity" id="currencyQuantity" min="1" required>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn send-btn" style="background: #337BAE;color: #fff">
+              {{
+              'Popups.SendButton' |
+              translate
+              }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="buyCoinsModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'BlockChainMessages.BuyCoins' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <form #formBuyCoins="ngForm" (ngSubmit)="creditCurrencyCoins(formBuyCoins)">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="alert alert-info alert-dismissible fade in text-center" role="alert">
+                {{'ProductDetailsPage.PayPlatform2' | translate}}
+              </div>
+              <label class="input-label" for="currencyQuantity2">{{'ProductDetailsPage.AmountDevice' | translate}}</label>
+              <input [class.has-error]="formInvalidBuyCoins && CurrencyQuantity2.invalid" #CurrencyQuantity2="ngModel"
+                [(ngModel)]="creditCurrencyDto.currencyQuantity" type="number" oninput="validity.valid||(value='');"
+                class="form-control" name="currencyQuantity2" id="currencyQuantity2" min="1" required>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn send-btn" style="background: #337BAE;color: #fff">{{'Popups.SendButton' |
+              translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div id="cancelOfferWallet" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 32px;">&times;</button>
+        <h4 class="modal-title">
+          <span class="product-header">{{'ProductDetailsPage.CancelOffer' | translate}}</span>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="formInvalidCancel" class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+          {{'CommonMessages.CheckInputsFill' | translate}}
+        </div>
+        <!-- <div *ngIf="sendForm && success" class="alert alert-success alert-dismissible fade in text-center" role="alert">
+              Votre offre a été annulé avec succés
+            </div>
+            <div *ngIf="sendForm && !success" class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+              Une erreur s'est produite lors de l'annulation de votre offre !
+            </div> -->
+        <form *ngIf="currentUser.blockChainAddress != null">
+          <div class="col-md-12">
+            <div class="alert alert-warning alert-dismissible fade in text-center" role="alert">
+              {{'ProductDetailsPage.CancelOfferConfirmText' | translate}}
+            </div>
+            <div class="form-group">
+              <label class="input-label" for="acceptPrivateKey">{{'ProductDetailsPage.PrivateKey' | translate}}</label>
+              <input [(ngModel)]="offerDto.privateKey" type="password" class="form-control" name="acceptPrivateKey" id="acceptPrivateKey"
+                required>
+            </div>
+          </div>
+          <div class="text-center">
+            <button (click)="sendCancelOffer()" type="submit" class="btn send-btn">{{'Popups.SendButton' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="payOutmodal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'WalletPage.PayOutPopUpTitle' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <form #formPayOut="ngForm" (ngSubmit)="payOut(formPayOut)">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="alert alert-info alert-dismissible fade in text-center" role="alert">
+                {{'WalletPage.PayOutPopUpHeader' | translate}}
+              </div>
+              <label class="input-label" for="debitedFund">{{'WalletPage.DebitedAmount' | translate}}</label>
+              <input [class.has-error]="formInvalidPayOut" #debitedFunds="ngModel" [(ngModel)]="debitedFund" type="number"
+                oninput="validity.valid||(value='');" class="form-control" name="debitedFund" id="debitedFund" min="1"
+                required>
+
+              <label class="input-label" for="privateKey"> {{'WalletPage.privateKey' | translate}} </label>
+              <input [class.has-error]="formInvalidPayOut" #privateKeys="ngModel" [(ngModel)]="privateKey" type="password"
+                class="form-control" name="privateKey" id="privateKey" required>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn send-btn" style="background: #337BAE;color: #fff">
+              {{'Popups.SendButton' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

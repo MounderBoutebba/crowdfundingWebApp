@@ -1,0 +1,115 @@
+<!-- Projects listing -->
+<app-loader [isRunning]="isRunning"></app-loader>
+<div class="container page-bottom-margin">
+  <h1 class="decoration text-center">
+    <span class="fav-text">{{'HomePageSections.Projects' | translate}}</span>
+  </h1>
+  <section class="section" id="portfolio-list">
+    <div class="wrapper projects font_p" id="contentWrapper">
+      <div class="zone-content clearfix page-bottom-margin">
+        <div class="list-projects-container " *ngIf="projects.length != 0">
+          <project-listing-item (validateProject)="onValidateProject($event)" (loaderIsRunning)="OnloaderIsRunning($event)"
+            class="col-lg-4 col-sm-6 col-xs-12" style="padding-top: 30px;" *ngFor="let project of projects" [project]=project
+            [slider]="'off'">
+          </project-listing-item>
+          <!-- <h1 id="scroll-to" *ngIf="displayScrollTo">ScrollTo</h1> -->
+        </div>
+        <div class="portfolio-container" *ngIf="success && projects.length == 0">
+          <h2 class="text-center">{{'UserProjectPage.EmptyProjectsMessage' | translate}}</h2>
+        </div>
+        <div class="portfolio-container" *ngIf="!success && error == 401">
+          <h2 class="text-center fav-text">
+            {{'UserProjectPage.AuthorizationText' | translate}}</h2>
+        </div>
+      </div>
+      <div>
+        <div id="loader" class="loader"></div>
+      </div>
+    </div>
+    <!-- <div *ngIf="seeMore" class="SeeMoreButton col-xs-12">
+        <span (click)="getMoreProjects()"> {{'UserProjectPage.seeMore' | translate }}  </span>
+    </div> -->
+  </section>
+</div>
+
+
+<!-- Modal Add News -->
+<div id="projectNewsModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'UserProjectPage.AddNews' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <form #aform="ngForm" class="message row form-horizontal" data-ajax="true" (ngSubmit)="addNews(aform)">
+
+        <div class="modal-body">
+          <div>
+            <div>
+              <div class="alert alert-info text-center" role="alert" *ngIf="DefaultMessage">
+                {{'UserProjectPage.AddUserNews' | translate}}
+              </div>
+              <div class="alert alert-success text-center" role="alert" *ngIf="!DefaultMessage && newsAdded">
+                {{'UserProjectPage.NewsSuccess' | translate}}
+              </div>
+              <div class="alert alert-danger text-center" role="alert" *ngIf="!DefaultMessage && !newsAdded">
+                {{'Popups.ErrorAccessProfil' | translate}}
+              </div>
+              <div class="alert alert-danger text-center" role="alert" *ngIf="froalaEditorValid">
+                {{'Popups.ErrorAccessProfil' | translate}}
+              </div>
+            </div>
+            <div class="form-content">
+              <div class="controls controls-row">
+                <div class="form-group" [class.has-error]="formInvalid && froalaEditorValid">
+                  <p class="label1" for="login">{{'UserProjectPage.NewsDescription' | translate}}
+                    <span class="red-obligation">*</span>
+                  </p>
+                  <!-- <textarea [(ngModel)]="news.newsContent" class="form-control select-style" rows="5" name="newsDescription"
+                    [placeholder]="'UserProjectPage.NewsDescription' | translate" #newsDescription="ngModel" required
+                    [maxlength]="Constants.ProjectDescreption"></textarea> -->
+                  <div class="col-lg-12" style="padding : 0">
+                    <textarea id="froalaEditor" placeholder="Description" name="projectDescription" required></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn popup-ok-btn">{{'UserProjectPage.AddNewsButton' | translate}}</button>
+            <button type="button" class="btn poup-cancel-btn" data-dismiss="modal">{{'Popups.CloseButton' | translate}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="confirmDone" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div *ngIf="status" class="modal-top-bar-info"></div>
+      <div *ngIf="!status" class="modal-top-bar-warning"></div>
+      <div class="modal-header">
+        <h2 *ngIf="status" class="modal-title modal-text-header" style="float: left;">{{'Popups.SuccessHeader' |
+          translate}}</h2>
+        <h2 *ngIf="!status" class="modal-title modal-text-header" style="float: left;">{{'Popups.ErrorHeader' |
+          translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div class="popup-text">
+          <p *ngIf="status">{{'Popups.OperationSuccessText' | translate}}</p>
+          <p *ngIf="!status">{{'Popups.OperationErrorText' | translate}}</p>
+        </div>
+        <div style="padding: 10px"></div>
+        <div class="text-center">
+          <button type="button" class="btn popup-ok-btn" data-dismiss="modal">{{'Popups.CloseButton' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,291 @@
+<!-- <ngx-carousel [inputs]="carouselBanner" [moveToSlide]="1" style="min-height:480px">
+  <ngx-item NgxCarouselItem>
+    <img src="assets/img/test-wallpaper.jpg" class="bannerStyle">
+  </ngx-item>
+  <ngx-item NgxCarouselItem>
+    <img src="assets/img/test-wallpaper.jpg" class="bannerStyle">
+  </ngx-item>
+  <ngx-item NgxCarouselItem>
+    <img src="assets/img/test-wallpaper.jpg" class="bannerStyle">
+  </ngx-item>
+  <button NgxCarouselPrev class='leftRs'>
+    <span class="fa fa-arrow-left custom-chevron"></span>
+  </button>
+  <button NgxCarouselNext class='rightRs'>
+    <span class="fa fa-arrow-right custom-chevron"></span>
+  </button>
+</ngx-carousel> -->
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="assets/img/test-wallpaper.jpg" class="bannerStyle">
+    </div>
+
+    <div class="item">
+      <img src="assets/img/test-wallpaper.jpg" class="bannerStyle">
+    </div>
+
+    <div class="item">
+      <img src="assets/img/test-wallpaper.jpg" class="bannerStyle">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <button class="leftRs" href="#myCarousel" data-slide="prev">
+    <span class="fa fa-arrow-left custom-chevron"></span>
+  </button>
+  <button class="rightRs" href="#myCarousel" data-slide="next">
+    <span class="fa fa-arrow-right custom-chevron"></span>
+  </button>
+</div>
+<!-- search-box big -->
+<div style="position:relative">
+  <div class="search-box">
+    <form class="form-inline">
+      <div class="form-group" style="margin-right:30px;">
+        <div class="input-group search-border-bottom">
+          <div class="input-group-addon search-icon">
+            <span class="fa fa-search" style="font-size:18px;opacity: 0.8"></span>
+          </div>
+          <input [(ngModel)]="searchInput" type="text" class="form-control search-input search-input-width input-search"
+            [placeholder]="'HomePageSections.SearchProductText' | translate" (keyup.enter)="searchForProjects()" name="searchInput"
+            autocomplete="off">
+          <div class="input-group-addon search-icon">
+            <span [ngStyle]="{'opacity': (searchInput == '') ? 0 : 1}" class="fa fa-close clear-btn" (click)="clearSearchInput()"></span>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn search-button" (click)="searchForProjects()">{{'HomePageSections.SearchButton' |
+        translate}}</button>
+    </form>
+  </div>
+</div>
+<!-- END search-box big -->
+
+
+<!-- search-box small -->
+<div style="position:relative">
+  <div class="search-box-xs">
+    <form class="form-vertical">
+      <div class="form-group">
+        <div class="input-group search-border-bottom">
+          <div class="input-group-addon search-icon">
+            <span class="fa fa-search"></span>
+          </div>
+          <input [(ngModel)]="searchInput" type="text" class="form-control search-input search-input-width-xs input-search"
+            [placeholder]="'HomePageSections.SearchProductText' | translate" (keyup.enter)="searchForProjects()" name="searchInput"
+            autocomplete="off">
+          <div class="input-group-addon search-icon">
+            <span [ngStyle]="{'opacity': (searchInput == '') ? 0 : 1}" class="fa fa-close clear-btn" (click)="clearSearchInput()"></span>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn search-button" (click)="searchForProjects()">{{'HomePageSections.SearchButton'
+          | translate}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- END search-box small -->
+
+<div class="clear"></div>
+<div class="content">
+  <p class="section-title  text-center">{{'HomePageSections.HowItWorks' | translate}}</p>
+  <div class="how-it-works">
+    <div class="col-sm-3 col-md-3">
+      <div class="folder">
+        <img class="img-size" src="../assets/img/Step1.png" alt="">
+      </div>
+      <div class="folder">
+        <h3 class="step-text text-center">{{'HomePageSections.Step1' | translate}}</h3>
+      </div>
+      <div class="folder">
+        <p class="step-description text-center">
+          <strong>{{'HomePageSections.Step1Text' | translate}}</strong>
+        </p>
+      </div>
+      <div class="folder">
+        <button class="btn btn-primary" (click)="checkConnectedUser()">{{'HomePageSections.step1-button' | translate}}</button>
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-3">
+      <div class="folder">
+        <img class="img-size" src="../assets/img/step2.png" alt="">
+      </div>
+      <div class="folder">
+        <h3 class="step-text text-center">{{'HomePageSections.Step2' | translate}}</h3>
+      </div>
+      <div class="folder">
+        <p class="step-description text-center">
+          <strong>{{'HomePageSections.Step2Text' | translate}}</strong>
+        </p>
+      </div>
+      <div class="folder">
+        <button class="btn btn-primary" (click)="checkConnectedUser()">{{'HomePageSections.step2-button' | translate}}</button>
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-3">
+      <div class="folder">
+        <img class="img-size" src="../assets/img/Step3.png" alt="">
+      </div>
+      <div class="folder">
+        <h3 class="step-text text-center">{{'HomePageSections.Step3' | translate}}</h3>
+      </div>
+      <div class="folder">
+        <p class="step-description text-center">
+          <strong>{{'HomePageSections.Step3Text' | translate}}</strong>
+        </p>
+      </div>
+      <div class="folder">
+        <button class="btn btn-primary" (click)="checkConnectedUser()">{{'HomePageSections.step3-button' | translate}}</button>
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-3">
+      <div class="folder">
+        <img class="img-size" src="../assets/img/Step4.png" alt="">
+      </div>
+      <div class="folder">
+        <h3 class="step-text text-center">{{'HomePageSections.Step4' | translate}}</h3>
+      </div>
+      <div class="folder">
+        <p class="step-description text-center">
+          <strong>{{'HomePageSections.Step4Text' | translate}}</strong>
+        </p>
+      </div>
+      <div class="folder">
+        <button class="btn btn-primary" (click)="checkConnectedUser()">{{'HomePageSections.step4-button' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="carousel-title">
+  <!-- Projects Carousel -->
+  <project-carousel-listing [carouselTileItems]="projects" [loader]="isRunningProjects"></project-carousel-listing>
+  <div class="line"></div>
+  <product-carousel-listing [carouselTileItems]="products" [loader]="isRunningProducts"></product-carousel-listing>
+  <!-- Projects Carousel -->
+</div>
+<div class="content page-bottom-margin">
+  <!-- Contact US -->
+  <div style="display:table;margin-top:40px;">
+    <div class="col-sm-6 col-md-6">
+      <div class="col-sm-12">
+        <table class="table table-marginBottom">
+          <tr>
+            <div class="inline-table mleft10">
+              <span class="contactus-title">{{'HomePageSections.ContactUs' | translate}}</span>
+            </div>
+          </tr>
+          <tr>
+            <td>
+              <div class="inline-table mleft10">
+                <span class="contactus-label">{{'HomePageSections.Adress' | translate}}</span>
+                <p class="contactus-value">106 rue Castagnary, PARIS 75015</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="inline-table mleft10">
+                <span class="contactus-label">{{'HomePageSections.Phone' | translate}}</span>
+                <p class="contactus-value">+331 567-678-4590</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="inline-table mleft10">
+                <span class="contactus-label">{{'LoginPage.LoginForm.Email' | translate}}</span>
+                <p class="contactus-value">contact@caryout.com</p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-6">
+      <div class="loader" *ngIf="LoaderContactIsRunning"></div>
+      <div class="alert alert-info alert-dismissible fade in alert-message info-message" role="alert" *ngIf="formInvalid">
+        {{'CommonMessages.CheckInputsFill' | translate}}
+      </div>
+      <div class="alert alert-danger alert-dismissible fade in alert-message danger-message" role="alert" *ngIf="sendForm && fail">
+        {{'HomePageSections.ErrorSentMessage' | translate}}
+      </div>
+      <div class="alert alert-success alert-dismissible fade in alert-message success-message" role="alert" *ngIf="sendForm && sendSuccess">
+        {{'HomePageSections.SuccessSentMessage' | translate}}
+      </div>
+      <div [ngStyle]="{'opacity': (LoaderContactIsRunning) ? 0.5 : 1}">
+        <form #form="ngForm" (ngSubmit)="sendEmail(form)">
+          <div>
+            <div>
+              <div class="form-group input-contact">
+                <div class="input-group ">
+                  <div class="input-group-addon search-icon">
+                    <span class="fa fa-user"></span>
+                  </div>
+                  <input type="text" class="form-control search-input" name="contactName" [(ngModel)]="contacUstDto.name"
+                    [placeholder]="'InputsPlaceholder.Name' | translate" [maxlength]="constants.EmailMaxLength"
+                    required>
+                </div>
+              </div>
+              <div class="form-group input-contact">
+                <div class="input-group ">
+                  <div class="input-group-addon search-icon">
+                    <span class="fa fa-envelope"></span>
+                  </div>
+                  <input type="text" class="form-control search-input" name="contactEmail" [(ngModel)]="contacUstDto.email"
+                    [placeholder]="'LoginPage.LoginForm.Email' | translate" [maxlength]="constants.EmailMaxLength"
+                    required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group input-contact">
+              <textarea class="form-control search-input" name="contactContent" [placeholder]="'InputsPlaceholder.ProjectDescription' | translate"
+                rows="7" cols="50" [(ngModel)]="contacUstDto.message" [maxlength]="constants.ProjectDescreption"
+                required></textarea>
+            </div>
+            <div class="hidden-sm hidden-xs visible-md visible-lg">
+              <div class="col-md-6 search-btn">
+                <button type="submit" class="btn search-button">{{'Popups.SendButton' | translate}}</button>
+              </div>
+              <div class="custom-captcha col-md-6">
+                <re-captcha #recaptchaRef="reCaptcha" (resolved)="resolved($event)"></re-captcha>
+              </div>
+            </div>
+            <div class="visible-sm visible-xs hidden-md hidden-lg">
+              <div class="custom-captcha">
+                <re-captcha #recaptchaRef="reCaptcha" (resolved)="resolved($event)"></re-captcha>
+              </div>
+              <div>
+                <button type="submit" class="btn search-button">{{'Popups.SendButton' | translate}}</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Contact US -->
+    <!-- <div class="col-lg-12 col-sm-12 text-center">
+      <h1 class="text-center conts">
+        <span>{{'HomePageSections.Creators' | translate}}</span>
+      </h1>
+    </div>
+    <div class="col-lg-6 col-sm-6 text-center mb-4">
+      <img class="img-circle img-fluid" src="assets/img/doe.jpg" alt="">
+      <h3>John Smith
+        <small>Job Title</small>
+      </h3>
+      <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+    </div>
+    <div class="col-lg-6 col-sm-6 text-center mb-4">
+      <img class="img-circle img-fluid" src="assets/img/doe.jpg" alt="">
+      <h3>John Smith
+        <small>Job Title</small>
+      </h3>
+      <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+    </div> -->
+  </div>
+</div>

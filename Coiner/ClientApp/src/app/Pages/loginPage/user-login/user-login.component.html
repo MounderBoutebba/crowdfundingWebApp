@@ -1,0 +1,118 @@
+<app-loader [isRunning]="isRunning"></app-loader>
+<div id="loginModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'Popups.Login' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body" style="padding-bottom: 40px;">
+        <div>
+          <!-- <div class="alert alert-info text-center" role="alert" *ngIf="!sendForm && !formInvalid">
+            {{'LoginPage.LoginInfoMessage' | translate}}
+          </div> -->
+          <div class="alert alert-danger text-center" role="alert" *ngIf="sendForm && !success && !formInvalid">
+            {{'Popups.ErrorAccessProfil' | translate}}
+          </div>
+          <div class="alert alert-danger text-center" role="alert" *ngIf="sendForm && success && currentUser == null  && !formInvalid">
+            {{'Popups.InvalidLogin' | translate}}
+          </div>
+          <div class="alert alert-danger text-center" role="alert" *ngIf="sendForm && success && currentUser != null && !userActive && !formInvalid">
+            {{'LoginPage.ActiveAccount' | translate}}
+          </div>
+          <div role="alert" class="alert alert-danger text-center" [hidden]="!(formInvalid && formInputsInvalide)">
+            <span>{{'CommonMessages.CheckInputsFill' | translate}}</span>
+          </div>
+        </div>
+        <div class="form-content">
+          <form #form="ngForm" (ngSubmit)="loginUser(form)">
+            <div class="form-group" [class.has-error]="formInvalid && Login.invalid">
+              <p class="label1" for="login">{{'InputsPlaceholder.Login' | translate}}</p>
+              <input type="text" class="form-control" id="Login" name="Login" #Login="ngModel" [placeholder]="'LoginPage.LoginForm.Email' | translate"
+                [(ngModel)]='login' required>
+            </div>
+            <div class="form-group" [class.has-error]="formInvalid && Password.invalid">
+              <p class="label1" for="passe">{{'InputsPlaceholder.Password' | translate}}</p>
+              <input type="password" class=" form-control" id="Password1" name="Password" #Password="ngModel"
+                [placeholder]="'LoginPage.LoginForm.Password' | translate" [(ngModel)]='password' required>
+            </div>
+            <div>
+              <p class="modal-footer-label2 cursor-pointer" (click)="OpenDemandNewPasswordModel()">{{'Popups.ForgotPassword'
+                | translate}}</p>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn login-btn">{{'LoginPage.LoginButton' | translate}}</button>
+            </div>
+            <div class="text-center Ordiv">
+              <hr class="half-hr"> <span class="Orlabel"> {{'ProjectCreationPage.OrLabel' | translate }} </span>
+              <hr class="half-hr">
+            </div>
+            <div class="text-center">
+              <button type="button" (click)="signInWithGoogle()" class="btn login-btn-google">
+                <span class="fa fa-google"></span> {{'LoginPage.LoginButtonGoogle' | translate}}
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+      <div class="modal-footer modal-footer-shadow">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button> -->
+        <div class="form-group">
+          <!-- <div class="col-sm-12"> -->
+          <div class="text-center">
+            <p class="modal-footer-label1">{{'Popups.CreateAccount' | translate}}</p>
+          </div>
+          <div>
+            <p class="cursor-pointer modal-footer-label2" (click)="openUserModal()">{{'Popups.Register' | translate}}</p>
+          </div>
+
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div id="DemandeKycModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">KYC</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div>
+
+          <div class="alert alert-warning text-center" role="alert" *ngIf="iWillSend">
+            {{'Popups.Transmettre03' | translate}}
+          </div>
+
+          <div class="alert alert-info" role="alert">
+            {{'Popups.Transmettre02' | translate}}
+          </div>
+
+          <button type="submit" (click)="sendByEmail()" class="btn popup-ok-btn" *ngIf="!iWillSend">
+            {{'Popups.Transmettre' | translate}}
+          </button>
+          <button *ngIf="!iWillSend" type="submit" data-dismiss="modal" class="btn popup-ok-btn pull-right">
+            {{'Popups.Plustard' | translate}}
+          </button>
+
+          <button *ngIf="iWillSend" type="submit" (click)="updateKyc()" data-dismiss="modal" class="btn popup-ok-btn">
+            {{'Popups.ok' | translate}}
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,78 @@
+<div id="scrollable" class="scrollable scroll-margin">
+
+  <!-- NavBar Component -->
+  <app-nav-bar></app-nav-bar>
+  <!-- End NavBar cmponent -->
+  <div style="min-height: 650px;">
+    <router-outlet></router-outlet>
+  </div>
+
+
+  <!-- Footer -->
+  <div id="footer">
+    <div class="footer">
+      <div class="col-md-12">
+        <div class="col-md-4 col-sm-12">
+          <h5>{{'Footer.About' | translate}}</h5>
+          <div class="tmargin20">
+            <p>Apple Inc has decided to launch the much awaited Apple Watch in the upcoming month of April and has
+              already received
+              around five to six million orders for the product. Analysts have expected this. product of the company to
+              bring
+              a positive.</p>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-4">
+          <h5>{{'Footer.Home' | translate}}</h5>
+          <div class="tmargin20">
+            <p>Lorem Ipsum</p>
+            <p>Lorem Ipsum</p>
+            <p>Lorem Ipsum</p>
+            <p>Lorem Ipsum</p>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-4">
+          <h5>{{'Footer.Projects' | translate}}</h5>
+          <div class="tmargin20">
+            <p>Lorem Ipsum</p>
+            <p>Lorem Ipsum</p>
+            <p>Lorem Ipsum</p>
+            <p>Lorem Ipsum</p>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-4">
+          <h5>{{'Footer.Contact' | translate}}</h5>
+          <div class="tmargin20">
+            <p>Lorem Ipsum</p>
+            <p>Lorem Ipsum</p>
+            <p>Lorem Ipsum</p>
+            <p>Lorem Ipsum</p>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-12">
+          <h5>{{'Footer.FollowUs' | translate}}</h5>
+          <div class="socialMedia">
+            <i style=" height:30px;width:30px;" class="fa fa-facebook" aria-hidden="true"></i>
+            <i style=" height:30px;width:30px;" class="fa fa-twitter" aria-hidden="true"></i>
+            <i style=" height:30px;width:30px;" class="fa fa-linkedin" aria-hidden="true"></i>
+          </div>
+          <h6 class="StartNow">{{'Footer.StartNow' | translate}}</h6>
+          <button *ngIf="currentUser != null && currentUser.userType == 1 " class="btn btn-primary footbtn" (click)="checkConnectedUser()">{{'Menu.CreateProject'
+            | translate}}</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="col-md-12 col-sm-12">
+        <div class="carryOutLogo">
+          <img src="../../assets/img/logo/Logo.svg" alt="carryoutLogo" class="carryOutLogoImg" />
+          <i class="copyrightsText">© {{Year}} Stirblock. {{'Footer.AllRightReceived' | translate}}</i>
+        </div>
+      </div>
+      <div class="beitcan col-md-12 col-sm-12" style="margin-bottom:10px;">{{'Footer.DeseignedBy' | translate}}
+        <a href="http://www.beitcan.com/" target="blank">Beitcan</a>
+      </div>
+    </div>
+  </div>
+  <!-- End Footer -->
+</div>

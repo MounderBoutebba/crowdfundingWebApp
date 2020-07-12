@@ -1,0 +1,912 @@
+<app-loader [isRunning]="isRunning"></app-loader>
+<div class="container-fluid info-background">
+  <div class="content" style="margin-top: 20px;">
+    <div class="cols">
+      <div class="col-sm-8 col-md-8">
+        <div class="decoration text-center fix-title">
+          <span class="nobacgr title-font-size">{{project.projectName}}</span>
+          <div *ngIf="currentUser != null " class="favorite-icon" data-toggle="tooltip" data-container="body"
+            data-placement="top" (click)="_projectService.addToFavorites(project.id)" [attr.data-original-title]="(_projectService.checkOfferAlreadyFavorite(project.id)) ? ('ProjectFavorite.RemoveFavoriteTooltipMessage' | translate) : ('ProjectFavorite.AddToFavoriteTooltipMessage' | translate)">
+            <i class="fa fa-heart-o"></i>
+            <i class="fa fa-heart" [ngStyle]="{'color': (_projectService.checkOfferAlreadyFavorite(project.id)) ? '#d84d4d' : '#c5c5c5'}"></i>
+          </div>
+        </div>
+        <ngx-carousel [inputs]="carouselBanner" [moveToSlide]="1">
+          <ngx-item NgxCarouselItem *ngFor="let image of project.projectImages" class="img-carousel-width">
+            <img *ngIf="project.projectImages.length != 0" [src]="constants.sharedImagesPath + image.path" alt="Avatar"
+              class="img-carousel-width">
+          </ngx-item>
+          <ngx-item NgxCarouselItem *ngIf="project.projectImages.length == 0" class="img-carousel-width">
+            <img [src]="constants.sharedImagesPath + 'no-image.Jpeg'" alt="Avatar" class="img-carousel-width no-image"
+              style="width: 100%;">
+          </ngx-item>
+          <ngx-item NgxCarouselItem *ngFor="let document of ListOfVideos">
+            <video *ngIf="document.extention =='mp4'" [id]="'player' + document.id" playsinline controls>
+              <source [src]="constants.sharedDocumentsPath + document.path" type="video/mp4">
+            </video>
+          </ngx-item>
+
+          <button NgxCarouselPrev class='leftRs'>
+            <span class="glyphicon glyphicon-chevron-left custom-chevron"></span>
+          </button>
+          <button NgxCarouselNext class='rightRs'>
+            <span class="glyphicon glyphicon-chevron-right custom-chevron"></span>
+          </button>
+        </ngx-carousel>
+
+      </div>
+      <div class="col-sm-4 col-md-4 fix-height">
+        <!-- <div id="back_this_project_block">
+          <div class="backers_days_blocks first">
+            <div class="row fix-row">
+              <div class="col-sm-1 col-md-1">
+                <div class="fa fa-users"></div>
+              </div>
+              <div class="col-sm-9 col-md-9">
+                <div class="top_text_backers_days_blocks">{{project.backers}}</div>
+                <div class="bottom_text_backers_days_blocks">{{'ProjectDetailsPage.SideBar.Backers' | translate}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="backers_days_blocks">
+            <div class="row fix-row">
+              <div class="col-sm-1 col-md-1">
+                <div class="fa fa-usd"></div>
+              </div>
+              <div class="col-col-sm-9 col-md-9">
+                <div class="top_text_backers_days_blocks">{{project.fundingGoal}} â‚¬</div>
+                <div class="bottom_text_backers_days_blocks">{{'ProjectDetailsPage.SideBar.FundingGoal' | translate}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="backers_days_blocks">
+            <div class="row fix-row">
+              <div class="col-sm-1 col-md-1">
+                <div class="fa fa-usd"></div>
+              </div>
+              <div class="col-sm-9 col-md-9">
+                <div class="top_text_backers_days_blocks">{{project.receivedFunding}} â‚¬</div>
+                <div class="bottom_text_backers_days_blocks">{{'ProjectDetailsPage.SideBar.ReceivedFunding' | translate}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="backers_days_blocks">
+            <div class="row fix-row">
+              <div class="col-sm-1 col-md-1">
+                <div class="fa fa-clock-o"></div>
+              </div>
+              <div class="col-sm-9 col-md-9">
+                <div class="top_text_backers_days_blocks">{{_commonService.getDays(project.beginEstimatedDate)}} {{'ProjectDetailsPage.SideBar.Days' | translate}}</div>
+                <div class="bottom_text_backers_days_blocks">{{'ProjectDetailsPage.SideBar.DaysToGo' | translate}}</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="alert alert-warning text-center" *ngIf="(project.receivedFunding >= project.fundingGoal)">
+              Fin de levÃ©
+            </div>
+            <div *ngIf="currentUser != null && currentUser.id != project.user.id">
+              <div class="alert alert-warning text-center" *ngIf="(maxCoinsEstimated < currentUser.userCoinsNumber) && (project.receivedFunding < project.fundingGoal)">
+                projet proche de la fin de levÃ© vous pouvez utiliser juste {{maxCoinsEstimated}} jetons
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="back_this_project_button" *ngIf="currentUser != null && currentUser.id != project.user.id">
+          <div>
+            <nouislider [config]="someKeyboardConfig" [(ngModel)]="project.slider.sliderValue" [min]="project.slider.sliderMin" [max]="project.slider.sliderMax"
+              [disabled]="project.slider.disabledSlider || (project.receivedFunding >= project.fundingGoal) && usedCoins == 0"></nouislider>
+          </div>
+          <button [disabled]="project.slider.disabledSlider || (project.receivedFunding >= project.fundingGoal) && usedCoins == 0"
+            class="btn-funder back_project btn-lg" type="button" (click)="openConfirmModal()">
+            <small>{{'ProjectDetailsPage.SideBar.InvestButton' | translate}}</small>
+          </button>
+        </div> -->
+
+
+
+
+        <div style="z-index: 100;" id="card1" class="row col-sm-4 col-md-4 rectangle no-margin-total">
+          <div class="col-md-12 col-xs-12" style="padding-top:15px;padding-right: 0px;padding-left: 10px;">
+
+            <div class="col-md-6 col-xs-6" style="text-align:left; padding: 0; color: #373E40;">
+              {{'ProjectDetailsPage.SideBar.FundingGoal' | translate}}
+              <p>
+                <span>
+                  <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/ic_coin.svg">
+                </span>
+                <span class="coins">{{project.fundingGoal}}â‚¬</span>
+              </p>
+            </div>
+            <div class="col-md-6 col-xs-6" style="text-align:left; padding: 0;  color: #373E40;">
+              {{'ProjectDetailsPage.SideBar.ReceivedFunding' | translate}}
+              <p>
+                <span>
+                  <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/ic_coin.svg">
+                </span>
+                <span class="coins">{{project.receivedFunding}}â‚¬</span>
+              </p>
+
+            </div>
+            <!-- <div class="col-md-12 col-xs-12" style="text-align:left;  color: #373E40;">
+
+              {{'ProjectCreationPage.CommissionTokenStirblock' | translate }}
+              <p *ngIf="project.commissionTokenStirblock > 0">
+                <span>
+                  <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/ic_coin.svg">
+                </span>
+                <span class="coins">{{project.commissionTokenStirblock}}â‚¬</span>
+              </p>
+            </div> -->
+            <div class="col-md-6 col-xs-6" style="text-align:left; padding: 0;  color: #373E40;">
+              {{'ProjectDetailsPage.SideBar.Progress' | translate}}
+              <p>
+                <span>
+                  <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/percentage.svg">
+                </span>
+                <span class="coins">{{project.percentageAsset}}%</span>
+              </p>
+            </div>
+            <div class="col-md-6 col-xs-6" style="text-align:left; padding: 0;  float:left; color: #373E40;">
+              <p>
+                <span>
+                  <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/ic_time.svg">
+                </span>
+                <span class="coins">{{_commonService.getDays(project.beginEstimatedDate)}}
+                  {{'ProjectDetailsPage.SideBar.Days' | translate}}</span>
+              </p>
+            </div>
+            <div class="col-md-6 col-xs-6" style="text-align:left; padding: 0; color: #373E40;">
+              <p>
+                <span>
+                  <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px" src="assets/img/icones/ic_baker.svg">
+                </span>
+                <span class="coins" style="font-size: 14px;">{{project.backers}} {{'ProjectDetailsPage.SideBar.Backers'
+                  | translate}}</span>
+              </p>
+            </div>
+            <div class="col-md-12 col-xs-12" style="text-align:left; padding: 0; color: #373E40;position: relative;">
+              <p>
+                <span>
+                  <img style="font-size:20px;color:black ;margin-right: 4px;margin-bottom: 6px;height: 20px;" src="assets/img/Coin2.png">
+                </span>
+                <span class="coins" style="font-size: 14px;"> 1 Coin = {{coinPercentage}} % </span>
+                <span>
+                  <img data-toggle="tooltip" data-placement="top" [attr.data-original-title]="'ProjectDetailsPage.SideBar.coinPercentageToolTip' | translate"
+                    class="info-icon" src="assets/img/icones/ic_info.svg"></span>
+              </p>
+            </div>
+            <div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /-------------- -->
+        <div id="card2" class="row col-sm-4 col-md-4 rectangle no-margin-total" style="margin-top:10px;">
+          <div class="col-md-12 col-xs-12" style="padding:10px">
+            <div class="alert alert-warning text-center" style="margin-bottom:0px;" *ngIf="(project.projectStatus == 2)">
+              {{'ProjectDetailsPage.EndOfLeve' | translate}}
+            </div>
+            <div *ngIf="currentUser != null ">
+              <div class="alert alert-warning text-center" style="margin-bottom:0px;" *ngIf="(maxCoinsEstimated < currentUser.userCoinsNumber) && (project.receivedFunding < project.fundingGoal)">
+                {{'ProjectDetailsPage.EndOfLeveText' | translate}} {{maxCoinsEstimated}} coins
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-xs-12" *ngIf="currentUser != null ">
+            <ngx-gauge class="gauge-width" [foregroundColor]="foregroundColor" [size]="size" [value]="gaugeValue"
+              [append]="gaugeAppendText">
+            </ngx-gauge>
+            <div style="padding:10px" class="row">
+              <div class="col-md-12 col-xs-12">
+                <div class="col-xs-2"><span style="cursor:pointer" (click)="sliderMinus()">-</span> </div>
+                <div class="col-xs-8">
+                  <nouislider [config]="someKeyboardConfig" [(ngModel)]="project.slider.sliderValue" [step]=10 [min]="project.slider.sliderMin"
+                    [max]="project.slider.sliderMax" [disabled]="project.slider.disabledSlider || (project.projectStatus == 2)"
+                    (slide)="rangeChanged($event)"></nouislider>
+                </div>
+                <div class="col-xs-2"><span style="cursor:pointer" (click)="sliderPlus()">+</span> </div>
+              </div>
+            </div>
+          </div>
+          <div class="
+                      col-md-12 col-xs-12 text-center invest-btn">
+            <button *ngIf="(project.projectStatus != 2)" [disabled]="project.slider.disabledSlider || (project.projectStatus == 2) || (project.slider.sliderValue == 0 && usedCoins == 0)"
+              class="btn btn-lg btn-primary" type="button" (click)="openConfirmModal()">
+              <small>{{'ProjectDetailsPage.SideBar.InvestButton' | translate}}</small>
+            </button>
+
+            <button *ngIf="(project.projectStatus == 2)" class="btn btn-lg btn-primary" type="button" (click)="goToProduct()">
+              <small>{{'ProjectDetailsPage.SideBar.GotoProduct' | translate}}</small>
+            </button>
+          </div>
+          <div class="no-gutters bottom-container ">
+            <div class="rectangle-copy-2" [style.width.%]="fundingPercentage">
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid info-background">
+  <div class="content" style="margin-top: 5px;">
+    <div class="cols ">
+      <div class="col-md-8">
+
+        <div class=" shadow tabbable" style="margin-bottom: 18px; padding:20px">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="#tab1" data-toggle="tab">{{'ProjectDetailsPage.Tabs.Description' | translate}}</a>
+            </li>
+            <li>
+              <a href="#tab4" data-toggle="tab">{{'ProjectDetailsPage.Tabs.News' | translate}}</a>
+            </li>
+            <li>
+              <a href="#tab3" data-toggle="tab">{{'ProjectDetailsPage.Tabs.Discussion' | translate}}
+              </a>
+            </li>
+            <li>
+              <a href="#tab2" *ngIf="project.documents.length!=0" data-toggle="tab">{{'ProjectDetailsPage.Tabs.Documents'
+                |
+                translate}}</a>
+            </li>
+          </ul>
+          <div id="tabs_pages">
+            <!-- <ul class=" tabs_pages_ul">
+              <li class="active">
+                <a href="#tab1" data-toggle="tab">{{'ProjectDetailsPage.Tabs.Description' | translate}}</a>
+              </li>
+              <li>
+                <a href="#tab2" data-toggle="tab">{{'ProjectDetailsPage.Tabs.Documents' | translate}}</a>
+              </li>
+              <li>
+                <a href="#tab3" data-toggle="tab">{{'ProjectDetailsPage.Tabs.Documents' | translate}}</a>
+              </li>
+              <li>
+                <a href="#tab4" data-toggle="tab">News</a>
+              </li>
+               </ul> -->
+          </div>
+          <div class="tab-content" style="margin-top: 25px; min-height: 300px;">
+            <div class="tab-pane active" id="tab1">
+              <div>
+                <div [froalaView]="project.projectDescription"></div>
+                <!-- <div [ngSwitch]="project.projectType">
+                    <div *ngSwitchCase="0">
+                      <div>
+                        <span class="badge-project-details">Type</span>
+                        {{ ('ProjectTypes.' + _commonService.getProjectTypeNameString(project.projectType)) | translate }}
+                      </div>
+                      <div>
+                        <span class="badge-project-details">DÃ©nomination du projet</span>
+                        {{project.projectName}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Presentez-vous et votre Ã©quipe</span>
+                        {{project.projectPresentation}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Type d'activitÃ©</span>
+                        {{ _commonService.getActivityTypeString(project.activityType) | translate }}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Lieu</span>
+                        {{project.projectAddress}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Business plan</span>
+                        {{project.businessPlan}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Lien web</span>
+                        {{project.webLink}}
+                      </div>
+                      <div>
+                        <span class="badge-project-details">Montant recherchÃ©</span>
+                        {{project.fundingGoal}} â‚¬
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Date dÃ©but estimÃ©</span>
+                        {{project.beginEstimatedDate | date: 'dd/MM/yyyy'}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">DurÃ©e de la lÃ©vÃ©</span>
+                        {{project.fundraisingPeriod}} mois
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Quel pourcentage de la sociÃ©tÃ© souhaitez-vous vendre</span>
+                        {{project.percentageAsset}} %
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Description du projet</span>
+                        {{project.projectDescription}}
+                      </div>
+      
+                    </div>
+                    <div *ngSwitchCase="1">
+                      <div>
+                        <span class="badge-project-details">Type</span>
+                        {{ ('ProjectTypes.' + _commonService.getProjectTypeNameString(project.projectType)) | translate }}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Nom du projet</span>
+                        {{project.projectName}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Nom du societÃ©</span>
+                        {{project.society_Name}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Identification lÃ©gale</span>
+                        {{project.society_LegaleIdentification}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Type de structure</span>
+                        {{project.society_StructureType}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Date de crÃ©ation</span>
+                        {{project.society_CreationDate | date: 'dd/MM/yyyy'}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Type d'activitÃ©</span>
+                        {{ _commonService.getActivityTypeString(project.activityType) | translate }}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Adresse</span>
+                        {{project.projectAddress}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Perspective d'Ã©volution</span>
+                        {{project.businessPlan}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Lien web</span>
+                        {{project.webLink}}
+                      </div>
+                      <div>
+                        <span class="badge-project-details">Montant recherchÃ©</span>
+                        {{project.fundingGoal}} â‚¬
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Date dÃ©but estimÃ©</span>
+                        {{project.beginEstimatedDate | date: 'dd/MM/yyyy'}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">DurÃ©e de la lÃ©vÃ©</span>
+                        {{project.fundraisingPeriod}} mois
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Quel pourcentage de la sociÃ©tÃ© souhaitez-vous vendre</span>
+                        {{project.percentageAsset}} %
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Description du projet</span>
+                        {{project.projectDescription}}
+                      </div>
+      
+                    </div>
+                    <div *ngSwitchCase="2">
+                      <div>
+                        <span class="badge-project-details">Type</span>
+                        {{ ('ProjectTypes.' + _commonService.getProjectTypeNameString(project.projectType)) | translate }}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">DÃ©nomination du profil</span>
+                        {{project.projectName}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Presentez-vous</span>
+                        {{project.projectPresentation}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Type d'activitÃ©</span>
+                        {{ _commonService.getActivityTypeString(project.activityType) | translate }}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details badge-project-details-success">Lieu</span>
+                        {{project.projectAddress}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details badge-project-details-success">Projection des gains suite Ã  votre rÃ©alisation</span>
+                        {{project.businessPlan}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Lien web</span>
+                        {{project.webLink}}
+                      </div>
+                      <div>
+                        <span class="badge-project-details">Montant recherchÃ©</span>
+                        {{project.fundingGoal}} â‚¬
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Date dÃ©but estimÃ©</span>
+                        {{project.beginEstimatedDate | date: 'dd/MM/yyyy'}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">DurÃ©e de la lÃ©vÃ©</span>
+                        {{project.fundraisingPeriod}} mois
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Sur combien d'annÃ©e vous souhaitez vous engager</span>
+                        {{project.career_EngagementYears}} ans
+                      </div>
+                      <div>
+                        <span class="badge-project-details">Quel pourcentage du CA ou salaire comptez-vous verser durant votre engagement</span>
+                        {{project.percentageAsset}} %
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Description de vos objectif </span>
+                        {{project.projectDescription}}
+                      </div>
+      
+                    </div>
+                    <div *ngSwitchCase="3">
+                      <div>
+                        <span class="badge-project-details">Type</span>
+                        {{ ('ProjectTypes.' + _commonService.getProjectTypeNameString(project.projectType)) | translate }}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">DÃ©nomination du bien</span>
+                        {{project.projectName}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Presentez-vous</span>
+                        {{project.projectPresentation}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Type de bien</span>
+                        {{ _commonService.getActivityTypeString(project.activityType) | translate }}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Lieu du bien</span>
+                        {{project.projectAddress}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Percepective de vente</span>
+                        {{project.product_SalesPercepective}} ans
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Lien web</span>
+                        {{project.webLink}}
+                      </div>
+                      <div>
+                        <span class="badge-project-details">Montant recherchÃ©</span>
+                        {{project.fundingGoal}} â‚¬
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Date dÃ©but estimÃ©</span>
+                        {{project.beginEstimatedDate | date: 'dd/MM/yyyy'}}
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">DurÃ©e de la lÃ©vÃ©</span>
+                        {{project.fundraisingPeriod}} mois
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Quel pourcentage du bien souhaitez-vous vendre</span>
+                        {{project.percentageAsset}} %
+                      </div>
+      
+                      <div>
+                        <span class="badge-project-details">Description du bien</span>
+                        {{project.projectDescription}}
+                      </div>
+      
+                    </div>
+                  </div> -->
+              </div>
+            </div>
+            <div class="tab-pane" id="tab2">
+              <div style="margin-top:25px;">
+                <div class="panel panel-default table-responsive">
+                  <!-- Default panel contents -->
+                  <!-- Table -->
+                  <table class="table">
+                    <thead>
+                      <tr class="success">
+                        <th class="col-md-5 col-xs-5">{{'ProjectDetailsPage.DocumentsTable.FileTitle' | translate}}</th>
+                        <th class="col-md-5 col-xs-5">{{'ProjectDetailsPage.DocumentsTable.FileDescription' |
+                          translate}}</th>
+                        <th class="col-md-2 col-xs-2"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let document of project.documents">
+                        <td class="col-md-5 col-xs-5">
+                          <img style="float: left;margin-right: 12px;width: 15%;" [src]="(document.extention == 'pdf') ? '../assets/img/pdf.png' : 
+                            (document.extention == 'xlsx' || document.extention == 'xls') ? '../assets/img/excel.png':
+                            (document.extention == 'docx' || document.extention == 'doc') ? '../assets/img/word.png':
+                            (document.extention == 'mp4') ? '../assets/img/youtube.png':
+                            (document.extention == 'pptx' || document.extention == 'ppt') ? '../assets/img/powerpoint.png' : ''"
+                            alt="">
+                          <span>
+                            {{document.title}}
+                          </span>
+                        </td>
+                        <td class="col-md-5 col-xs-5">
+                          <span>{{document.description}}</span>
+                        </td>
+                        <td class="col-md-2 col-xs-2">
+                          <a [href]="constants.sharedDocumentsPath + document.path">
+                            <i class="fa fa-download" style="cursor:pointer;color:green;">
+                            </i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab3">
+              <div id="description_content">
+                <!-- Discussion Content -->
+                <div style="margin-top:25px" *ngFor="let discussion of project.discussions">
+                  <!-- Display Question Content -->
+                  <div>
+                    <div>
+                      <img style="float:left" class="img-circle avatar" *ngIf="discussion.user.userImage != null && discussion.user.provider == 0 "
+                        [src]="constants.sharedUserImagesPath + discussion.user.userImage.path">
+                      <img style="float:left" class="img-circle avatar" *ngIf="discussion.user.userImage == null && discussion.user.provider == 0 "
+                        [src]="constants.sharedUserImagesPath + 'no-image-user.png'">
+                      <img style="float:left" class="img-circle avatar" *ngIf="discussion.user.provider == 1" [src]="discussion.user.userImage.path">
+                    </div>
+                    <div class="name">
+                      {{discussion.user.firstName}}
+                      <i class="time-ago pull-right">{{discussion.questionCreation | timeAgo}}</i>
+                    </div>
+                    <div class="disscussion-content">
+                      {{discussion.questionContent}}
+                    </div>
+                    <div *ngIf="currentUser != null">
+                      <div *ngIf="(currentUser.id == project.user.id) && (discussion.answerContent == null)" class="pull-right"
+                        style="cursor: pointer;">
+                        <i class="fa fa-reply"></i>
+                        <i class="respond-btn" (click)="openAnswerModal(discussion)">{{'ProductDetailsPage.ReplyButton'
+                          |
+                          translate}}</i>
+                      </div>
+                    </div>
+                    <div class="line"></div>
+                  </div>
+                  <!-- Display Question Content -->
+
+                  <!-- Display Answer Content -->
+                  <div style="padding-left: 87px;margin-top: 25px;" *ngIf="discussion.answerContent != null">
+                    <div>
+                      <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage != null && project.user.provider ==0 "
+                        [src]="constants.sharedUserImagesPath + project.user.userImage.path">
+                      <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage == null && project.user.provider ==0"
+                        [src]="constants.sharedUserImagesPath + 'no-image-user.png'">
+                      <img style="float:left" class="img-circle avatar" *ngIf="project.user.provider == 1 " [src]="project.user.userImage.path">
+                    </div>
+                    <div class="name">
+                      {{project.user.firstName}}
+                      <i class="time-ago pull-right">{{discussion.answerCreation | timeAgo}}</i>
+                    </div>
+                    <div class="disscussion-content">
+                      {{discussion.answerContent}}
+                    </div>
+
+                  </div>
+                  <div class="line" *ngIf="discussion.answerContent != null" style="margin-left:0px !important;"></div>
+                  <!-- Display Answer Content -->
+                </div>
+                <!-- Discussion Content -->
+
+                <!-- Ask Question Form -->
+                <div style="margin-top:25px;" *ngIf="currentUser != null && currentUser.id != project.user.id">
+                  <div>
+                    <span>{{'ProductDetailsPage.AskQuestion' | translate}}</span>
+                  </div>
+                  <div class="form-group">
+                    <textarea [(ngModel)]="discussion.questionContent" class="form-control" rows="3" id="questionContent"
+                      name="questionContent" [maxlength]="constants.ProjectDescreption" placeholder="" #questionContent="ngModel"
+                      required></textarea>
+                  </div>
+                  <div>
+                    <img *ngIf="currentUser.userImage != null && currentUser.provider == 0 " [src]="constants.sharedUserImagesPath + currentUser.userImage.path"
+                      class="image-profile-size img-circle">
+                    <img *ngIf="currentUser.userImage == null && currentUser.provider == 0" [src]="constants.sharedUserImagesPath + 'no-image-user.png'"
+                      class="image-profile-size img-circle">
+                    <img *ngIf="currentUser.provider == 1" [src]="currentUser.userImage.path" class="image-profile-size img-circle">
+                    <button class="btn btn-primary" style="margin-left: 20px;" (click)="addQuestionToProject()">{{'ProductDetailsPage.AskQuestionButton'
+                      | translate}}</button>
+                  </div>
+                </div>
+                <!-- Ask Question Form -->
+              </div>
+            </div>
+            <div class="tab-pane" id="tab4">
+              <div id="description_content">
+                <div *ngIf="project.projectUpdates.length > 0" style="margin-bottom: 18px; margin-top:25px;">
+                  <div *ngFor="let news of project.projectUpdates">
+                    <div class="row">
+                      <div class="col-md-12 text-right" style="margin-top : 10px; margin-bottom : 10px;">
+                        <span class="day-style">
+                          {{ 'createdAt' | translate:{date: news.creationDate | localizedDate :'dd'} }}
+                        </span>
+                        <div class="month-year-style">
+                          <div class="">
+                            {{ 'createdAt' | translate:{date: news.creationDate | localizedDate : 'MMMM yyyy' } }}
+                          </div>
+                          <div class="">
+                            {{ 'createdAt' | translate:{date: news.creationDate | localizedDate : 'EEEE' } }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" row">
+                      <div class="col-md-12 text-news">
+                        <div [froalaView]="news.newsContent"></div>
+                        <!-- {{news.newsContent}} -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<!-- </div>
+</div> -->
+
+<div id="confirmCoinsModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 *ngIf="!userInvestedCoin" class="modal-title modal-text-header" style="float: left;">{{'Popups.ConfirmationHeader'
+          | translate}}</h2>
+        <h2 *ngIf="userInvestedCoin" class="modal-title modal-text-header" style="float: left;">{{'Popups.ConfirmationHeader'
+          | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div class="popup-text" *ngIf="project.slider.sliderValue < usedCoins">
+          <p>{{'Popups.ProjectDeatilPopup.ConfirmationCoinsUsageText' | translate}}</p>
+          <p>{{currentUser.userCoinsNumber }} {{'Popups.ProjectDeatilPopup.NumberUsedCoins3Times' | translate}} </p>
+          <p>{{usedCoins - project.slider.sliderValue}} {{'Popups.ProjectDeatilPopup.NumberUsedCoins2Times' |
+            translate}}</p>
+          <p>0 {{'Popups.ProjectDeatilPopup.NumberUsedCoins1Times' | translate}}</p>
+        </div>
+        <div class="popup-text">
+          <span *ngIf="project.slider.sliderValue >= usedCoins && !userInvestedCoin">{{'Popups.ProjectDeatilPopup.ConfirmInvestText'
+            |
+            translate}}</span>
+          <span *ngIf="userInvestedCoin">{{'Popups.ProjectDeatilPopup.AddMoreCoins' | translate}}</span>
+        </div>
+        <div style="padding: 10px"></div>
+        <div class="text-center">
+          <button *ngIf="!userInvestedCoin" type="button" class="btn popup-ok-btn" data-dismiss="modal" (click)="redirectToPaymentPage()">{{'Popups.ConfirmationButton'
+            | translate}}</button>
+          <button *ngIf="userInvestedCoin" type="button" class="btn popup-ok-btn" data-dismiss="modal">{{'Popups.ok'
+            |
+            translate}}</button>
+          <button type="button" class="btn poup-cancel-btn" data-dismiss="modal">{{'Popups.CancelButton' |
+            translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="InvestDone" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div *ngIf="successInvest" class="modal-top-bar-info"></div>
+      <div *ngIf="!successInvest" class="modal-top-bar-warning"></div>
+      <div class="modal-header">
+        <h2 *ngIf="successInvest" class="modal-title modal-text-header" style="float: left;">{{'Popups.SuccessHeader'
+          |
+          translate}}</h2>
+        <h2 *ngIf="!successInvest" class="modal-title modal-text-header" style="float: left;">{{'Popups.ErrorHeader'
+          |
+          translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div class="popup-text">
+          <p *ngIf="successInvest">{{'Popups.OperationSuccessText' | translate}}</p>
+          <p *ngIf="!successInvest">{{'Popups.OperationErrorText' | translate}}</p>
+        </div>
+        <div class="padding:10px"></div>
+        <div class="text-center">
+          <button type="button" class="btn popup-ok-btn" data-dismiss="modal">{{'Popups.CloseButton' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="answerQuestionModal" class="modal fade" role="dialog" *ngIf="currentUser != null">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'Popups.ReplyQuestionHeader' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div style="margin-top: 25px;">
+          <div>
+            <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage != null && project.user.provider == 0"
+              [src]="constants.sharedUserImagesPath + project.user.userImage.path">
+            <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage == null && project.user.provider == 0"
+              [src]="constants.sharedUserImagesPath + 'no-image-user.png'">
+            <img style="float:left" class="img-circle avatar" *ngIf="project.user.userImage != null && project.user.provider == 1"
+              [src]="project.user.userImage.path">
+          </div>
+          <div class="name">
+            {{currentUser.firstName}}
+          </div>
+          <div class="disscussion-content">
+            <div class="form-group">
+              <textarea [(ngModel)]="answerContent" class="form-control" rows="3" id="answerContent" name="answerContent"
+                placeholder="" [maxlength]="constants.ProjectDescreption" #answerContentName="ngModel" required></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn popup-ok-btn" data-dismiss="modal" (click)="addAnswerToQuestion()">{{'Popups.SendButton'
+            | translate}}</button>
+          <button type="button" class="btn poup-cancel-btn" data-dismiss="modal">{{'Popups.CancelButton' |
+            translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="buyCryptomodal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'BlockChainMessages.BuyCrypto' | translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <form #form="ngForm" (ngSubmit)="creditCurrency(form)">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="alert alert-info alert-dismissible fade in text-center" role="alert">
+                {{'ProductDetailsPage.PayPlatform' | translate}}
+              </div>
+              <label class="input-label" for="currencyQuantity">{{'ProductDetailsPage.AmountDevice' | translate}}</label>
+              <input [class.has-error]="formInvalid && CurrencyQuantity.invalid" #CurrencyQuantity="ngModel"
+                [(ngModel)]="creditCurrencyDto.currencyQuantity" type="number" oninput="validity.valid||(value='');"
+                class="form-control" name="currencyQuantity" id="currencyQuantity" min="1" required>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn send-btn" style="background: #337BAE;color: #fff">
+              {{
+              'Popups.SendButton' |
+              translate
+              }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="investWithCryptoEuro" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-top-bar-info"></div>
+      <div class="modal-header">
+        <h2 class="modal-title modal-text-header" style="float: left;">{{'WalletPage.InvestWithCryptoEuroTitle' |
+          translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <form #formCryptoEuro="ngForm" (ngSubmit)="investWithCryptoEuro(formCryptoEuro)">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="alert alert-info alert-dismissible fade in text-center" role="alert">
+                {{'WalletPage.InvestWithCryptoEuroHeader' | translate}}
+              </div>
+              <label class="input-label" for="privateKey"> {{'WalletPage.privateKey' | translate}} </label>
+              <input [class.has-error]="formInvalid" #privateKeys="ngModel" [(ngModel)]="privateKey" type="password"
+                class="form-control" name="privateKey" id="privateKey" required>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn send-btn" style="background: #337BAE;color: #fff">
+              {{'Popups.SendButton' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="buyCryptoEuroDoneModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div *ngIf="buyCryptoEuroDone" class="modal-top-bar-info"></div>
+      <div *ngIf="!buyCryptoEuroDone" class="modal-top-bar-warning"></div>
+      <div class="modal-header">
+        <h2 *ngIf="buyCryptoEuroDone" class="modal-title modal-text-header" style="float: left;">{{'Popups.SuccessHeader'
+          |
+          translate}}</h2>
+        <h2 *ngIf="!buyCryptoEuroDone" class="modal-title modal-text-header" style="float: left;">{{'Popups.ErrorHeader'
+          |
+          translate}}</h2>
+        <h2 class="cursor-pointer modal-title pull-right modal-close-btn" data-dismiss="modal">&times;</h2>
+      </div>
+      <div class="modal-body">
+        <div class="popup-text">
+          <p *ngIf="buyCryptoEuroDone">{{'Popups.OperationSuccessText' | translate}}</p>
+          <p *ngIf="!buyCryptoEuroDone">{{'Popups.OperationErrorText' | translate}}</p>
+        </div>
+        <div class="padding:10px"></div>
+        <div class="text-center">
+          <button type="button" class="btn popup-ok-btn" data-dismiss="modal">{{'Popups.CloseButton' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

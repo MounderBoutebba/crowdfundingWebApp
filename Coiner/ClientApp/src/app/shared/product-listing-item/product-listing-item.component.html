@@ -1,0 +1,76 @@
+<div class="item-container">
+  <div (click)="getProductDetails()">
+    <div style="margin:20px">
+      <div class="">
+        <img style="float:left;" src="/assets/img/icones/product_logo_v1.svg">
+      </div>
+      <div>
+        <div class="title-project cursor-pointer">
+          <div *ngIf="product.project.productName != null">
+            {{ (product.project.productName.length > 25) ?
+            (product.project.productName | slice:0:25)+'...' :
+            (product.project.productName)
+            }}
+          </div>
+          <span class="pull-right price"> {{product.lastTransaction}}€</span>
+        </div>
+      </div>
+
+    </div>
+    <div style="margin:20px">
+      <div class="product-name cursor-pointer">
+        {{ (product.project.projectName.length > 25) ?
+        (product.project.projectName | slice:0:25)+'...' :
+        (product.project.projectName)
+        }}
+      </div>
+      <div class="tag-label col-xs-12 pull-left">
+        #{{ ('ProjectTypes.' + _commonService.getProjectTypeNameString(product.project.projectType)) | translate }} #{{
+        _commonService.getActivityTypeString(product.project.activityType)
+        | translate }}
+      </div>
+    </div>
+    <div style="margin-bottom: 10px;">
+      <!-- <img class="img-size" src="assets/img/chart-image.png" alt="Avatar"> -->
+      <canvas baseChart width="350" height="70" class="graph-size cursor-pointer" [datasets]="lineChartData" [labels]="lineChartLabels"
+        [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
+      </canvas>
+    </div>
+
+    <div class="capitalisation">
+      <div class="capitalisation-text">
+        {{'ProductDetailsPage.TotalCapitalisation' | translate}}
+      </div>
+      <div class="capitalisation-number-big">
+        {{product.totalCapitalization}}€
+      </div>
+    </div>
+  </div>
+  <div class="row fix-row">
+    <div class="col-xs-6 border-left">
+      <div>
+        <div class="sell-btn text-sell cursor-pointer" (click)="sellbuttonClicked()">
+          {{'ProductDetailsPage.Sale' | translate}}
+        </div>
+        <div class="capitalisation-number">
+          {{product.maxSellValue}}
+        </div>
+      </div>
+
+    </div>
+    <div class="col-xs-6">
+      <div>
+        <div class="buy-btn text-sell cursor-pointer" (click)="buybuttonClicked()">
+          {{'ProductDetailsPage.Buy' | translate}}
+        </div>
+        <div class="capitalisation-number">
+          {{product.minBuyValue}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-container">
+    <div class="rectangle-copy-2">
+    </div>
+  </div>
+</div>
