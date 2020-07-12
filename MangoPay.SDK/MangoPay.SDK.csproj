@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>MangoPay</AssemblyName>
+    <Version>1.2.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Common.Logging" Version="3.4.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="RestSharp" Version="106.1.0" />
+  </ItemGroup>
+
+</Project>
